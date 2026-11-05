@@ -99,12 +99,29 @@
     select(selected);
   }
 
-  /* The silent film loops when it can be seen. */
-  $$('video[data-autoplay]').forEach((v) => {
-    if (reduce) { v.controls = true; return; }
-    v.preload = 'auto';
-    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) v.play().catch(() => { v.controls = true; }); else v.pause(); }, { threshold: 0.35 });
-    io.observe(v);
+  /* Films: a poster with an authored play control; the browser's own controls appear only once a film plays.
+     The silent film loops on its own while it is on screen (not with reduced motion). */
+  $$('[data-player]').forEach((fig) => {
+    const v = $('video', fig);
+    const btn = $('.player__play', fig);
+    const auto = fig.hasAttribute('data-autoplay') && !reduce;
+    v.controls = false;
+    const start = () => {
+      btn.hidden = true;
+      fig.classList.add('is-playing');
+      if (!auto) v.controls = true;
+      v.play().catch(() => { v.controls = true; });
+    };
+    if (auto) {
+      fig.classList.add('is-playing');
+      v.preload = 'auto';
+      new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) v.play().catch(() => { fig.classList.remove('is-playing'); btn.hidden = false; });
+        else v.pause();
+      }, { threshold: 0.35 }).observe(v);
+      v.addEventListener('click', () => (v.paused ? v.play() : v.pause()));
+    } else btn.hidden = false;
+    btn.addEventListener('click', start);
   });
   $$('video[data-goatcounter-play]').forEach((v) => {
     v.addEventListener('play', () => window.goatcounter?.count?.({ path: v.dataset.goatcounterPlay, title: 'play', event: true }), { once: true });

@@ -61,7 +61,7 @@ export function extension({ t, data, site, e, prev, next }) {
     ${sentences.length ? `<ul class="consent">${sentences.map((s) => `<li>${esc(s)}</li>`).join('')}</ul>` : `<p class="consent consent--none">${esc(t.ext.nothing)}</p>`}
     <dl class="xfacts">${facts.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
   </section>
-  <section class="xpage__readme" aria-labelledby="readme-title">
+  <section class="xpage__readme galley" aria-labelledby="readme-title">
     <h2 id="readme-title" class="visually-hidden">${esc(t.ext.readme)}</h2>
     ${t.ext.readmeLang ? `<p class="pencil pencil--inline" lang="${t.lang}">${esc(t.ext.readmeLang)}</p>` : ''}
     <div class="prose" lang="en">${renderReadme(e)}</div>

@@ -58,6 +58,8 @@ export default {
     body: 'The panel under the caret, the Stack, transforms on ⇧ and categories as columns, in the order you would meet them.',
     slug: 'The app in 40 seconds · no sound',
     label: 'yabbistir in 40 seconds, without sound',
+    play: 'Play',
+    meta: '0:40 · no sound',
   },
 
   features: {
@@ -101,6 +103,7 @@ export default {
     body: 'Extensions are small JavaScript packages that recognize what you copy, clean it before it’s saved, transform it, act on it or fill a column of their own. yabbistir draws every piece of their interface, so they look and work like the rest of the app.',
     film: 'Five extensions in 60 seconds',
     filmLabel: 'Five yabbistir extensions in 60 seconds, narrated, with captions',
+    filmMeta: '1:00 · narrated · captions in English and Turkish',
     asks: 'Each one says what it wants to do before you install it.',
     asksSlug: 'Settings → Extensions → Store',
     asksBody: 'Reaching websites, running a program, reading your history or seeing what you copy: nothing happens until you allow it. The store’s catalog is signed, and yabbistir checks every package before installing it.',
@@ -113,9 +116,9 @@ export default {
   privacy: {
     h2: 'Nothing leaves your Mac unless you ask.',
     items: [
-      { title: 'No telemetry', body: 'No analytics, no background network. yabbistir goes online only when you ask: Check for Updates… asks GitHub for the latest version, and the Store tab reads the store’s signed list when you open it.' },
-      { title: 'Passwords stay out', body: 'Copies that apps mark as concealed or transient, the way password managers do, are never saved, and neither is anything copied from Keychain Access or Passwords.' },
-      { title: 'Your history is local', body: 'It stays on your Mac. Copies from your iPhone arrive through Universal Clipboard and are kept there too. History is kept for a year from the last time you used an item.' },
+      { title: 'No telemetry', slug: 'Check for Updates… · Store → Refresh', body: 'No analytics, no background network. yabbistir goes online only when you ask: Check for Updates… asks GitHub for the latest version, and the Store tab reads the store’s signed list when you open it.' },
+      { title: 'Passwords stay out', slug: 'org.nspasteboard.ConcealedType · TransientType', body: 'Copies that apps mark as concealed or transient, the way password managers do, are never saved, and neither is anything copied from Keychain Access or Passwords.' },
+      { title: 'Your history is local', slug: '~/Library/Application Support/yabbistir', body: 'It stays on your Mac. Copies from your iPhone arrive through Universal Clipboard and are kept there too. History is kept for a year from the last time you used an item.' },
     ],
     more: 'More about privacy',
   },
@@ -130,6 +133,7 @@ export default {
     notes: 'Release notes',
     copy: 'Copy',
     copied: 'Copied',
+    terminal: 'Terminal',
   },
 
   faq: {
@@ -176,6 +180,7 @@ export default {
     back: 'All extensions',
     install: 'Install',
     wants: 'What it may do',
+    wantsTitle: (n) => `“${n}” wants to:`,
     nothing: 'Needs no special permissions.',
     sentences: {
       networkAny: 'Can reach any website',

@@ -58,6 +58,8 @@ export default {
     body: 'İmlecin altındaki panel, Sıra, ⇧ ile dönüşümler ve sütun olarak açılan kategoriler; karşılaşacağın sırayla.',
     slug: 'Kırk saniyede uygulama · sessiz',
     label: 'Kırk saniyede yabbistir, sessiz',
+    play: 'Oynat',
+    meta: '0:40 · sessiz',
   },
 
   features: {
@@ -101,6 +103,7 @@ export default {
     body: 'Uzantılar küçük JavaScript paketleri: kopyaladığını tanır, saklanmadan önce temizler, dönüştürür, onunla bir iş yapar ya da kendi sütununu doldurur. Arayüzlerinin her parçasını yabbistir çizer, bu yüzden uygulamanın geri kalanı gibi görünür ve çalışırlar.',
     film: 'Altmış saniyede beş uzantı',
     filmLabel: 'Altmış saniyede beş yabbistir uzantısı, sesli anlatım ve altyazıyla',
+    filmMeta: '1:00 · sesli anlatım · Türkçe ve İngilizce altyazı',
     asks: 'Her biri kurulmadan önce ne yapmak istediğini söyler.',
     asksSlug: 'Ayarlar → Uzantılar → Mağaza',
     asksBody: 'İnternete çıkmak, bir program çalıştırmak, geçmişini okumak ya da kopyaladığını görmek: sen izin vermeden hiçbiri olmaz. Mağazanın kataloğu imzalı; yabbistir her paketi kurmadan önce doğrular.',
@@ -113,9 +116,9 @@ export default {
   privacy: {
     h2: 'Sen istemedikçe hiçbir şey Mac’inden çıkmaz.',
     items: [
-      { title: 'Telemetri yok', body: 'Analitik yok, arka planda ağ bağlantısı yok. yabbistir yalnızca sen isteyince internete çıkar: Güncellemeleri Denetle… GitHub’a son sürümü sorar; Mağaza sekmesi açtığında mağazanın imzalı listesini okur.' },
-      { title: 'Parolalar dışarıda kalır', body: 'Parola yöneticilerinin yaptığı gibi gizli ya da geçici olarak işaretlenen kopyalar hiç saklanmaz; Anahtar Zinciri Erişimi’nden ya da Parolalar’dan kopyalananlar da.' },
-      { title: 'Geçmişin yerel', body: 'Mac’inde kalır. iPhone’undan kopyaladıkların Evrensel Pano ile gelir ve orada tutulur. Geçmiş, bir öğeyi son kullandığın günden itibaren bir yıl saklanır.' },
+      { title: 'Telemetri yok', slug: 'Güncellemeleri Denetle… · Mağaza → Yenile', body: 'Analitik yok, arka planda ağ bağlantısı yok. yabbistir yalnızca sen isteyince internete çıkar: Güncellemeleri Denetle… GitHub’a son sürümü sorar; Mağaza sekmesi açtığında mağazanın imzalı listesini okur.' },
+      { title: 'Parolalar dışarıda kalır', slug: 'org.nspasteboard.ConcealedType · TransientType', body: 'Parola yöneticilerinin yaptığı gibi gizli ya da geçici olarak işaretlenen kopyalar hiç saklanmaz; Anahtar Zinciri Erişimi’nden ya da Parolalar’dan kopyalananlar da.' },
+      { title: 'Geçmişin yerel', slug: '~/Library/Application Support/yabbistir', body: 'Mac’inde kalır. iPhone’undan kopyaladıkların Evrensel Pano ile gelir ve orada tutulur. Geçmiş, bir öğeyi son kullandığın günden itibaren bir yıl saklanır.' },
     ],
     more: 'Gizlilik hakkında daha fazlası',
   },
@@ -130,6 +133,7 @@ export default {
     notes: 'Sürüm notları',
     copy: 'Kopyala',
     copied: 'Kopyalandı',
+    terminal: 'Terminal',
   },
 
   faq: {
@@ -176,6 +180,7 @@ export default {
     back: 'Tüm uzantılar',
     install: 'Kur',
     wants: 'Neler yapabilir',
+    wantsTitle: (n) => `“${n}” şunları istiyor:`,
     nothing: 'Özel bir izin istemiyor.',
     sentences: {
       networkAny: 'Her siteye internetten erişebilir',

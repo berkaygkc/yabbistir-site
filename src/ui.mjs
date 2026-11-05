@@ -35,6 +35,7 @@ const SPRITE = html`<svg width="0" height="0" style="position:absolute" aria-hid
   <symbol id="i-chev" viewBox="0 0 12 12"><path d="m3 4.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-code" viewBox="0 0 20 20"><path d="M7 5.5 2.5 10 7 14.5M13 5.5l4.5 4.5-4.5 4.5M11.2 4 8.8 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-lines" viewBox="0 0 20 20"><path d="M3.5 5h13M3.5 8.4h13M3.5 11.8h13M3.5 15.2h8" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 20 20"><path d="M6.5 4.2v11.6c0 .6.66.97 1.17.65l9.1-5.8a.77.77 0 0 0 0-1.3l-9.1-5.8a.77.77 0 0 0-1.17.65Z" fill="currentColor"/></symbol>
   <symbol id="i-menu" viewBox="0 0 20 20"><path d="M3.5 6.5h13M3.5 13.5h13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
 </svg>`;
 
@@ -51,11 +52,14 @@ export function downloadTab(t, release, { size = 'lg', id = 'download-dmg' } = {
 
 export function brewBlock(t) {
   const lines = ['brew tap berkaygkc/tap', 'brew trust --cask berkaygkc/tap/yabbistir', 'brew install --cask berkaygkc/tap/yabbistir'];
+  const wrap = (l) => esc(l).replace(/ (--cask|berkaygkc\/tap\/)/g, ' <wbr>$1');
   return html`<div class="cmd">
-    <pre class="cmd__code"><code>${lines.map((l) => `<span class="cmd__line">${esc(l)}</span>`).join('')}</code></pre>
-    <button class="cmd__copy" type="button" data-copy="${esc(lines.join('\n'))}" data-copied="${esc(t.install.copied)}" data-goatcounter-click="copy-brew">
-      ${icon('copy')}<span>${esc(t.install.copy)}</span>
-    </button>
+    <div class="cmd__bar"><span class="slug">${esc(t.install.terminal)}</span>
+      <button class="cmd__copy" type="button" data-copy="${esc(lines.join('\n'))}" data-copied="${esc(t.install.copied)}" data-goatcounter-click="copy-brew">
+        ${icon('copy')}<span>${esc(t.install.copy)}</span>
+      </button>
+    </div>
+    <pre class="cmd__code"><code>${lines.map((l) => `<span class="cmd__line">${wrap(l)}</span>`).join('')}</code></pre>
   </div>`;
 }
 

@@ -1,5 +1,5 @@
 import { APP_REPO, STORE_REPO } from '../data.mjs';
-import { html, esc, icon, reg, page, downloadTab, brewBlock, monogram, permissionMarks, localPath, bytes } from '../ui.mjs';
+import { html, esc, icon, reg, page, downloadTab, brewBlock, monogram, permissionMarks, consentSentences, localPath, bytes } from '../ui.mjs';
 
 function demoPanel(t) {
   const p = t.panel;
@@ -55,9 +55,10 @@ function hero(t, data, site) {
     <figcaption class="pencil">${esc(t.hero.tryNote)}</figcaption>
     <p class="visually-hidden" aria-live="polite" data-demo-live></p>
   </figure>
-  ${reg('hero__reg')}
 </section>`;
 }
+
+const playButton = (label, aria) => `<button type="button" class="player__play" aria-label="${esc(aria)}" hidden><span class="player__disc">${icon('play')}</span><span class="player__label">${esc(label)}</span></button>`;
 
 function film(t, site) {
   return html`<section class="film" aria-labelledby="film-title">
@@ -66,8 +67,10 @@ function film(t, site) {
     <p>${esc(t.film.body)}</p>
     <p class="slug slug--foot">${esc(t.film.slug)}</p>
   </div>
-  <figure class="film__frame crop" data-paste>
-    <video class="film__video" src="${site.url('/media/app-40s.mp4')}" poster="${site.url('/media/app-40s.jpg')}" muted loop playsinline preload="none" data-autoplay aria-label="${esc(t.film.label)}" width="1280" height="720"></video>
+  <figure class="film__frame player crop" data-paste data-player data-autoplay>
+    <video class="film__video" src="${site.url('/media/app-40s.mp4')}" poster="${site.url('/media/app-40s.jpg')}" muted loop playsinline controls preload="none" aria-label="${esc(t.film.label)}" width="1280" height="720"></video>
+    ${playButton(t.film.play, t.film.label)}
+    <figcaption class="slug player__slug">${esc(t.film.meta)}</figcaption>
   </figure>
 </section>`;
 }
@@ -114,15 +117,20 @@ function features(t, site) {
 </section>`;
 }
 
-export function extensionGalley(t, site, e, { featured = false } = {}) {
+export function extensionGalley(t, site, e, { lead = false, strip = false } = {}) {
   const name = e.name[t.lang] ?? e.name.en;
   const desc = e.description[t.lang] ?? e.description.en;
   const cats = e.categories.map((c) => t.store.categories[c] ?? c).join(', ');
   const marks = permissionMarks(t, e);
-  return html`<li class="xgalley${featured ? ' xgalley--featured' : ''}" data-paste data-name="${esc((name + ' ' + e.name.en + ' ' + desc + ' ' + e.id).toLocaleLowerCase(t.locale))}" data-cats="${esc(e.categories.join(' '))}" data-perms="${esc(marks.map((m) => m[0]).join(' '))}">
+  const sentences = consentSentences(t, e);
+  const wants = lead
+    ? `<span class="xgalley__wants"><span class="xgalley__wants-title">${esc(t.ext.wantsTitle(name))}</span>${(sentences.length ? sentences : [t.ext.nothing]).map((s) => `<span class="xgalley__wants-line">${esc(s)}</span>`).join('')}</span>`
+    : '';
+  return html`<li class="xgalley${lead ? ' xgalley--lead' : ''}${strip ? ' xgalley--strip' : ''}" data-paste data-name="${esc((name + ' ' + e.name.en + ' ' + desc + ' ' + e.id).toLocaleLowerCase(t.locale))}" data-cats="${esc(e.categories.join(' '))}" data-perms="${esc(marks.map((m) => m[0]).join(' '))}">
     <a class="xgalley__link" href="${site.url(localPath(t.lang, `/extensions/${e.slug}/`))}">
       <span class="xgalley__title">${monogram(e.name.en)}<span class="xgalley__name">${esc(name)}</span></span>
       <span class="xgalley__desc">${esc(desc)}</span>
+      ${wants}
       <span class="marks">${marks.map(([k, label]) => `<span class="mark mark--${k}">${esc(label)}</span>`)}</span>
       <span class="slug slug--foot">${esc(cats)} · ${esc(e.version)}</span>
     </a>
@@ -138,20 +146,21 @@ function grows(t, data, site) {
     <h2 id="grows-title" class="grows__title">${esc(t.grows.h2)}</h2>
     <p class="grows__body">${esc(t.grows.body)}</p>
   </div>
-  <figure class="grows__film crop" data-paste>
+  <figure class="grows__film player crop" data-paste data-player>
     <video class="film__video" controls preload="none" poster="${site.url('/media/extensions-60s.jpg')}" playsinline width="1280" height="720" aria-label="${esc(t.grows.filmLabel)}" data-goatcounter-play="extensions-film">
       <source src="${site.url('/media/extensions-60s.mp4')}" type="video/mp4">
       <track kind="captions" src="${site.url('/media/extensions-60s.en.vtt')}" srclang="en" label="English"${t.lang === 'en' ? ' default' : ''}>
       <track kind="subtitles" src="${site.url('/media/extensions-60s.tr.vtt')}" srclang="tr" label="Türkçe"${t.lang === 'tr' ? ' default' : ''}>
     </video>
-    <figcaption class="pencil pencil--below">${esc(t.grows.film)}</figcaption>
+    ${playButton(t.film.play, t.grows.filmLabel)}
+    <figcaption class="player__caption"><span class="pencil">${esc(t.grows.film)}</span><span class="slug">${esc(t.grows.filmMeta)}</span></figcaption>
   </figure>
   <div class="asks galley" data-paste>
     <h3>${esc(t.grows.asks)}</h3>
     <p>${esc(t.grows.asksBody)}</p>
     <p class="slug slug--foot">${esc(t.grows.asksSlug)}</p>
   </div>
-  <ul class="xgrid xgrid--featured" role="list">${featured.map((e) => extensionGalley(t, site, e, { featured: true }))}</ul>
+  <ul class="xspread" role="list">${featured.map((e, i) => extensionGalley(t, site, e, { lead: i === 0, strip: i > 0 }))}</ul>
   <div class="grows__more">
     <a class="button-link" href="${site.url(localPath(t.lang, '/extensions/'))}">${esc(t.grows.all(total))}${icon('arrow')}</a>
     <div class="grows__write">
@@ -165,7 +174,7 @@ function grows(t, data, site) {
 function privacy(t, site) {
   return html`<section class="privacy" aria-labelledby="privacy-title">
   <h2 id="privacy-title" class="section-title">${esc(t.privacy.h2)}</h2>
-  <div class="privacy__cols">${t.privacy.items.map((it) => `<div class="privacy__item galley" data-paste><h3>${esc(it.title)}</h3><p>${esc(it.body)}</p></div>`)}</div>
+  <div class="privacy__sheet galley" data-paste>${t.privacy.items.map((it) => `<div class="privacy__item"><h3>${esc(it.title)}</h3><p>${esc(it.body)}</p><p class="slug slug--foot">${esc(it.slug)}</p></div>`)}</div>
   <p><a class="text-link" href="${site.url(localPath(t.lang, '/privacy/'))}">${esc(t.privacy.more)}</a></p>
 </section>`;
 }
