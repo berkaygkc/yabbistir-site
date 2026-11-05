@@ -1,0 +1,222 @@
+// English copy. Permission sentences, category names and panel strings are the app's own (Localizable.xcstrings).
+
+export default {
+  lang: 'en',
+  locale: 'en-US',
+  other: { lang: 'tr', label: 'Türkçe', short: 'TR' },
+  meta: {
+    title: 'yabbistir: the clipboard history that opens where you type',
+    description: 'A free, open-source clipboard history for macOS 26 that opens right under your text caret and grows with extensions from an open store.',
+    extensionsTitle: 'Extensions for yabbistir',
+    extensionsDescription: (n) => `${n} extensions from yabbistir's open store. Each one shows what it wants to do before you install it.`,
+    privacyTitle: 'Privacy · yabbistir',
+  },
+  skip: 'Skip to content',
+  nav: { home: 'yabbistir', extensions: 'Extensions', privacy: 'Privacy', github: 'GitHub', download: 'Download', menu: 'Menu' },
+  langSuggest: { text: 'This page is also in Turkish.', go: 'Türkçe', dismiss: 'Dismiss' },
+
+  hero: {
+    draft: 'Thursday demo. To bring the database up locally, run ',
+    h1: 'Paste where you type.',
+    sub: 'yabbistir is a clipboard history for macOS that opens right under your text caret. Type to search, press ↵ to paste. Extensions teach it what your copies are and what to do with them.',
+    measure: '8 pt',
+    measureNote: 'the panel opens 8 points under the caret',
+    facts: ['Free and open source (MIT)', 'Signed and notarized by Apple', 'macOS 26 on Apple silicon'],
+    tryNote: 'Try it: type to search · ↑ ↓ · ↵ pastes into the draft',
+    pasted: (t) => `Pasted “${t}” into the draft.`,
+  },
+  download: {
+    cta: 'Download for macOS',
+    meta: (r, size) => `Version ${r.version} · ${size} · DMG`,
+    brew: 'Homebrew',
+    allWays: 'Other ways to install',
+  },
+  panel: {
+    search: 'Search your clipboard…',
+    categories: 'Categories',
+    history: 'History',
+    today: 'Today',
+    yesterday: 'Yesterday',
+    paste: 'Paste',
+    transform: 'Transform',
+    actions: 'Actions',
+    noResults: (q) => `No results for “${q}”`,
+    label: 'yabbistir panel demo',
+    rows: [
+      { kind: 'code', text: "SELECT id, email FROM users WHERE created_at > now() - interval '1 day'", age: '2m', day: 'today' },
+      { kind: 'link', tile: 'V', tileColor: '#3b2e6e', text: 'Liquid Glass in SwiftUI — a complete guide', age: '6m', day: 'today' },
+      { kind: 'text', text: 'Thursday 2 pm: refund flow demo with Elif and Mert', age: '9m', day: 'today' },
+      { kind: 'color', color: '#C8A27C', text: '#C8A27C', age: '14m', day: 'today' },
+      { kind: 'code', text: 'docker compose up -d db', age: '25m', day: 'today', selected: true },
+      { kind: 'link', tile: 'G', tileColor: '#24262b', text: 'https://git.example.dev/yabbistir/issues/42', age: '47m', day: 'today' },
+      { kind: 'text', text: 'Hi! Your refund is approved and will reach you in 3–5 days.', age: 'yesterday', day: 'yesterday' },
+    ],
+  },
+
+  film: {
+    h2: 'Forty seconds, start to finish.',
+    body: 'The panel under the caret, the Stack, transforms on ⇧ and categories as columns, in the order you would meet them.',
+    slug: 'The app in 40 seconds · no sound',
+    label: 'yabbistir in 40 seconds, without sound',
+  },
+
+  features: {
+    h2: 'Made for the keyboard, kept out of the way.',
+    items: {
+      caret: {
+        title: 'A panel under your caret',
+        body: 'It opens 8 points below the text caret, or under the pointer in apps that don’t report one. Type to search, ↑ ↓ to move, ↵ to paste, ⌘1–⌘9 for the first nine. ⇧↵ gives the item’s second choice, such as plain text for rich text.',
+        slug: '⇧⌘V · ↑ ↓ · ↵ · ⌘1–⌘9',
+      },
+      stack: {
+        title: 'Stack',
+        body: 'Copy several things in a row with ⇧⌘C, then paste them in order: each ⌘V brings up the next one. Drag to reorder. When a new copy lands at the end, ⌥1 moves it to the top or ⌥2 to second place, and the rest of the queue stays as it was.',
+        slug: '⇧⌘C · ⌘V · ⌥1 · ⌥2',
+        steps: ['git checkout -b fix/refund-email', 'npm test -- refund', 'git push -u origin HEAD'],
+        next: 'Next ⌘V',
+      },
+      transforms: {
+        title: 'Transforms',
+        body: 'Tap ⇧ on an item to see what can be done with it: encode Base64, turn a color into RGB, HSL, OKLCH or a SwiftUI Color, convert an image or read the text in it. ⌘K lists every action. ↵ always pastes the item as it is.',
+        slug: '⇧ · ⌘K',
+        alt: 'The transform panel on a video link with Finder in front: Download as video, Download audio, Paste to Finder as a File and Encode Base64',
+      },
+      columns: {
+        title: 'Categories as columns',
+        body: '⌘P adds an item to a category, and a category can open as its own column next to History. Items in a category stay until you remove them.',
+        slug: '⌘P · → ←',
+        alt: 'The yabbistir panel with History on the left and a Snippets category open as a second column',
+      },
+      jobs: {
+        title: 'Jobs in the menu bar',
+        body: 'Long actions, such as downloading a video, run as jobs on a small card under the menu bar icon, and the icon shows their progress as a ring.',
+        slug: 'up to 3 at once',
+        alt: 'The job card under the menu bar icon: a video downloading, audio being merged, a result ready to paste and a file saved to Finder',
+      },
+    },
+  },
+
+  grows: {
+    h2: 'It grows.',
+    body: 'Extensions are small JavaScript packages that recognize what you copy, clean it before it’s saved, transform it, act on it or fill a column of their own. yabbistir draws every piece of their interface, so they look and work like the rest of the app.',
+    film: 'Five extensions in 60 seconds',
+    filmLabel: 'Five yabbistir extensions in 60 seconds, narrated, with captions',
+    asks: 'Each one says what it wants to do before you install it.',
+    asksSlug: 'Settings → Extensions → Store',
+    asksBody: 'Reaching websites, running a program, reading your history or seeing what you copy: nothing happens until you allow it. The store’s catalog is signed, and yabbistir checks every package before installing it.',
+    all: (n) => `All ${n} extensions`,
+    write: 'Write your own',
+    writeBody: 'An extension is TypeScript bundled into one file. Start from a template in the store repository, run it live in yabbistir while you edit, then open a pull request.',
+    featured: ['dev.yabbistir.secret-guard', 'dev.yabbistir.safe-paste', 'dev.yabbistir.authenticator', 'dev.yabbistir.ai-writing', 'dev.yabbistir.github', 'dev.yabbistir.video-download'],
+  },
+
+  privacy: {
+    h2: 'Nothing leaves your Mac unless you ask.',
+    items: [
+      { title: 'No telemetry', body: 'No analytics, no background network. yabbistir goes online only when you ask: Check for Updates… asks GitHub for the latest version, and the Store tab reads the store’s signed list when you open it.' },
+      { title: 'Passwords stay out', body: 'Copies that apps mark as concealed or transient, the way password managers do, are never saved, and neither is anything copied from Keychain Access or Passwords.' },
+      { title: 'Your history is local', body: 'It stays on your Mac. Copies from your iPhone arrive through Universal Clipboard and are kept there too. History is kept for a year from the last time you used an item.' },
+    ],
+    more: 'More about privacy',
+  },
+
+  install: {
+    h2: 'Get yabbistir.',
+    dmgSteps: 'Open the DMG and drag yabbistir to Applications. It’s signed with a Developer ID and notarized by Apple.',
+    brewTitle: 'With Homebrew',
+    brewNote: 'Homebrew 7 and later ask you to trust a cask from another tap first.',
+    requires: 'Requires macOS 26 or later on Apple silicon.',
+    first: 'A short first-run window walks you through the start: your language, bringing over another clipboard manager’s library, the shortcut, and the Accessibility permission yabbistir needs to paste for you.',
+    notes: 'Release notes',
+    copy: 'Copy',
+    copied: 'Copied',
+  },
+
+  faq: {
+    h2: 'Questions',
+    items: [
+      { q: 'Why macOS 26 only?', a: 'It’s built on macOS 26: the panel uses Liquid Glass, and extensions can use Apple’s on-device model, which needs macOS 26 and Apple silicon. It’s one person’s project, and one platform done well beats two done halfway.' },
+      { q: 'Why isn’t it on the App Store?', a: 'The Mac App Store requires the app sandbox, and yabbistir doesn’t run in one: extensions you allow can run command-line programs you’ve installed. It’s signed with a Developer ID and notarized by Apple instead, and it’s free, so GitHub releases and Homebrew are enough.' },
+      { q: 'What can an extension do? Isn’t that risky?', a: 'Before an extension is installed, yabbistir shows what it wants to do: reach websites (and which ones), run command-line programs (and which ones), read your history or see what you copy. Nothing happens until you allow it, and an update that asks for more asks again. Extensions run in a separate helper process, and yabbistir draws their interface.' },
+      { q: 'Is it really free?', a: 'Yes. No account, no subscription, no paid tier. The code is MIT-licensed on GitHub.' },
+    ],
+  },
+
+  footer: {
+    name: 'yabbistir is a playful way of saying yapıştır, Turkish for “paste”.',
+    made: 'MIT License · Made by Berkay Gökçe, with Claude Code.',
+    links: { app: 'Source code', store: 'Extension store', releases: 'Releases', issues: 'Report a problem', privacy: 'Privacy' },
+    counter: 'Visits are counted without cookies.',
+  },
+
+  store: {
+    h1: 'Extensions',
+    sub: (n) => `${n} extensions from the open store. Each one shows what it wants to do before you install it, and nothing happens until you allow it.`,
+    search: 'Search extensions',
+    searchPlaceholder: 'Search by name or what it does',
+    allCategories: 'All',
+    category: 'Category',
+    permission: 'Permissions',
+    anyPermission: 'Any',
+    showing: (n, total) => (n === total ? `${total} extensions` : `${n} of ${total} extensions`),
+    empty: 'No extension matches. Try fewer words or another category.',
+    reset: 'Show all',
+    categories: { text: 'Text', links: 'Links', images: 'Images', files: 'Files', developer: 'Developer', media: 'Media', ai: 'AI', productivity: 'Productivity' },
+    perm: {
+      none: 'No permissions',
+      network: 'Reaches websites',
+      exec: 'Runs programs',
+      sensitive: 'Reads secrets',
+      capture: 'Sees your copies',
+      history: 'Reads history',
+    },
+  },
+
+  ext: {
+    back: 'All extensions',
+    install: 'Install',
+    wants: 'What it may do',
+    nothing: 'Needs no special permissions.',
+    sentences: {
+      networkAny: 'Can reach any website',
+      network: (hosts) => `Can reach: ${hosts}`,
+      exec: (tools) => `Can run these programs on your Mac: ${tools}. They can read and write your files and reach the internet.`,
+      sensitive: 'Can read and paste secrets such as passwords. They’re never written to history or disk.',
+      capture: 'Can see everything you copy',
+      history: 'Can read your whole history',
+    },
+    facts: { version: 'Version', requires: 'Needs yabbistir', updated: 'Updated', author: 'Author', categories: 'Categories', size: 'Package', id: 'Identifier' },
+    readme: 'README',
+    readmeLang: null,
+    source: 'Source on GitHub',
+    prev: 'Previous',
+    next: 'Next',
+    sheet: {
+      title: (n) => `Install ${n}`,
+      open: 'Open in yabbistir',
+      openNote: 'Needs yabbistir 0.5 or later. yabbistir shows what the extension wants to do and installs it only when you allow it.',
+      manual: (n) => `Or, in yabbistir: Settings → Extensions → Store, then pick ${n}.`,
+      noApp: 'Don’t have yabbistir yet?',
+      close: 'Close',
+    },
+  },
+
+  privacyPage: {
+    h1: 'Privacy',
+    siteTitle: 'This site',
+    site: [
+      'yabbistir.com counts visits with GoatCounter, without cookies and without storing anything that identifies you. It counts pages viewed and clicks on Download and Install, nothing more. There is no consent banner because there is nothing to consent to.',
+      'Videos and fonts are served from this site. Nothing loads from YouTube or ad networks.',
+    ],
+    appTitle: 'The app',
+    app: [
+      'No telemetry, no analytics, no background network. yabbistir goes online only when you ask: Check for Updates… asks GitHub for the latest version and, if there’s a newer one, offers to open its release page; the Store tab reads the store’s signed list when you open it or press Refresh, and downloads only what you install. The built-in extensions never go online.',
+      'Copies that apps mark as concealed or transient, the way password managers do, are never saved, and neither is anything copied from Keychain Access or Passwords. A password an extension pastes goes on the clipboard as a concealed item for this Mac only, and your clipboard comes back a moment later; it’s never shown, saved or logged.',
+      'Your history stays on your Mac, in ~/Library/Application Support/yabbistir.',
+      'Store extensions show what they want to do before you install them: reach websites (and which ones), run programs (and which ones), read your history or see what you copy. They can do none of it until you allow it.',
+    ],
+  },
+
+  notFound: { title: 'This galley got lost.', body: 'The page you followed isn’t on the board.', home: 'Back to yabbistir' },
+  dates: (iso) => new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
+};

@@ -1,0 +1,222 @@
+// Türkçe metinler. İzin cümleleri, kategori adları ve panel metinleri uygulamanın kendi metinleri (Localizable.xcstrings).
+
+export default {
+  lang: 'tr',
+  locale: 'tr-TR',
+  other: { lang: 'en', label: 'English', short: 'EN' },
+  meta: {
+    title: 'yabbistir: yazdığın yerde açılan pano geçmişi',
+    description: 'macOS 26 için ücretsiz ve açık kaynak bir pano geçmişi: yazı imlecinin hemen altında açılır, açık bir mağazadaki uzantılarla büyür.',
+    extensionsTitle: 'yabbistir uzantıları',
+    extensionsDescription: (n) => `yabbistir’in açık mağazasından ${n} uzantı. Her biri kurulmadan önce ne yapmak istediğini gösterir.`,
+    privacyTitle: 'Gizlilik · yabbistir',
+  },
+  skip: 'İçeriğe geç',
+  nav: { home: 'yabbistir', extensions: 'Uzantılar', privacy: 'Gizlilik', github: 'GitHub', download: 'İndir', menu: 'Menü' },
+  langSuggest: { text: 'Bu sayfa İngilizce de var.', go: 'English', dismiss: 'Kapat' },
+
+  hero: {
+    draft: 'Perşembe demosu. Veritabanını yerelde açmak için şunu çalıştır: ',
+    h1: 'Yazdığın yere yapıştır.',
+    sub: 'yabbistir, macOS için yazı imlecinin hemen altında açılan bir pano geçmişi. Yazınca arar, ↵ ile yapıştırır. Uzantılar ona kopyaladıklarının ne olduğunu ve onlarla ne yapacağını öğretir.',
+    measure: '8 pt',
+    measureNote: 'panel imlecin 8 punto altında açılır',
+    facts: ['Ücretsiz ve açık kaynak (MIT)', 'Apple tarafından imzalı ve onaylı', 'Apple silicon ile macOS 26'],
+    tryNote: 'Dene: yazarak ara · ↑ ↓ · ↵ taslağa yapıştırır',
+    pasted: (t) => `“${t}” taslağa yapıştırıldı.`,
+  },
+  download: {
+    cta: 'macOS için indir',
+    meta: (r, size) => `Sürüm ${r.version} · ${size} · DMG`,
+    brew: 'Homebrew',
+    allWays: 'Diğer kurulum yolları',
+  },
+  panel: {
+    search: 'Kopyaladıklarında ara…',
+    categories: 'Kategoriler',
+    history: 'Geçmiş',
+    today: 'Bugün',
+    yesterday: 'Dün',
+    paste: 'Yapıştır',
+    transform: 'Dönüştür',
+    actions: 'Eylemler',
+    noResults: (q) => `“${q}” için sonuç yok`,
+    label: 'yabbistir paneli örneği',
+    rows: [
+      { kind: 'code', text: "SELECT id, email FROM users WHERE created_at > now() - interval '1 day'", age: '2 dk', day: 'today' },
+      { kind: 'link', tile: 'V', tileColor: '#3b2e6e', text: 'SwiftUI’da Liquid Glass: eksiksiz rehber', age: '6 dk', day: 'today' },
+      { kind: 'text', text: 'Perşembe 14:00: Elif ve Mert’le iade akışı demosu', age: '9 dk', day: 'today' },
+      { kind: 'color', color: '#C8A27C', text: '#C8A27C', age: '14 dk', day: 'today' },
+      { kind: 'code', text: 'docker compose up -d db', age: '25 dk', day: 'today', selected: true },
+      { kind: 'link', tile: 'G', tileColor: '#24262b', text: 'https://git.example.dev/yabbistir/issues/42', age: '47 dk', day: 'today' },
+      { kind: 'text', text: 'Merhaba! İadeniz onaylandı, 3–5 gün içinde hesabınızda olur.', age: 'dün', day: 'yesterday' },
+    ],
+  },
+
+  film: {
+    h2: 'Baştan sona kırk saniye.',
+    body: 'İmlecin altındaki panel, Sıra, ⇧ ile dönüşümler ve sütun olarak açılan kategoriler; karşılaşacağın sırayla.',
+    slug: 'Kırk saniyede uygulama · sessiz',
+    label: 'Kırk saniyede yabbistir, sessiz',
+  },
+
+  features: {
+    h2: 'Klavye için yapıldı, yolundan çekilir.',
+    items: {
+      caret: {
+        title: 'İmlecin altında bir panel',
+        body: 'Yazı imlecinin 8 punto altında açılır; imleç konumunu bildirmeyen uygulamalarda fare imlecinin altında. Yazınca arar, ↑ ↓ ile gezersin, ↵ yapıştırır, ⌘1–⌘9 ilk dokuzu. ⇧↵ öğenin ikinci seçeneğini verir; örneğin zengin metni düz metin olarak.',
+        slug: '⇧⌘V · ↑ ↓ · ↵ · ⌘1–⌘9',
+      },
+      stack: {
+        title: 'Sıra',
+        body: '⇧⌘C ile art arda birkaç şey kopyala, sonra sırayla yapıştır: her ⌘V bir sonrakini getirir. Sürükleyerek yeniden sırala. Sona yeni bir kopya gelince ⌥1 onu başa, ⌥2 ikinci sıraya alır; kuyruğun geri kalanı olduğu gibi kalır.',
+        slug: '⇧⌘C · ⌘V · ⌥1 · ⌥2',
+        steps: ['git checkout -b fix/refund-email', 'npm test -- refund', 'git push -u origin HEAD'],
+        next: 'Sıradaki ⌘V',
+      },
+      transforms: {
+        title: 'Dönüşümler',
+        body: 'Bir öğede ⇧’ye dokun, onunla neler yapılabileceğini gör: Base64 kodla, bir rengi RGB, HSL, OKLCH ya da SwiftUI Color’a çevir, bir görseli dönüştür ya da içindeki metni oku. ⌘K her eylemi listeler. ↵ öğeyi her zaman olduğu gibi yapıştırır.',
+        slug: '⇧ · ⌘K',
+        alt: 'Finder öndeyken bir video bağlantısında dönüşüm paneli: video olarak indir, sesi indir, Finder’a dosya olarak yapıştır ve Base64 kodla',
+      },
+      columns: {
+        title: 'Sütun olarak kategoriler',
+        body: '⌘P bir öğeyi bir kategoriye ekler; bir kategori Geçmiş’in yanında kendi sütunu olarak açılabilir. Kategorideki öğeler sen kaldırana kadar durur.',
+        slug: '⌘P · → ←',
+        alt: 'Solda Geçmiş, ikinci sütunda Snippets kategorisi açık yabbistir paneli',
+      },
+      jobs: {
+        title: 'Menü çubuğunda işler',
+        body: 'Video indirmek gibi uzun eylemler menü çubuğu simgesinin altındaki küçük bir kartta iş olarak çalışır; simge ilerlemeyi bir halka olarak gösterir.',
+        slug: 'aynı anda en çok 3',
+        alt: 'Menü çubuğu simgesinin altındaki iş kartı: inen bir video, birleştirilen ses, yapıştırmaya hazır bir sonuç ve Finder’a kaydedilmiş bir dosya',
+      },
+    },
+  },
+
+  grows: {
+    h2: 'Büyüyor.',
+    body: 'Uzantılar küçük JavaScript paketleri: kopyaladığını tanır, saklanmadan önce temizler, dönüştürür, onunla bir iş yapar ya da kendi sütununu doldurur. Arayüzlerinin her parçasını yabbistir çizer, bu yüzden uygulamanın geri kalanı gibi görünür ve çalışırlar.',
+    film: 'Altmış saniyede beş uzantı',
+    filmLabel: 'Altmış saniyede beş yabbistir uzantısı, sesli anlatım ve altyazıyla',
+    asks: 'Her biri kurulmadan önce ne yapmak istediğini söyler.',
+    asksSlug: 'Ayarlar → Uzantılar → Mağaza',
+    asksBody: 'İnternete çıkmak, bir program çalıştırmak, geçmişini okumak ya da kopyaladığını görmek: sen izin vermeden hiçbiri olmaz. Mağazanın kataloğu imzalı; yabbistir her paketi kurmadan önce doğrular.',
+    all: (n) => `${n} uzantının hepsi`,
+    write: 'Kendin yaz',
+    writeBody: 'Bir uzantı, tek dosyada paketlenmiş TypeScript. Mağaza reposundaki bir şablonla başla, düzenlerken yabbistir’de canlı çalıştır, sonra bir pull request aç.',
+    featured: ['dev.yabbistir.secret-guard', 'dev.yabbistir.safe-paste', 'dev.yabbistir.authenticator', 'dev.yabbistir.ai-writing', 'dev.yabbistir.github', 'dev.yabbistir.video-download'],
+  },
+
+  privacy: {
+    h2: 'Sen istemedikçe hiçbir şey Mac’inden çıkmaz.',
+    items: [
+      { title: 'Telemetri yok', body: 'Analitik yok, arka planda ağ bağlantısı yok. yabbistir yalnızca sen isteyince internete çıkar: Güncellemeleri Denetle… GitHub’a son sürümü sorar; Mağaza sekmesi açtığında mağazanın imzalı listesini okur.' },
+      { title: 'Parolalar dışarıda kalır', body: 'Parola yöneticilerinin yaptığı gibi gizli ya da geçici olarak işaretlenen kopyalar hiç saklanmaz; Anahtar Zinciri Erişimi’nden ya da Parolalar’dan kopyalananlar da.' },
+      { title: 'Geçmişin yerel', body: 'Mac’inde kalır. iPhone’undan kopyaladıkların Evrensel Pano ile gelir ve orada tutulur. Geçmiş, bir öğeyi son kullandığın günden itibaren bir yıl saklanır.' },
+    ],
+    more: 'Gizlilik hakkında daha fazlası',
+  },
+
+  install: {
+    h2: 'yabbistir’i edin.',
+    dmgSteps: 'DMG’yi aç, yabbistir’i Uygulamalar’a sürükle. Developer ID ile imzalı ve Apple tarafından onaylı (noterize).',
+    brewTitle: 'Homebrew ile',
+    brewNote: 'Homebrew 7 ve sonrası, başka bir tap’teki cask’i kurmadan önce ona güvenmeni ister.',
+    requires: 'Apple silicon ile macOS 26 ya da sonrası gerekir.',
+    first: 'Kısa bir ilk açılış penceresi başlangıçta sana eşlik eder: dil, başka bir pano yöneticisinin kitaplığını getirme, kısayol ve yabbistir’in senin yerine yapıştırması için gereken Erişilebilirlik izni.',
+    notes: 'Sürüm notları',
+    copy: 'Kopyala',
+    copied: 'Kopyalandı',
+  },
+
+  faq: {
+    h2: 'Sorular',
+    items: [
+      { q: 'Neden yalnızca macOS 26?', a: 'macOS 26 üzerine kuruldu: panel Liquid Glass kullanıyor, uzantılar da Apple’ın cihaz üzerindeki modelini kullanabiliyor; bunun için macOS 26 ve Apple silicon gerekiyor. Tek kişilik bir proje; iki platformu yarım yapmaktansa birini iyi yapmak daha iyi.' },
+      { q: 'Neden App Store’da değil?', a: 'Mac App Store uygulama korumalı alanı (sandbox) istiyor; yabbistir onun içinde çalışmıyor, çünkü izin verdiğin uzantılar kurduğun komut satırı programlarını çalıştırabiliyor. Bunun yerine Developer ID ile imzalı ve Apple tarafından onaylı; ücretsiz olduğu için GitHub sürümleri ve Homebrew yetiyor.' },
+      { q: 'Bir uzantı neler yapabilir? Riskli değil mi?', a: 'Bir uzantı kurulmadan önce yabbistir ne yapmak istediğini gösterir: internete çıkmak (ve hangi sitelere), komut satırı programları çalıştırmak (ve hangilerini), geçmişini okumak ya da kopyaladığını görmek. Sen izin vermeden hiçbiri olmaz; daha fazlasını isteyen bir güncelleme yeniden sorar. Uzantılar ayrı bir yardımcı süreçte çalışır, arayüzlerini yabbistir çizer.' },
+      { q: 'Gerçekten ücretsiz mi?', a: 'Evet. Hesap yok, abonelik yok, ücretli sürüm yok. Kodu GitHub’da, MIT lisanslı.' },
+    ],
+  },
+
+  footer: {
+    name: 'yabbistir, “yapıştır”ın şakacı bir söylenişi.',
+    made: 'MIT lisansı · Berkay Gökçe yaptı, Claude Code ile.',
+    links: { app: 'Kaynak kodu', store: 'Uzantı mağazası', releases: 'Sürümler', issues: 'Sorun bildir', privacy: 'Gizlilik' },
+    counter: 'Ziyaretler çerezsiz sayılır.',
+  },
+
+  store: {
+    h1: 'Uzantılar',
+    sub: (n) => `Açık mağazadan ${n} uzantı. Her biri kurulmadan önce ne yapmak istediğini gösterir; sen izin vermeden hiçbir şey olmaz.`,
+    search: 'Uzantılarda ara',
+    searchPlaceholder: 'Ada ya da ne yaptığına göre ara',
+    allCategories: 'Tümü',
+    category: 'Kategori',
+    permission: 'İzinler',
+    anyPermission: 'Hepsi',
+    showing: (n, total) => (n === total ? `${total} uzantı` : `${total} uzantıdan ${n} tanesi`),
+    empty: 'Eşleşen uzantı yok. Daha az sözcük ya da başka bir kategori dene.',
+    reset: 'Hepsini göster',
+    categories: { text: 'Metin', links: 'Linkler', images: 'Görseller', files: 'Dosyalar', developer: 'Geliştirici', media: 'Medya', ai: 'Yapay zekâ', productivity: 'Verimlilik' },
+    perm: {
+      none: 'İzin istemeyenler',
+      network: 'İnternete çıkar',
+      exec: 'Program çalıştırır',
+      sensitive: 'Gizli kayıt okur',
+      capture: 'Kopyalarını görür',
+      history: 'Geçmişi okur',
+    },
+  },
+
+  ext: {
+    back: 'Tüm uzantılar',
+    install: 'Kur',
+    wants: 'Neler yapabilir',
+    nothing: 'Özel bir izin istemiyor.',
+    sentences: {
+      networkAny: 'Her siteye internetten erişebilir',
+      network: (hosts) => `İnternete çıkabilir: ${hosts}`,
+      exec: (tools) => `Bilgisayarındaki şu programları çalıştırabilir: ${tools}. Bu programlar dosyalarına erişebilir ve internete çıkabilir.`,
+      sensitive: 'Şifre gibi gizli kayıtları okuyup yapıştırabilir. Bunlar geçmişe ve diske yazılmaz.',
+      capture: 'Her kopyanı görebilir',
+      history: 'Geçmişinin tamamını okuyabilir',
+    },
+    facts: { version: 'Sürüm', requires: 'Gereken yabbistir', updated: 'Güncellendi', author: 'Yazan', categories: 'Kategoriler', size: 'Paket', id: 'Kimlik' },
+    readme: 'README',
+    readmeLang: 'Bu açıklama İngilizce.',
+    source: 'GitHub’da kaynak',
+    prev: 'Önceki',
+    next: 'Sonraki',
+    sheet: {
+      title: (n) => `${n} uzantısını kur`,
+      open: 'yabbistir’de aç',
+      openNote: 'yabbistir 0.5 ya da sonrası gerekir. yabbistir uzantının ne yapmak istediğini gösterir ve yalnızca sen izin verirsen kurar.',
+      manual: (n) => `Ya da yabbistir’de: Ayarlar → Uzantılar → Mağaza, sonra ${n} uzantısını seç.`,
+      noApp: 'yabbistir henüz sende yok mu?',
+      close: 'Kapat',
+    },
+  },
+
+  privacyPage: {
+    h1: 'Gizlilik',
+    siteTitle: 'Bu site',
+    site: [
+      'yabbistir.com ziyaretleri GoatCounter ile, çerez kullanmadan ve seni tanıtacak hiçbir şeyi saklamadan sayar. Yalnızca görüntülenen sayfaları ve İndir ile Kur düğmelerine tıklamaları sayar. Onaylanacak bir şey olmadığı için onay penceresi de yok.',
+      'Videolar ve yazı tipleri bu siteden gelir. YouTube’dan ya da reklam ağlarından hiçbir şey yüklenmez.',
+    ],
+    appTitle: 'Uygulama',
+    app: [
+      'Telemetri yok, analitik yok, arka planda ağ bağlantısı yok. yabbistir yalnızca sen isteyince internete çıkar: Güncellemeleri Denetle… GitHub’a son sürümü sorar ve daha yenisi varsa sürüm sayfasını açmayı önerir; Mağaza sekmesi açtığında ya da Yenile’ye bastığında mağazanın imzalı listesini okur ve yalnızca kurduğunu indirir. Yerleşik uzantılar hiç internete çıkmaz.',
+      'Parola yöneticilerinin yaptığı gibi gizli ya da geçici olarak işaretlenen kopyalar hiç saklanmaz; Anahtar Zinciri Erişimi’nden ya da Parolalar’dan kopyalananlar da. Bir uzantının yapıştırdığı parola panoya yalnızca bu Mac için gizli bir öğe olarak konur ve panon bir an sonra eski hâline döner; hiç gösterilmez, saklanmaz, kaydedilmez.',
+      'Geçmişin Mac’inde, ~/Library/Application Support/yabbistir içinde kalır.',
+      'Mağazadaki uzantılar kurulmadan önce ne yapmak istediklerini gösterir: internete çıkmak (ve hangi sitelere), program çalıştırmak (ve hangilerini), geçmişini okumak ya da kopyaladığını görmek. Sen izin vermeden hiçbirini yapamazlar.',
+    ],
+  },
+
+  notFound: { title: 'Bu şerit kaybolmuş.', body: 'Takip ettiğin sayfa kartonda yok.', home: 'yabbistir’e dön' },
+  dates: (iso) => new Date(iso).toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
+};
