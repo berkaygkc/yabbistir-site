@@ -118,8 +118,8 @@ export function page({ t, site, path, title, description, body, data, bodyClass 
 <link rel="alternate" hreflang="tr" href="${esc(site.abs(tr))}">
 <link rel="alternate" hreflang="x-default" href="${esc(site.abs(en))}">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2f3ef">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#131416">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f1f2ee">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#15191d">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="yabbistir">
 <meta property="og:title" content="${esc(title)}">
