@@ -59,22 +59,22 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --board: #14171a;
+    --board: #15191d;
     --paper: #ecebe3;
     --paper-2: #e2e0d6;
     --ink: #f1efe8;
     --ink-2: #cfcdc5;
     --ink-3: #a2a097;
     --rule: rgba(241, 239, 232, 0.14);
-    --grid-minor: rgba(140, 200, 240, 0.11);
-    --grid-major: rgba(140, 200, 240, 0.3);
+    --grid-minor: rgba(150, 208, 245, 0.15);
+    --grid-major: rgba(150, 208, 245, 0.4);
     --nonphoto: #6aaed6;
     --pencil: #92cdf0;
     --ruby: #cf2a30;
     --ruby-deep: #b92228;
     --ruby-film: rgba(214, 48, 54, 0.9);
     --crop: #e9e7e0;
-    --lit: radial-gradient(130% 90% at 50% -10%, rgba(150, 205, 240, 0.14), rgba(150, 205, 240, 0.03) 55%, transparent 80%);
+    --lit: radial-gradient(75% 60% at 50% 22%, rgba(160, 212, 245, 0.30), rgba(160, 212, 245, 0.11) 45%, rgba(160, 212, 245, 0.03) 75%, transparent 100%);
     --shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 16px 32px -16px rgba(0, 0, 0, 0.9);
     --shadow-lift: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 30px 54px -22px rgba(0, 0, 0, 0.95);
 
@@ -212,7 +212,7 @@ main > section, main > article { width: min(100% - 2 * var(--margin), var(--max)
 .galley > p, .galley > h2 + p, .galley > h3 + p { color: var(--ink-2); }
 .slug {
   font: 400 12.5px/1.4 var(--font-slug); color: var(--ink-3);
-  letter-spacing: 0.01em; font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em; font-variant-numeric: tabular-nums; overflow-wrap: anywhere;
 }
 .slug--foot { margin-top: auto; padding-top: 10px; border-top: 1px dashed color-mix(in srgb, var(--nonphoto) 75%, transparent); }
 
@@ -382,7 +382,7 @@ main > section, main > article { width: min(100% - 2 * var(--margin), var(--max)
 
 .film { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(32px, 4vw, 64px); align-items: end; padding-block: 24px 120px; }
 .film__head h2 { font-size: clamp(30px, 3vw, 44px); font-weight: 760; line-height: 1.04; letter-spacing: -0.024em; }
-.film__frame { background: #d8dadf; box-shadow: var(--shadow); }
+.film__frame .film__video { box-shadow: var(--shadow); }
 .player { position: relative; }
 .player__play {
   position: absolute; left: 18px; top: 18px; z-index: 2;
@@ -440,12 +440,12 @@ main > section, main > article { width: min(100% - 2 * var(--margin), var(--max)
 .asks h3 { font-size: 26px; }
 .xgrid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 28px 24px; align-items: start; }
 .xspread { grid-column: 1 / -1; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 26px 24px; align-items: start; }
-.xspread > :nth-child(1) { grid-column: 1 / span 6; grid-row: 1 / span 3; }
+.xspread > :nth-child(1) { grid-column: 1 / span 6; grid-row: 1 / span 2; }
 .xspread > :nth-child(2) { grid-column: 7 / span 6; grid-row: 1; }
 .xspread > :nth-child(3) { grid-column: 8 / span 5; grid-row: 2; }
-.xspread > :nth-child(4) { grid-column: 7 / span 4; grid-row: 3; }
-.xspread > :nth-child(5) { grid-column: 2 / span 5; grid-row: 4; margin-top: 6px; }
-.xspread > :nth-child(6) { grid-column: 7 / span 6; grid-row: 4; margin-top: 38px; }
+.xspread > :nth-child(4) { grid-column: 7 / span 5; grid-row: 3; margin-top: 18px; }
+.xspread > :nth-child(5) { grid-column: 2 / span 5; grid-row: 3; }
+.xspread > :nth-child(6) { grid-column: 4 / span 6; grid-row: 4; margin-top: 8px; }
 .xgalley--lead .xgalley__link { padding: 30px 32px 16px; gap: 18px; }
 .xgalley--lead .xgalley__name { font-size: clamp(28px, 2.6vw, 38px); font-weight: 800; letter-spacing: -0.025em; }
 .xgalley--lead .mono-tile { width: 54px; height: 54px; font-size: 18px; border-width: 2px; }
@@ -457,7 +457,7 @@ main > section, main > article { width: min(100% - 2 * var(--margin), var(--max)
 .xgalley--strip .xgalley__link { padding: 16px 18px 10px; gap: 9px; }
 .xgalley--strip .xgalley__name { font-size: 18px; }
 .xgalley--strip .mono-tile { width: 30px; height: 30px; font-size: 11.5px; }
-.xgalley--strip .xgalley__desc { font-size: 15px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.xgalley--strip .xgalley__desc { font-size: 15px; line-height: 1.45; }
 .grows__more { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 32px; }
 .grows__write { max-width: 34em; }
 .grows__write h3 { margin-bottom: 8px; }
