@@ -59,6 +59,9 @@ for (const p of pages) {
 await writeFile(join(DIST, '404.html'), lost.html);
 await writeFile(join(DIST, '.nojekyll'), '');
 await writeFile(join(DIST, '.base'), base);
+// What this build rendered from, for the tests (outside dist/, so it isn't published).
+await mkdir('.build', { recursive: true });
+await writeFile('.build/manifest.json', JSON.stringify({ base, version: data.release.version, dmg: data.release.dmg.url, extensions: data.extensions.map((e) => e.id) }, null, 2));
 
 const today = new Date().toISOString().slice(0, 10);
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

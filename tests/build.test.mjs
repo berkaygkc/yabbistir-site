@@ -6,7 +6,8 @@ import { join } from 'node:path';
 
 const DIST = 'dist';
 const base = (await readFile(join(DIST, '.base'), 'utf8')).trim();
-const data = JSON.parse(await readFile('data/snapshot/data.json', 'utf8'));
+// What the build rendered from (live data or the snapshot), not the committed snapshot: the two differ after a release.
+const built = JSON.parse(await readFile('.build/manifest.json', 'utf8'));
 const exists = (p) => access(p).then(() => true, () => false);
 
 async function htmlFiles(dir = DIST) {
@@ -22,8 +23,8 @@ const files = await htmlFiles();
 const pages = await Promise.all(files.map(async (f) => [f, await readFile(f, 'utf8')]));
 
 test('every extension has a page in both languages', async () => {
-  for (const e of data.catalog.extensions) {
-    const slug = e.id.replace(/^dev\.yabbistir\./, '');
+  for (const id of built.extensions) {
+    const slug = id.replace(/^dev\.yabbistir\./, '');
     assert.ok(await exists(join(DIST, 'extensions', slug, 'index.html')), `en ${slug}`);
     assert.ok(await exists(join(DIST, 'tr/extensions', slug, 'index.html')), `tr ${slug}`);
   }
@@ -32,7 +33,7 @@ test('every extension has a page in both languages', async () => {
 test('the store lists every extension once', async () => {
   for (const lang of ['', 'tr/']) {
     const html = await readFile(join(DIST, lang, 'extensions/index.html'), 'utf8');
-    assert.equal((html.match(/class="xgalley"/g) ?? []).length, data.catalog.extensions.length);
+    assert.equal((html.match(/class="xgalley"/g) ?? []).length, built.extensions.length);
   }
 });
 
@@ -71,8 +72,8 @@ test('every internal link and asset resolves', async () => {
 
 test('the download points at the release DMG', async () => {
   const html = await readFile(join(DIST, 'index.html'), 'utf8');
-  const dmg = data.release.assets.find((a) => a.name.endsWith('.dmg'));
-  assert.ok(html.includes(dmg.browser_download_url));
+  assert.match(built.dmg, /^https:\/\/github\.com\/berkaygkc\/yabbistir\/releases\/download\/v[\d.]+\/yabbistir-[\d.]+\.dmg$/);
+  assert.ok(html.includes(built.dmg));
 });
 
 test('install links use the app scheme with the extension id', async () => {
