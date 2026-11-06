@@ -80,6 +80,16 @@ test('install links use the app scheme with the extension id', async () => {
   assert.ok(html.includes('yabbistir://store/install?id=dev.yabbistir.secret-guard'));
 });
 
+test('the counter records the same paths under the project URL and the domain', async () => {
+  const html = await readFile(join(DIST, 'tr/extensions/index.html'), 'utf8');
+  const config = html.match(/<script>(window\.goatcounter=[^<]*)<\/script>/)?.[1];
+  const window = {};
+  if (config) new Function('window', config)(window);
+  const path = window.goatcounter?.path ?? ((p) => p);
+  assert.equal(path(`${base}tr/extensions/`), '/tr/extensions/');
+  assert.equal(path(base), '/');
+});
+
 test('no star or download counts anywhere', () => {
   for (const [f, html] of pages) assert.doesNotMatch(html, /shields\.io|stargazers|github\/downloads/, f);
 });

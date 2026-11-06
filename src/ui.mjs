@@ -136,6 +136,7 @@ export function page({ t, site, path, title, description, body, data, bodyClass 
 <script defer src="${site.url('/assets/site.js')}?v=${v}"></script>
 <script>document.documentElement.classList.add('js')</script>
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld).replace(/</g, '\\u003c')}</script>` : ''}
+${site.base === '/' ? '' : `<script>window.goatcounter={path:function(p){var b=${JSON.stringify(site.base)};return p.indexOf(b)===0?p.slice(b.length-1):p}}</script>`}
 <script data-goatcounter="https://yabbistir.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body class="${esc(bodyClass)}" data-lang="${t.lang}">
