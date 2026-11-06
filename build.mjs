@@ -13,9 +13,8 @@ import { mkdir, rm, cp, readFile, writeFile, access } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { dirname, join } from 'node:path';
 import { loadData } from './src/data.mjs';
+import { LANGUAGES } from './src/languages.mjs';
 import { makeSite } from './src/ui.mjs';
-import en from './src/i18n/en.mjs';
-import tr from './src/i18n/tr.mjs';
 import { home } from './src/pages/home.mjs';
 import { extensions } from './src/pages/extensions.mjs';
 import { extension } from './src/pages/extension.mjs';
@@ -37,19 +36,23 @@ await rm(DIST, { recursive: true, force: true });
 await mkdir(join(DIST, 'assets'), { recursive: true });
 await cp('public', DIST, { recursive: true });
 const css = await readFile('src/styles/site.css', 'utf8');
-const js = await readFile('src/client/site.js', 'utf8');
+// The client picks a language with the same function the tests run: its source goes ahead of site.js.
+const matcher = (await readFile('src/lang-match.mjs', 'utf8')).replace(/^export /m, '');
+const js = matcher + '\n' + (await readFile('src/client/site.js', 'utf8'));
 const assetVersion = createHash('sha256').update(css).update(js).digest('hex').slice(0, 10);
 await writeFile(join(DIST, 'assets/site.css'), css);
 await writeFile(join(DIST, 'assets/site.js'), js);
 
-const site = makeSite({ origin, base, assetVersion });
+const catalogs = await Promise.all(LANGUAGES.map(async (l) => (await import(`./src/i18n/${l.code}.mjs`)).default));
+const tracks = (await Promise.all(LANGUAGES.map(async (l) => ((await exists(`public/media/extensions-60s.${l.code}.vtt`)) ? l : null)))).filter(Boolean);
+const site = makeSite({ origin, base, assetVersion, tracks });
 const pages = [];
-for (const t of [en, tr]) {
+for (const t of catalogs) {
   pages.push(home({ t, data, site }), extensions({ t, data, site }), privacy({ t, data, site }));
   const sorted = [...data.extensions].sort((a, b) => (a.name[t.lang] ?? a.name.en).localeCompare(b.name[t.lang] ?? b.name.en, t.locale));
   sorted.forEach((e, i) => pages.push(extension({ t, data, site, e, prev: sorted[i - 1], next: sorted[i + 1] })));
 }
-const lost = notFound({ t: en, data, site });
+const lost = notFound({ t: catalogs[0], data, site });
 
 for (const p of pages) {
   const file = join(DIST, p.path, 'index.html');
@@ -61,7 +64,7 @@ await writeFile(join(DIST, '.nojekyll'), '');
 await writeFile(join(DIST, '.base'), base);
 // What this build rendered from, for the tests (outside dist/, so it isn't published).
 await mkdir('.build', { recursive: true });
-await writeFile('.build/manifest.json', JSON.stringify({ base, version: data.release.version, dmg: data.release.dmg.url, extensions: data.extensions.map((e) => e.id) }, null, 2));
+await writeFile('.build/manifest.json', JSON.stringify({ base, origin, version: data.release.version, dmg: data.release.dmg.url, extensions: data.extensions.map((e) => e.id) }, null, 2));
 
 const today = new Date().toISOString().slice(0, 10);
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

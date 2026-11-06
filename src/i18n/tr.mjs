@@ -3,7 +3,6 @@
 export default {
   lang: 'tr',
   locale: 'tr-TR',
-  other: { lang: 'en', label: 'English', short: 'EN' },
   meta: {
     title: 'yabbistir: yazdığın yerde açılan pano geçmişi',
     description: 'macOS 26 için ücretsiz ve açık kaynak bir pano geçmişi: yazı imlecinin hemen altında açılır, açık bir mağazadaki uzantılarla büyür.',
@@ -13,6 +12,7 @@ export default {
   },
   skip: 'İçeriğe geç',
   nav: { home: 'yabbistir', extensions: 'Uzantılar', privacy: 'Gizlilik', github: 'GitHub', download: 'İndir', menu: 'Menü' },
+  langMenu: { label: 'Dil' },
   langSuggest: { text: 'Bu sayfa İngilizce de var.', go: 'English', dismiss: 'Kapat' },
 
   hero: {
@@ -149,7 +149,7 @@ export default {
   footer: {
     name: 'yabbistir, “yapıştır”ın şakacı bir söylenişi.',
     made: 'MIT lisansı · Berkay Gökçe yaptı, Claude Code ile.',
-    links: { app: 'Kaynak kodu', store: 'Uzantı mağazası', releases: 'Sürümler', issues: 'Sorun bildir', privacy: 'Gizlilik' },
+    links: { app: 'Kaynak kodu', store: 'Uzantı mağazası', releases: 'Sürümler', issues: 'Sorun bildir', privacy: 'Gizlilik', translation: 'Çeviri hatası bildir' },
     counter: 'Ziyaretler çerezsiz sayılır.',
   },
 
@@ -197,7 +197,7 @@ export default {
     },
     facts: { version: 'Sürüm', requires: 'Gereken yabbistir', updated: 'Güncellendi', author: 'Yazan', categories: 'Kategoriler', size: 'Paket', id: 'Kimlik' },
     readme: 'README',
-    readmeLang: 'Bu açıklama İngilizce.',
+    readmeNote: 'Bu açıklama İngilizce.',
     source: 'GitHub’da kaynak',
     prev: 'Önceki',
     next: 'Sonraki',

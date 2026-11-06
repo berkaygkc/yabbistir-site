@@ -3,6 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, readdir, access } from 'node:fs/promises';
 import { join } from 'node:path';
+import { LANGUAGES, localPath } from '../src/languages.mjs';
 
 const DIST = 'dist';
 const base = (await readFile(join(DIST, '.base'), 'utf8')).trim();
@@ -22,17 +23,21 @@ async function htmlFiles(dir = DIST) {
 const files = await htmlFiles();
 const pages = await Promise.all(files.map(async (f) => [f, await readFile(f, 'utf8')]));
 
-test('every extension has a page in both languages', async () => {
-  for (const id of built.extensions) {
-    const slug = id.replace(/^dev\.yabbistir\./, '');
-    assert.ok(await exists(join(DIST, 'extensions', slug, 'index.html')), `en ${slug}`);
-    assert.ok(await exists(join(DIST, 'tr/extensions', slug, 'index.html')), `tr ${slug}`);
+const dirOf = (code) => join(DIST, LANGUAGES.find((l) => l.code === code).path);
+
+test('every language has a home, a store, a privacy page and every extension page', async () => {
+  for (const { code } of LANGUAGES) {
+    for (const p of ['', 'extensions', 'privacy']) assert.ok(await exists(join(dirOf(code), p, 'index.html')), `${code} ${p || 'home'}`);
+    for (const id of built.extensions) {
+      const slug = id.replace(/^dev\.yabbistir\./, '');
+      assert.ok(await exists(join(dirOf(code), 'extensions', slug, 'index.html')), `${code} ${slug}`);
+    }
   }
 });
 
 test('the store lists every extension once', async () => {
-  for (const lang of ['', 'tr/']) {
-    const html = await readFile(join(DIST, lang, 'extensions/index.html'), 'utf8');
+  for (const { code } of LANGUAGES) {
+    const html = await readFile(join(dirOf(code), 'extensions/index.html'), 'utf8');
     assert.equal((html.match(/class="xgalley"/g) ?? []).length, built.extensions.length);
   }
 });
@@ -46,14 +51,40 @@ test('no page leaks a missing value or a template marker', () => {
   }
 });
 
-test('pages carry their language, an alternate and a canonical link', () => {
+// The language a built page belongs to: the registry entry whose path prefixes it (longest first, so /zh-hans never reads as /zh).
+const languageOf = (file) => {
+  const rel = '/' + file.slice(DIST.length + 1).replace(/index\.html$/, '');
+  return [...LANGUAGES].sort((a, b) => b.path.length - a.path.length).find((l) => l.path && (rel === l.path + '/' || rel.startsWith(l.path + '/'))) ?? LANGUAGES[0];
+};
+
+test('pages carry their language, an alternate for every language and a canonical link', () => {
   for (const [f, html] of pages) {
-    const lang = f.startsWith(join(DIST, 'tr')) ? 'tr' : 'en';
-    assert.match(html, new RegExp(`<html lang="${lang}">`), f);
+    assert.match(html, new RegExp(`<html lang="${languageOf(f).code}">`), f);
     assert.match(html, /<link rel="canonical"/, f);
-    assert.match(html, /hreflang="tr"/, f);
-    assert.match(html, /hreflang="en"/, f);
+    for (const { code } of LANGUAGES) assert.match(html, new RegExp(`<link rel="alternate" hreflang="${code}" href="`), `${f} ${code}`);
+    assert.match(html, /<link rel="alternate" hreflang="x-default" href="/, f);
   }
+});
+
+test('hreflang links point at the same page in each language', () => {
+  const html = pages.find(([f]) => f === join(DIST, 'tr/extensions/secret-guard/index.html'))[1];
+  for (const { code } of LANGUAGES) {
+    const want = `${base.replace(/\/$/, '')}${localPath(code, '/extensions/secret-guard/')}`;
+    assert.ok(html.includes(`hreflang="${code}" href="${built.origin}${want}"`), code);
+  }
+});
+
+test('non-English extension pages say the README is English; English pages do not', async () => {
+  for (const { code } of LANGUAGES) {
+    const html = await readFile(join(dirOf(code), 'extensions/secret-guard/index.html'), 'utf8');
+    const note = (await import(`../src/i18n/${code}.mjs`)).default.ext.readmeNote;
+    assert.equal(html.includes('class="pencil pencil--inline"'), code !== 'en', code);
+    if (code !== 'en') assert.ok(html.includes(note.replace(/'/g, '&#39;')), code);
+  }
+});
+
+test('the footer links to the translation issue form', () => {
+  for (const [f, html] of pages) assert.ok(html.includes('https://github.com/berkaygkc/yabbistir/issues/new?template=translation.yml'), f);
 });
 
 test('every internal link and asset resolves', async () => {

@@ -188,10 +188,10 @@
   const hint = $('[data-lang-suggest]');
   if (hint) {
     const want = hint.dataset.langSuggest;
-    const prefers = (navigator.languages ?? [navigator.language]).some((l) => l?.toLowerCase().startsWith('tr'));
+    const best = bestLanguage(navigator.languages ?? [navigator.language], hint.dataset.langCodes.split(' ')) ?? 'en';
     let dismissed = false;
     try { dismissed = localStorage.getItem('yab-lang-hint') === '1'; } catch {}
-    if (!dismissed && ((want === 'tr' && prefers) || (want === 'en' && !prefers))) hint.hidden = false;
+    if (!dismissed && best === want) hint.hidden = false;
     $('[data-lang-dismiss]', hint)?.addEventListener('click', () => {
       hint.hidden = true;
       try { localStorage.setItem('yab-lang-hint', '1'); } catch {}

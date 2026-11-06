@@ -1,0 +1,29 @@
+// The site's languages, in menu order. A new language is one entry here, `src/i18n/<code>.mjs` and
+// `public/media/extensions-60s.<code>.vtt`; nothing else names a language.
+//
+//   code    the BCP 47 tag: <html lang>, hreflang, the i18n module's name
+//   path    where the language lives ('' for English at the root)
+//   name    the language's own name, for menus and hints
+//   locale  for number, date and collation formatting
+//   og      og:locale
+
+export const LANGUAGES = [
+  { code: 'en', path: '', name: 'English', locale: 'en-US', og: 'en_US' },
+  { code: 'tr', path: '/tr', name: 'Türkçe', locale: 'tr-TR', og: 'tr_TR' },
+];
+
+export const DEFAULT_LANGUAGE = LANGUAGES[0];
+
+export const languageOf = (code) => LANGUAGES.find((l) => l.code === code) ?? DEFAULT_LANGUAGE;
+
+/** An English path (`/extensions/`) as it is served in a language. */
+export const localPath = (code, enPath) => languageOf(code).path + enPath;
+
+/** The language a served path belongs to, and the English path under it (longest prefix first, so /zh-hans never reads as /zh). */
+export function splitPath(path) {
+  const own = [...LANGUAGES].sort((a, b) => b.path.length - a.path.length).find((l) => l.path && (path === l.path || path.startsWith(l.path + '/')));
+  return own ? { language: own, enPath: path.slice(own.path.length) || '/' } : { language: DEFAULT_LANGUAGE, enPath: path };
+}
+
+/** A served path (in any language) as it is served in `code`. */
+export const pathIn = (code, path) => localPath(code, splitPath(path).enPath);

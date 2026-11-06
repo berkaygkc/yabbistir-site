@@ -31,11 +31,11 @@
   --crop: #151513;
   --shadow: 0 1px 0 rgba(21, 21, 19, 0.035), 0 1px 2px rgba(21, 21, 19, 0.06), 0 12px 24px -14px rgba(21, 21, 19, 0.28);
   --shadow-lift: 0 3px 6px rgba(21, 21, 19, 0.07), 0 26px 44px -18px rgba(21, 21, 19, 0.34);
-  --font-display: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
-  --font-text: "Source Serif 4", "Iowan Old Style", Georgia, serif;
-  --font-slug: "Courier Prime", "Courier New", monospace;
-  --font-app: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
-  --font-app-mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --font-display: "Libre Franklin", "Helvetica Neue", Arial, "PingFang SC", "PingFang TC", "Hiragino Sans", "Apple SD Gothic Neo", "Noto Sans CJK SC", "Microsoft YaHei", "Malgun Gothic", sans-serif;
+  --font-text: "Source Serif 4", "Iowan Old Style", Georgia, "Songti SC", "Hiragino Mincho ProN", serif;
+  --font-slug: "Courier Prime", "Courier New", "PingFang SC", "PingFang TC", "Hiragino Sans", "Apple SD Gothic Neo", "Noto Sans CJK SC", "Microsoft YaHei", "Malgun Gothic", monospace;
+  --font-app: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, "PingFang SC", "PingFang TC", "Hiragino Sans", "Apple SD Gothic Neo", "Noto Sans CJK SC", "Microsoft YaHei", "Malgun Gothic", sans-serif;
+  --font-app-mono: ui-monospace, "SF Mono", Menlo, "PingFang SC", "PingFang TC", "Hiragino Sans", "Apple SD Gothic Neo", "Noto Sans CJK SC", "Microsoft YaHei", "Malgun Gothic", monospace;
   --margin: clamp(16px, 4.2vw, 64px);
   --max: 1344px;
   --pica: 16px;

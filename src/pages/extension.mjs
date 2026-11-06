@@ -81,7 +81,7 @@ export function extension({ t, data, site, e, prev, next }) {
   </section>
   <section class="xpage__readme galley" aria-labelledby="readme-title">
     <h2 id="readme-title" class="visually-hidden">${esc(t.ext.readme)}</h2>
-    ${t.ext.readmeLang ? `<p class="pencil pencil--inline" lang="${t.lang}">${esc(t.ext.readmeLang)}</p>` : ''}
+    ${t.lang !== 'en' ? `<p class="pencil pencil--inline" lang="${t.lang}">${esc(t.ext.readmeNote)}</p>` : ''}
     <div class="prose" lang="en">${renderReadme(e)}</div>
   </section>
   <nav class="xpage__pager" aria-label="${esc(t.store.h1)}">

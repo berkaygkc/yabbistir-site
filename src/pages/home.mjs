@@ -148,8 +148,7 @@ function grows(t, data, site) {
   <figure class="grows__film player crop" data-paste data-player>
     <video class="film__video" controls preload="none" poster="${site.url('/media/extensions-60s.jpg')}" playsinline width="1280" height="720" aria-label="${esc(t.grows.filmLabel)}" data-goatcounter-play="extensions-film">
       <source src="${site.url('/media/extensions-60s.mp4')}" type="video/mp4">
-      <track kind="captions" src="${site.url('/media/extensions-60s.en.vtt')}" srclang="en" label="English"${t.lang === 'en' ? ' default' : ''}>
-      <track kind="subtitles" src="${site.url('/media/extensions-60s.tr.vtt')}" srclang="tr" label="Türkçe"${t.lang === 'tr' ? ' default' : ''}>
+      ${site.tracks.map((l) => `<track kind="${l.code === 'en' ? 'captions' : 'subtitles'}" src="${site.url(`/media/extensions-60s.${l.code}.vtt`)}" srclang="${l.code}" label="${esc(l.name)}"${t.lang === l.code ? ' default' : ''}>`).join('\n      ')}
     </video>
     ${playButton(t.film.play, t.grows.filmLabel)}
     <figcaption class="player__caption"><span class="pencil">${esc(t.grows.film)}</span><span class="slug">${esc(t.grows.filmMeta)}</span></figcaption>

@@ -3,7 +3,6 @@
 export default {
   lang: 'en',
   locale: 'en-US',
-  other: { lang: 'tr', label: 'Türkçe', short: 'TR' },
   meta: {
     title: 'yabbistir: the clipboard history that opens where you type',
     description: 'A free, open-source clipboard history for macOS 26 that opens right under your text caret and grows with extensions from an open store.',
@@ -13,6 +12,7 @@ export default {
   },
   skip: 'Skip to content',
   nav: { home: 'yabbistir', extensions: 'Extensions', privacy: 'Privacy', github: 'GitHub', download: 'Download', menu: 'Menu' },
+  langMenu: { label: 'Language' },
   langSuggest: { text: 'This page is also in Turkish.', go: 'Türkçe', dismiss: 'Dismiss' },
 
   hero: {
@@ -149,7 +149,7 @@ export default {
   footer: {
     name: 'yabbistir is a playful way of saying yapıştır, Turkish for “paste”.',
     made: 'MIT License · Made by Berkay Gökçe, with Claude Code.',
-    links: { app: 'Source code', store: 'Extension store', releases: 'Releases', issues: 'Report a problem', privacy: 'Privacy' },
+    links: { app: 'Source code', store: 'Extension store', releases: 'Releases', issues: 'Report a problem', privacy: 'Privacy', translation: 'Report a translation issue' },
     counter: 'Visits are counted without cookies.',
   },
 
@@ -197,7 +197,7 @@ export default {
     },
     facts: { version: 'Version', requires: 'Needs yabbistir', updated: 'Updated', author: 'Author', categories: 'Categories', size: 'Package', id: 'Identifier' },
     readme: 'README',
-    readmeLang: null,
+    readmeNote: 'This extension’s documentation is in English.',
     source: 'Source on GitHub',
     prev: 'Previous',
     next: 'Next',

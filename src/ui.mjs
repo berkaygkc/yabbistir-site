@@ -1,6 +1,9 @@
 // Shared pieces: escaping, links, the page shell and the components of the paste-up board.
 
 import { APP_REPO, STORE_REPO } from './data.mjs';
+import { LANGUAGES, languageOf, localPath, pathIn } from './languages.mjs';
+
+export { localPath, pathIn };
 
 export const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -14,14 +17,10 @@ export function bytes(n, locale) {
 }
 
 /** Paths on the site: `site.url('/extensions/')` → the base-aware href; `site.abs(...)` → the absolute URL. */
-export function makeSite({ origin, base, assetVersion }) {
+export function makeSite({ origin, base, assetVersion, tracks = [] }) {
   const url = (path) => base.replace(/\/$/, '') + path;
-  return { origin, base, assetVersion, url, abs: (path) => origin + url(path) };
+  return { origin, base, assetVersion, tracks, url, abs: (path) => origin + url(path) };
 }
-
-/** The same page in the other language: English lives at /, Turkish at /tr/. */
-export const localPath = (lang, path) => (lang === 'tr' ? '/tr' + path : path);
-export const otherPath = (lang, path) => (lang === 'tr' ? path.replace(/^\/tr/, '') || '/' : '/tr' + path);
 
 const SPRITE = html`<svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-reg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M12 0v24M0 12h24" stroke="currentColor" stroke-width="1"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/></symbol>
@@ -96,9 +95,9 @@ export function consentSentences(t, e) {
 
 export function page({ t, site, path, title, description, body, data, bodyClass = '', image = '/img/og.png', jsonld = null }) {
   const here = site.url(path);
-  const alt = otherPath(t.lang, path);
-  const en = t.lang === 'en' ? path : alt;
-  const tr = t.lang === 'tr' ? path : alt;
+  // While there are two languages the masthead toggles to the other one.
+  const other = LANGUAGES.find((l) => l.code !== t.lang);
+  const alt = pathIn(other.code, path);
   const v = site.assetVersion;
   const nav = [
     ['/extensions/', t.nav.extensions],
@@ -114,9 +113,8 @@ export function page({ t, site, path, title, description, body, data, bodyClass 
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(site.abs(path))}">
-<link rel="alternate" hreflang="en" href="${esc(site.abs(en))}">
-<link rel="alternate" hreflang="tr" href="${esc(site.abs(tr))}">
-<link rel="alternate" hreflang="x-default" href="${esc(site.abs(en))}">
+${LANGUAGES.map((l) => `<link rel="alternate" hreflang="${l.code}" href="${esc(site.abs(pathIn(l.code, path)))}">`).join('\n')}
+<link rel="alternate" hreflang="x-default" href="${esc(site.abs(pathIn('en', path)))}">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f1f2ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#15191d">
@@ -126,7 +124,7 @@ export function page({ t, site, path, title, description, body, data, bodyClass 
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${esc(site.abs(path))}">
 <meta property="og:image" content="${esc(site.abs(image))}">
-<meta property="og:locale" content="${t.locale.replace('-', '_')}">
+<meta property="og:locale" content="${languageOf(t.lang).og}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="${site.url('/img/favicon-64.png')}">
 <link rel="apple-touch-icon" href="${site.url('/img/apple-touch-icon.png')}">
@@ -142,8 +140,8 @@ ${site.base === '/' ? '' : `<script>window.goatcounter={path:function(p){var b=$
 <body class="${esc(bodyClass)}" data-lang="${t.lang}">
 ${SPRITE}
 <a class="skip" href="#main">${esc(t.skip)}</a>
-<div class="lang-suggest" data-lang-suggest="${t.other.lang}" hidden>
-  <p>${esc(t.langSuggest.text)} <a href="${site.url(alt)}" hreflang="${t.other.lang}" lang="${t.other.lang}">${esc(t.langSuggest.go)}</a></p>
+<div class="lang-suggest" data-lang-suggest="${other.code}" data-lang-codes="${LANGUAGES.map((l) => l.code).join(' ')}" hidden>
+  <p>${esc(t.langSuggest.text)} <a href="${site.url(alt)}" hreflang="${other.code}" lang="${other.code}">${esc(t.langSuggest.go)}</a></p>
   <button type="button" class="icon-button" data-lang-dismiss aria-label="${esc(t.langSuggest.dismiss)}">${icon('close')}</button>
 </div>
 <header class="masthead">
@@ -154,7 +152,7 @@ ${SPRITE}
   <nav class="masthead__nav" aria-label="Primary">
     ${nav.map(([p, label]) => `<a href="${site.url(localPath(t.lang, p))}"${current(p)}>${esc(label)}</a>`)}
     <a href="${APP_REPO}" rel="noopener">${esc(t.nav.github)}</a>
-    <a class="masthead__lang" href="${site.url(alt)}" hreflang="${t.other.lang}" lang="${t.other.lang}" aria-label="${esc(t.other.label)}">${esc(t.other.short)}</a>
+    <a class="masthead__lang" href="${site.url(alt)}" hreflang="${other.code}" lang="${other.code}" aria-label="${esc(other.name)}">${esc(other.code.toUpperCase())}</a>
   </nav>
   ${downloadTab(t, data.release, { size: 'sm', id: 'download-dmg-nav' }).replace('tab tab--sm', 'tab tab--sm tab--quiet')}
 </header>
@@ -170,6 +168,7 @@ ${body}
     <li><a href="${STORE_REPO}" rel="noopener">${esc(t.footer.links.store)}</a></li>
     <li><a href="${APP_REPO}/releases" rel="noopener">${esc(t.footer.links.releases)}</a></li>
     <li><a href="${APP_REPO}/issues" rel="noopener">${esc(t.footer.links.issues)}</a></li>
+    <li><a href="${APP_REPO}/issues/new?template=translation.yml" rel="noopener">${esc(t.footer.links.translation)}</a></li>
     <li><a href="${site.url(localPath(t.lang, '/privacy/'))}">${esc(t.footer.links.privacy)}</a></li>
   </ul>
   <p class="colophon__fine">${esc(t.footer.made)} ${esc(t.footer.counter)}</p>
