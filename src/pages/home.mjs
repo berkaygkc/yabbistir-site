@@ -1,5 +1,5 @@
 import { APP_REPO, STORE_REPO } from '../data.mjs';
-import { html, esc, icon, reg, page, downloadTab, brewBlock, monogram, permissionMarks, consentSentences, localPath, bytes } from '../ui.mjs';
+import { html, esc, icon, reg, page, downloadTab, brewBlock, monogram, permissionMarks, consentSentences, localPath, bytes, playButton } from '../ui.mjs';
 
 function demoPanel(t) {
   const p = t.panel;
@@ -58,7 +58,6 @@ function hero(t, data, site) {
 </section>`;
 }
 
-const playButton = (label, aria) => `<button type="button" class="player__play" aria-label="${esc(aria)}" hidden><span class="player__disc">${icon('play')}</span><span class="player__label">${esc(label)}</span></button>`;
 
 function film(t, site) {
   return html`<section class="film" aria-labelledby="film-title">

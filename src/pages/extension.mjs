@@ -1,6 +1,7 @@
 import { Marked } from 'marked';
 import { STORE_REPO } from '../data.mjs';
-import { html, esc, icon, page, localPath, monogram, consentSentences, downloadTab } from '../ui.mjs';
+import { html, esc, icon, page, localPath, monogram, consentSentences, downloadTab, playButton } from '../ui.mjs';
+import { FILMS } from '../films.mjs';
 
 /** README → HTML. Raw HTML is shown as text, links and images resolve against the store repository, the title goes. */
 function renderReadme(e) {
@@ -26,6 +27,22 @@ function renderReadme(e) {
   });
   const md = e.readme.replace(/^#\s+[^\n]*\n+/, '');
   return marked.parse(md);
+}
+
+/** The extension's film, when it has one: the site's player, captions in both languages, and the YouTube copy. */
+function film(t, site, e, name) {
+  const f = FILMS[e.id];
+  if (!f) return '';
+  const label = t.ext.film.label(name);
+  return html`<figure class="xpage__film player crop" data-paste data-player>
+    <video class="film__video" controls preload="none" poster="${site.url(`/media/${f.file}.jpg`)}" playsinline width="1280" height="720" aria-label="${esc(label)}" data-goatcounter-play="film-${esc(e.slug)}">
+      <source src="${site.url(`/media/${f.file}.mp4`)}" type="video/mp4">
+      <track kind="captions" src="${site.url(`/media/${f.file}.en.vtt`)}" srclang="en" label="English"${t.lang === 'en' ? ' default' : ''}>
+      <track kind="subtitles" src="${site.url(`/media/${f.file}.tr.vtt`)}" srclang="tr" label="Türkçe"${t.lang === 'tr' ? ' default' : ''}>
+    </video>
+    ${playButton(t.film.play, label)}
+    <figcaption class="player__caption"><span class="slug">${esc(t.ext.film.meta(f.length))}</span><a class="text-link" href="${esc(f.youtube)}" rel="noopener">${esc(t.ext.film.youtube)}</a></figcaption>
+  </figure>`;
 }
 
 export function extension({ t, data, site, e, prev, next }) {
@@ -56,6 +73,7 @@ export function extension({ t, data, site, e, prev, next }) {
     </div>
     <p class="slug slug--foot">${esc(e.id)} · ${esc(e.version)}</p>
   </header>
+  ${film(t, site, e, name)}
   <section class="xpage__wants" aria-labelledby="wants-title">
     <h2 id="wants-title">${esc(t.ext.wants)}</h2>
     ${sentences.length ? `<ul class="consent">${sentences.map((s) => `<li>${esc(s)}</li>`).join('')}</ul>` : `<p class="consent consent--none">${esc(t.ext.nothing)}</p>`}

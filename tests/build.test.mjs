@@ -94,3 +94,17 @@ test('the counter records the same paths under the project URL and the domain', 
 test('no star or download counts anywhere', () => {
   for (const [f, html] of pages) assert.doesNotMatch(html, /shields\.io|stargazers|github\/downloads/, f);
 });
+
+test('an extension with a film shows it on its page, with captions, and others show none', async () => {
+  for (const lang of ['', 'tr/']) {
+    const html = await readFile(join(DIST, lang, 'extensions/authenticator/index.html'), 'utf8');
+    assert.match(html, /<video[^>]*poster="[^"]*\/media\/authenticator-44s\.jpg"/);
+    assert.ok(html.includes('/media/authenticator-44s.mp4'));
+    assert.match(html, /<track kind="captions" src="[^"]*authenticator-44s\.en\.vtt"/);
+    assert.match(html, /<track kind="subtitles" src="[^"]*authenticator-44s\.tr\.vtt"/);
+    assert.ok(html.includes('https://youtu.be/sBg1I6EmRB0'));
+  }
+  const other = await readFile(join(DIST, 'extensions/secret-guard/index.html'), 'utf8');
+  assert.doesNotMatch(other, /<video/);
+});
+

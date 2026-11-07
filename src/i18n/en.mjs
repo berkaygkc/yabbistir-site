@@ -177,6 +177,11 @@ export default {
   },
 
   ext: {
+    film: {
+      label: (n) => `${n} at work, with narration`,
+      meta: (len) => `${len} · narrated · captions`,
+      youtube: 'Watch on YouTube',
+    },
     back: 'All extensions',
     install: 'Install',
     wants: 'What it may do',

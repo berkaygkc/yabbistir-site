@@ -177,6 +177,11 @@ export default {
   },
 
   ext: {
+    film: {
+      label: (n) => `${n} iş başında, anlatımlı`,
+      meta: (len) => `${len} · anlatımlı · altyazılı`,
+      youtube: 'YouTube’da izle',
+    },
     back: 'Tüm uzantılar',
     install: 'Kur',
     wants: 'Neler yapabilir',

@@ -178,3 +178,5 @@ ${body}
 </html>
 `;
 }
+
+export const playButton = (label, aria) => `<button type="button" class="player__play" aria-label="${esc(aria)}" hidden><span class="player__disc">${icon('play')}</span><span class="player__label">${esc(label)}</span></button>`;
