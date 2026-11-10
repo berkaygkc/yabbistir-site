@@ -32,7 +32,7 @@ export default {
     allWays: 'Weitere Installationswege',
   },
   panel: {
-    search: 'Zwischenablage durchsuchen …',
+    search: 'Verlauf durchsuchen …',
     categories: 'Kategorien',
     history: 'Verlauf',
     today: 'Heute',

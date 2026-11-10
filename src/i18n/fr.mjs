@@ -32,7 +32,7 @@ export default {
     allWays: 'Autres façons d’installer',
   },
   panel: {
-    search: 'Rechercher dans votre presse-papiers…',
+    search: 'Rechercher…',
     categories: 'Catégories',
     history: 'Historique',
     today: 'Aujourd’hui',
