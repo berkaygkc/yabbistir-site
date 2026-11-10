@@ -1,0 +1,232 @@
+// Textes français. Les phrases d’autorisation, les noms de catégories et les textes du panneau sont ceux de l’app (Localizable.xcstrings).
+
+export default {
+  lang: 'fr',
+  locale: 'fr-FR',
+  meta: {
+    title: 'yabbistir : l’historique du presse-papiers qui s’ouvre là où vous tapez',
+    description: 'Un historique du presse-papiers gratuit et open source pour macOS 26, qui s’ouvre juste sous votre point d’insertion et s’enrichit grâce aux extensions d’une boutique ouverte.',
+    extensionsTitle: 'Extensions pour yabbistir',
+    extensionsDescription: (n) => `${n} extensions de la boutique ouverte de yabbistir. Chacune montre ce qu’elle veut faire avant son installation.`,
+    privacyTitle: 'Confidentialité · yabbistir',
+  },
+  skip: 'Aller au contenu',
+  nav: { home: 'yabbistir', extensions: 'Extensions', privacy: 'Confidentialité', github: 'GitHub', download: 'Télécharger', menu: 'Menu' },
+  langMenu: { label: 'Langue' },
+  langSuggest: { text: 'Cette page existe aussi en anglais.', go: 'English', dismiss: 'Fermer' },
+
+  hero: {
+    draft: 'Démo de jeudi. Pour lancer la base de données en local, exécutez ',
+    h1: 'Collez là où vous tapez.',
+    sub: 'yabbistir est un historique du presse-papiers pour macOS qui s’ouvre juste sous votre point d’insertion. Tapez pour rechercher, appuyez sur ↵ pour coller. Les extensions lui apprennent ce que sont vos copies et quoi en faire.',
+    measure: '8 pt',
+    measureNote: 'le panneau s’ouvre 8 points sous le point d’insertion',
+    facts: ['Gratuit et open source (MIT)', 'Signé et notarisé par Apple', 'macOS 26 sur Apple silicon'],
+    tryNote: 'Essayez : tapez pour rechercher · ↑ ↓ · ↵ colle dans le brouillon',
+    pasted: (t) => `« ${t} » collé dans le brouillon.`,
+  },
+  download: {
+    cta: 'Télécharger pour macOS',
+    meta: (r, size) => `Version ${r.version} · ${size} · DMG`,
+    brew: 'Homebrew',
+    allWays: 'Autres façons d’installer',
+  },
+  panel: {
+    search: 'Rechercher dans votre presse-papiers…',
+    categories: 'Catégories',
+    history: 'Historique',
+    today: 'Aujourd’hui',
+    yesterday: 'Hier',
+    paste: 'Coller',
+    transform: 'Transformer',
+    actions: 'Actions',
+    noResults: (q) => `Aucun résultat pour « ${q} »`,
+    label: 'démo du panneau yabbistir',
+    rows: [
+      { kind: 'code', text: "SELECT id, email FROM users WHERE created_at > now() - interval '1 day'", age: '2 min', day: 'today' },
+      { kind: 'link', tile: 'V', tileColor: '#3b2e6e', text: 'Liquid Glass dans SwiftUI — le guide complet', age: '6 min', day: 'today' },
+      { kind: 'text', text: 'Jeudi 14 h : démo du parcours de remboursement avec Élodie et Mehdi', age: '9 min', day: 'today' },
+      { kind: 'color', color: '#C8A27C', text: '#C8A27C', age: '14 min', day: 'today' },
+      { kind: 'code', text: 'docker compose up -d db', age: '25 min', day: 'today', selected: true },
+      { kind: 'link', tile: 'G', tileColor: '#24262b', text: 'https://git.example.dev/yabbistir/issues/42', age: '47 min', day: 'today' },
+      { kind: 'text', text: 'Bonjour ! Votre remboursement est accepté et vous parviendra sous 3 à 5 jours.', age: 'hier', day: 'yesterday' },
+    ],
+  },
+
+  film: {
+    h2: 'Quarante secondes, du début à la fin.',
+    body: 'Le panneau sous le point d’insertion, la Pile, les transformations sur ⇧ et les catégories en colonnes, dans l’ordre où vous les rencontrerez.',
+    slug: 'L’app en 40 secondes · sans son',
+    label: 'yabbistir en 40 secondes, sans son',
+    play: 'Lire',
+    meta: '0:40 · sans son',
+  },
+
+  features: {
+    h2: 'Pensé pour le clavier, sans jamais gêner.',
+    items: {
+      caret: {
+        title: 'Un panneau sous votre point d’insertion',
+        body: 'Il s’ouvre 8 points sous le point d’insertion, ou sous le pointeur dans les apps qui n’en signalent pas. Tapez pour rechercher, ↑ ↓ pour naviguer, ↵ pour coller, ⌘1–⌘9 pour les neuf premiers. ⇧↵ donne l’option secondaire de l’élément, comme le texte brut pour du texte enrichi.',
+        slug: '⇧⌘V · ↑ ↓ · ↵ · ⌘1–⌘9',
+      },
+      stack: {
+        title: 'Pile',
+        body: 'Copiez plusieurs choses d’affilée avec ⇧⌘C, puis collez-les dans l’ordre : chaque ⌘V fait apparaître la suivante. Faites glisser pour réordonner. Quand une nouvelle copie arrive à la fin, ⌥1 la place en tête ou ⌥2 en deuxième position, et le reste de la file ne bouge pas.',
+        slug: '⇧⌘C · ⌘V · ⌥1 · ⌥2',
+        steps: ['git checkout -b fix/refund-email', 'npm test -- refund', 'git push -u origin HEAD'],
+        next: 'Prochain ⌘V',
+      },
+      transforms: {
+        title: 'Transformations',
+        body: 'Sur un élément, appuyez sur ⇧ pour voir ce qu’on peut en faire : encoder en Base64, transformer une couleur en RGB, HSL, OKLCH ou en Color SwiftUI, convertir une image ou en lire le texte. ⌘K liste toutes les actions. ↵ colle toujours l’élément tel quel.',
+        slug: '⇧ · ⌘K',
+        alt: 'Le panneau des transformations sur un lien vidéo, avec le Finder au premier plan : Télécharger en vidéo, Télécharger l’audio, Coller dans le Finder comme fichier et Encoder en Base64',
+      },
+      columns: {
+        title: 'Les catégories en colonnes',
+        body: '⌘P ajoute un élément à une catégorie, et une catégorie peut s’ouvrir en colonne à côté de l’Historique. Les éléments d’une catégorie restent jusqu’à ce que vous les retiriez.',
+        slug: '⌘P · → ←',
+        alt: 'Le panneau yabbistir avec l’Historique à gauche et une catégorie Extraits de texte ouverte en seconde colonne',
+      },
+      jobs: {
+        title: 'Des tâches dans la barre des menus',
+        body: 'Les actions longues, comme le téléchargement d’une vidéo, s’exécutent en tâches sur une petite carte sous l’icône de la barre des menus, et l’icône en montre la progression sous forme d’anneau.',
+        slug: 'jusqu’à 3 à la fois',
+        alt: 'La carte des tâches sous l’icône de la barre des menus : une vidéo en cours de téléchargement, un audio en cours de fusion, un résultat prêt à coller et un fichier enregistré dans le Finder',
+      },
+    },
+  },
+
+  grows: {
+    h2: 'Il s’enrichit.',
+    body: 'Les extensions sont de petits paquets JavaScript qui reconnaissent ce que vous copiez, le nettoient avant son enregistrement, le transforment, agissent dessus ou remplissent leur propre colonne. yabbistir dessine chaque élément de leur interface : elles ressemblent donc au reste de l’app et fonctionnent comme elle.',
+    film: 'Cinq extensions en 60 secondes',
+    filmLabel: 'Cinq extensions yabbistir en 60 secondes, avec narration en anglais et sous-titres',
+    filmMeta: '1:00 · narration en anglais · sous-titres en français, en anglais et en turc',
+    asks: 'Chacune dit ce qu’elle veut faire avant son installation.',
+    asksSlug: 'Réglages → Extensions → Boutique',
+    asksBody: 'Accéder à des sites web, exécuter un programme, lire votre historique ou voir ce que vous copiez : rien ne se passe tant que vous ne l’autorisez pas. Le catalogue de la boutique est signé, et yabbistir vérifie chaque paquet avant de l’installer.',
+    all: (n) => `Les ${n} extensions`,
+    write: 'Écrivez la vôtre',
+    writeBody: 'Une extension est du TypeScript regroupé dans un seul fichier. Partez d’un modèle du dépôt de la boutique, exécutez-la en direct dans yabbistir pendant que vous la modifiez, puis ouvrez une pull request.',
+    featured: ['dev.yabbistir.secret-guard', 'dev.yabbistir.safe-paste', 'dev.yabbistir.authenticator', 'dev.yabbistir.ai-writing', 'dev.yabbistir.github', 'dev.yabbistir.video-download'],
+  },
+
+  privacy: {
+    h2: 'Rien ne quitte votre Mac sans que vous le demandiez.',
+    items: [
+      { title: 'Aucune télémétrie', slug: 'Rechercher des mises à jour… · Boutique → Actualiser', body: 'Aucune analyse, aucun réseau en arrière-plan. yabbistir ne se connecte à Internet que lorsque vous le demandez : Rechercher des mises à jour… demande à GitHub la dernière version, et l’onglet Boutique lit la liste signée de la boutique lorsque vous l’ouvrez.' },
+      { title: 'Les mots de passe restent à l’écart', slug: 'org.nspasteboard.ConcealedType · TransientType', body: 'Les copies que les apps marquent comme masquées ou transitoires, comme le font les gestionnaires de mots de passe, ne sont jamais enregistrées, pas plus que ce qui est copié depuis Trousseaux d’accès ou Mots de passe.' },
+      { title: 'Votre historique est local', slug: '~/Library/Application Support/yabbistir', body: 'Il reste sur votre Mac. Les copies de votre iPhone arrivent par le Presse-papiers universel et y sont conservées aussi. L’historique est conservé un an à partir de la dernière utilisation d’un élément.' },
+    ],
+    more: 'En savoir plus sur la confidentialité',
+  },
+
+  install: {
+    h2: 'Obtenir yabbistir.',
+    dmgSteps: 'Ouvrez le DMG et faites glisser yabbistir dans Applications. Il est signé avec un Developer ID et notarisé par Apple.',
+    brewTitle: 'Avec Homebrew',
+    brewNote: 'Homebrew 7 et les versions suivantes vous demandent d’abord de faire confiance à un cask d’un autre tap.',
+    requires: 'Nécessite macOS 26 ou version ultérieure sur Apple silicon.',
+    first: 'Une courte fenêtre de premier lancement vous guide au démarrage : votre langue, l’import de la bibliothèque d’un autre gestionnaire de presse-papiers, le raccourci, et l’autorisation Accessibilité dont yabbistir a besoin pour coller à votre place.',
+    notes: 'Notes de version',
+    copy: 'Copier',
+    copied: 'Copié',
+    terminal: 'Terminal',
+  },
+
+  faq: {
+    h2: 'Questions',
+    items: [
+      { q: 'Pourquoi uniquement macOS 26 ?', a: 'Il est conçu sur macOS 26 : le panneau utilise Liquid Glass, et les extensions peuvent utiliser le modèle d’Apple exécuté sur l’appareil, qui nécessite macOS 26 et Apple silicon. C’est le projet d’une seule personne, et une plateforme bien faite vaut mieux que deux à moitié.' },
+      { q: 'Pourquoi n’est-il pas sur l’App Store ?', a: 'Le Mac App Store exige le bac à sable des apps, et yabbistir n’en utilise pas : les extensions que vous autorisez peuvent exécuter des programmes en ligne de commande que vous avez installés. Il est donc signé avec un Developer ID et notarisé par Apple, et comme il est gratuit, les versions GitHub et Homebrew suffisent.' },
+      { q: 'Que peut faire une extension ? N’est-ce pas risqué ?', a: 'Avant l’installation d’une extension, yabbistir montre ce qu’elle veut faire : accéder à des sites web (et lesquels), exécuter des programmes en ligne de commande (et lesquels), lire votre historique ou voir ce que vous copiez. Rien ne se passe tant que vous ne l’autorisez pas, et une mise à jour qui demande plus redemande l’autorisation. Les extensions s’exécutent dans un processus auxiliaire séparé, et yabbistir dessine leur interface.' },
+      { q: 'Est-il vraiment gratuit ?', a: 'Oui. Aucun compte, aucun abonnement, aucune offre payante. Le code est sous licence MIT sur GitHub.' },
+    ],
+  },
+
+  footer: {
+    name: 'yabbistir est une façon ludique de dire yapıştır, « coller » en turc.',
+    made: 'Licence MIT · Créé par Berkay Gökçe, avec Claude Code.',
+    links: { app: 'Code source', store: 'Boutique d’extensions', releases: 'Versions', issues: 'Signaler un problème', privacy: 'Confidentialité', translation: 'Signaler un problème de traduction' },
+    counter: 'Les visites sont comptées sans cookies.',
+  },
+
+  store: {
+    h1: 'Extensions',
+    sub: (n) => `${n} extensions de la boutique ouverte. Chacune montre ce qu’elle veut faire avant son installation, et rien ne se passe tant que vous ne l’autorisez pas.`,
+    search: 'Rechercher des extensions',
+    searchPlaceholder: 'Rechercher par nom ou par fonction',
+    allCategories: 'Toutes',
+    category: 'Catégorie',
+    permission: 'Autorisations',
+    anyPermission: 'Toutes',
+    showing: (n, total) => (n === total ? `${total} extensions` : `${n} extensions sur ${total}`),
+    empty: 'Aucune extension ne correspond. Essayez moins de mots ou une autre catégorie.',
+    reset: 'Tout afficher',
+    categories: { text: 'Texte', links: 'Liens', images: 'Images', files: 'Fichiers', developer: 'Développement', media: 'Médias', ai: 'IA', productivity: 'Productivité' },
+    perm: {
+      none: 'Aucune autorisation',
+      network: 'Accède à des sites web',
+      exec: 'Exécute des programmes',
+      sensitive: 'Lit des secrets',
+      capture: 'Voit vos copies',
+      history: 'Lit l’historique',
+    },
+  },
+
+  ext: {
+    film: {
+      label: (n) => `${n} à l’œuvre, avec narration en anglais`,
+      meta: (len) => `${len} · narration en anglais · sous-titres en anglais et en turc`,
+      youtube: 'Regarder sur YouTube',
+    },
+    back: 'Toutes les extensions',
+    install: 'Installer',
+    wants: 'Ce qu’elle peut faire',
+    wantsTitle: (n) => `« ${n} » souhaite :`,
+    nothing: 'Ne demande aucune autorisation particulière.',
+    sentences: {
+      networkAny: 'Peut accéder à n’importe quel site web',
+      network: (hosts) => `Peut accéder à : ${hosts}`,
+      exec: (tools) => `Peut exécuter ces programmes sur votre Mac : ${tools}. Ils peuvent lire et écrire vos fichiers et accéder à Internet.`,
+      sensitive: 'Peut lire et coller des secrets, comme des mots de passe. Ils ne sont jamais écrits dans l’historique ni sur le disque.',
+      capture: 'Peut voir tout ce que vous copiez',
+      history: 'Peut lire tout votre historique',
+    },
+    facts: { version: 'Version', requires: 'Nécessite yabbistir', updated: 'Mise à jour', author: 'Auteur', categories: 'Catégories', size: 'Paquet', id: 'Identifiant' },
+    readme: 'README',
+    readmeNote: 'La documentation de cette extension est en anglais.',
+    source: 'Code source sur GitHub',
+    prev: 'Précédente',
+    next: 'Suivante',
+    sheet: {
+      title: (n) => `Installer ${n}`,
+      open: 'Ouvrir dans yabbistir',
+      openNote: 'Nécessite yabbistir 0.5 ou version ultérieure. yabbistir montre ce que l’extension veut faire et ne l’installe que si vous l’autorisez.',
+      manual: (n) => `Ou, dans yabbistir : Réglages → Extensions → Boutique, puis choisissez ${n}.`,
+      noApp: 'Vous n’avez pas encore yabbistir ?',
+      close: 'Fermer',
+    },
+  },
+
+  privacyPage: {
+    h1: 'Confidentialité',
+    siteTitle: 'Ce site',
+    site: [
+      'yabbistir.com compte les visites avec GoatCounter, sans cookies et sans rien enregistrer qui vous identifie. Il compte les pages vues et les clics sur Télécharger et Installer, rien de plus. Il n’y a pas de bannière de consentement, car il n’y a rien à consentir.',
+      'Les vidéos et les polices sont servies depuis ce site. Rien ne se charge depuis YouTube ni depuis des régies publicitaires.',
+    ],
+    appTitle: 'L’app',
+    app: [
+      'Aucune télémétrie, aucune analyse, aucun réseau en arrière-plan. yabbistir ne se connecte à Internet que lorsque vous le demandez : Rechercher des mises à jour… demande à GitHub la dernière version et, s’il y en a une plus récente, propose d’ouvrir sa page de version ; l’onglet Boutique lit la liste signée de la boutique lorsque vous l’ouvrez ou appuyez sur Actualiser, et ne télécharge que ce que vous installez. Les extensions intégrées ne se connectent jamais.',
+      'Les copies que les apps marquent comme masquées ou transitoires, comme le font les gestionnaires de mots de passe, ne sont jamais enregistrées, pas plus que ce qui est copié depuis Trousseaux d’accès ou Mots de passe. Un mot de passe qu’une extension colle est placé dans le presse-papiers comme élément masqué, pour ce Mac uniquement, et votre presse-papiers revient un instant plus tard ; il n’est jamais affiché, enregistré ni journalisé.',
+      'Votre historique reste sur votre Mac, dans ~/Library/Application Support/yabbistir.',
+      'Les extensions de la boutique montrent ce qu’elles veulent faire avant leur installation : accéder à des sites web (et lesquels), exécuter des programmes (et lesquels), lire votre historique ou voir ce que vous copiez. Elles ne peuvent rien de tout cela tant que vous ne l’autorisez pas.',
+    ],
+  },
+
+  notFound: { title: 'Cette galée s’est perdue.', body: 'La page que vous avez suivie n’est pas sur le tableau.', home: 'Retour à yabbistir' },
+  dates: (iso) => new Date(iso).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
+};
