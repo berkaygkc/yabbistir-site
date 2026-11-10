@@ -1,10 +1,10 @@
-import { html, esc, page, localPath } from '../ui.mjs';
+import { html, esc, page, localPath, titleEms } from '../ui.mjs';
 
 export function privacy({ t, data, site }) {
   const path = localPath(t.lang, '/privacy/');
   const p = t.privacyPage;
   const body = html`<article class="doc" aria-labelledby="doc-title">
-  <h1 id="doc-title" class="doc__title">${esc(p.h1)}</h1>
+  <h1 id="doc-title" class="doc__title" style="--title-ems: ${titleEms(p.h1)}">${esc(p.h1)}</h1>
   <section class="doc__section galley" data-paste>
     <h2>${esc(p.siteTitle)}</h2>
     ${p.site.map((s) => `<p>${esc(s)}</p>`)}

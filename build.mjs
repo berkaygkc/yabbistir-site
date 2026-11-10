@@ -37,8 +37,8 @@ await rm(DIST, { recursive: true, force: true });
 await mkdir(join(DIST, 'assets'), { recursive: true });
 await cp('public', DIST, { recursive: true });
 const css = await readFile('src/styles/site.css', 'utf8');
-// The client picks a language with the same function the tests run: its source goes ahead of site.js.
-const matcher = (await readFile('src/lang-match.mjs', 'utf8')).replace(/^export /m, '');
+// The client picks a language with the same functions the tests run: their source goes ahead of site.js.
+const matcher = (await readFile('src/lang-match.mjs', 'utf8')).replace(/^export /gm, '');
 const js = matcher + '\n' + (await readFile('src/client/site.js', 'utf8'));
 const assetVersion = createHash('sha256').update(css).update(js).digest('hex').slice(0, 10);
 await writeFile(join(DIST, 'assets/site.css'), css);

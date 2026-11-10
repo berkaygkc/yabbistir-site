@@ -1,4 +1,4 @@
-import { html, esc, icon, page, localPath } from '../ui.mjs';
+import { html, esc, icon, page, localPath, titleEms } from '../ui.mjs';
 import { extensionGalley } from './home.mjs';
 
 export function extensions({ t, data, site }) {
@@ -15,7 +15,7 @@ export function extensions({ t, data, site }) {
     `<button type="button" class="chip" data-filter="${group}" data-value="${esc(value)}" aria-pressed="${pressed ? 'true' : 'false'}">${esc(label)}</button>`;
   const body = html`<section class="store" aria-labelledby="store-title">
   <header class="store__head">
-    <h1 id="store-title" class="store__title">${esc(t.store.h1)}</h1>
+    <h1 id="store-title" class="store__title" style="--title-ems: ${titleEms(t.store.h1)}">${esc(t.store.h1)}</h1>
     <p class="store__sub">${esc(t.store.sub(total))}</p>
   </header>
   <div class="filters" data-store-filters>

@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { readFile, readdir, access } from 'node:fs/promises';
 import { join } from 'node:path';
 import { LANGUAGES, localPath, splitPath } from '../src/languages.mjs';
+import { titleEms } from '../src/ui.mjs';
 
 const DIST = 'dist';
 const base = (await readFile(join(DIST, '.base'), 'utf8')).trim();
@@ -200,3 +201,19 @@ test('the home film carries a track for each language with a caption file', asyn
   }
 });
 
+
+test('poster titles carry the width of their longest word, so a long one can shrink to fit a phone', async () => {
+  // A long Latin word is wider than a short one; a CJK or Hangul character may break after itself; spaces end a run.
+  assert.ok(titleEms('Erweiterungen') > titleEms('Extensions'));
+  assert.equal(titleEms('機能拡張'), 0.96);
+  assert.equal(titleEms('개인정보 보호'), 0.96);
+  assert.equal(titleEms('Get yabbistir'), titleEms('yabbistir'));
+  for (const { code } of LANGUAGES) {
+    for (const [file, cls] of [['extensions/index.html', 'store__title'], ['privacy/index.html', 'doc__title']]) {
+      const html = await readFile(join(dirOf(code), file), 'utf8');
+      const [, ems, text] = html.match(new RegExp(`<h1 [^>]*class="${cls}" style="--title-ems: ([\\d.]+)">([^<]*)</h1>`)) ?? [];
+      assert.ok(ems, `${code} ${cls}`);
+      assert.equal(Number(ems), titleEms(text.replace(/&#39;/g, "'").replace(/&amp;/g, '&')), `${code} ${cls}`);
+    }
+  }
+});

@@ -13,7 +13,7 @@ export default {
   skip: '跳到主要內容',
   nav: { home: 'yabbistir', extensions: '延伸功能', privacy: '隱私權', github: 'GitHub', download: '下載', menu: '選單' },
   langMenu: { label: '語言' },
-  langSuggest: { text: '此頁面也有繁體中文版。', dismiss: '關閉' },
+  langSuggest: { text: '本頁面也有繁體中文版。', dismiss: '關閉' },
 
   hero: {
     draft: '週四示範。要在本機啟動資料庫，請執行 ',

@@ -184,8 +184,9 @@
     if (q.value || state.cat || state.perm) apply();
   }
 
-  /* The language menu is a <details>: it opens and links without this. Here it also closes on Esc (focus back on its
-     tab), on a click outside and when focus leaves it, and ↑ ↓ Home End move through the languages. */
+  /* The language menu is a <details>: it opens and links without this. Here it also closes on Esc wherever focus is
+     (back on its tab if focus was in it), on a click outside and when focus leaves it, and ↑ ↓ Home End move through the
+     languages. A language picked here is remembered, so the hint below never argues with it. */
   $$('.langmenu').forEach((menu) => {
     const tab = $('summary', menu);
     const links = $$('a', menu);
@@ -195,9 +196,16 @@
       if (refocus) tab.focus();
     };
     document.addEventListener('click', (e) => { if (!menu.contains(e.target)) close(false); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || !menu.open) return;
+      e.preventDefault();
+      close(menu.contains(document.activeElement));
+    });
     menu.addEventListener('focusout', (e) => { if (e.relatedTarget && !menu.contains(e.relatedTarget)) close(false); });
+    links.forEach((a) => a.addEventListener('click', () => {
+      try { localStorage.setItem('yab-lang', a.hreflang); } catch {}
+    }));
     menu.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menu.open) { e.preventDefault(); close(true); return; }
       if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key) || !links.length) return;
       if (!menu.open) {
         if (e.key !== 'ArrowDown') return;
@@ -211,14 +219,18 @@
     });
   });
 
-  /* A visitor whose first browser language the site serves, if it isn't this page's, gets a quiet hint in that
-     language, once. */
+  /* A quiet hint in the visitor's language, when this page isn't in it: the language they picked from the menu, else
+     their first browser language the site serves (hintLanguage). Once dismissed, never again. */
   const hint = $('[data-lang-suggest]');
   if (hint) {
-    const best = bestLanguage(navigator.languages?.length ? navigator.languages : [navigator.language], hint.dataset.langCodes.split(' ')) ?? 'en';
-    const line = best === document.documentElement.lang ? null : $(`[data-lang-for="${best}"]`, hint);
+    let chosen = null;
     let dismissed = false;
-    try { dismissed = localStorage.getItem('yab-lang-hint') === '1'; } catch {}
+    try {
+      chosen = localStorage.getItem('yab-lang');
+      dismissed = localStorage.getItem('yab-lang-hint') === '1';
+    } catch {}
+    const offer = hintLanguage(navigator.languages?.length ? navigator.languages : [navigator.language], document.documentElement.lang, hint.dataset.langCodes.split(' '), chosen);
+    const line = offer && $(`[data-lang-for="${offer}"]`, hint);
     if (line && !dismissed) line.hidden = hint.hidden = false;
     hint.addEventListener('click', (e) => {
       if (!e.target.closest('[data-lang-dismiss]')) return;

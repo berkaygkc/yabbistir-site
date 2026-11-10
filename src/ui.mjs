@@ -44,6 +44,22 @@ const SPRITE = html`<svg width="0" height="0" style="position:absolute" aria-hid
 export const icon = (id, cls = '') => `<svg class="ic ${cls}" aria-hidden="true"><use href="#i-${id}"/></svg>`;
 export const reg = (cls = '') => `<svg class="reg ${cls}" aria-hidden="true"><use href="#i-reg"/></svg>`;
 
+/** How wide a poster title's longest unbreakable run is, in em, written as --title-ems so that on a phone a long word
+    (Erweiterungen, Confidentialité) shrinks until it fits the column while a title that fits keeps its size. The widths
+    are Libre Franklin 860 with the poster's −0.04em tracking, measured in Chrome and rounded up a little. A CJK or Hangul
+    character may break after itself, so it is a run of its own. */
+export function titleEms(text) {
+  let run = 0;
+  let widest = 0;
+  for (const ch of text) {
+    if (/\s/.test(ch)) run = 0;
+    else if (/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u.test(ch)) { run = 0; widest = Math.max(widest, 0.96); }
+    else run += /[ijlıíìîï'’.,:;!]/.test(ch) ? 0.25 : /[frtIİJ-]/.test(ch) ? 0.42 : /[mwæœMW]/.test(ch) ? 0.92 : /[\p{Lu}ß]/u.test(ch) ? 0.7 : 0.55;
+    widest = Math.max(widest, run);
+  }
+  return Math.round(widest * 100) / 100;
+}
+
 /** The primary action, a strip of rubylith. Only one per view. */
 export function downloadTab(t, release, { size = 'lg', id = 'download-dmg' } = {}) {
   if (!release.dmg) return '';
@@ -101,15 +117,15 @@ export function consentSentences(t, e) {
 function langMenu(t, site, path) {
   const own = languageOf(t.lang);
   const row = (l) => {
-    const inner = `<span class="langmenu__mark" aria-hidden="true">${l.code === own.code ? icon('check') : ''}</span><span class="langmenu__name">${esc(l.name)}</span><span class="langmenu__code">${l.code}</span>`;
+    const inner = `<span class="langmenu__mark" aria-hidden="true">${l.code === own.code ? icon('check') : ''}</span><span class="langmenu__name">${esc(l.name)}</span><span class="langmenu__code" aria-hidden="true">${l.code}</span>`;
     return l.code === own.code
       ? `<li><span class="langmenu__item" aria-current="true" lang="${l.code}">${inner}</span></li>`
       : `<li><a class="langmenu__item" href="${site.url(pathIn(l.code, path))}" hreflang="${l.code}" lang="${l.code}">${inner}</a></li>`;
   };
   return html`<details class="langmenu">
-      <summary class="langmenu__tab"><span class="visually-hidden">${esc(t.langMenu.label)} </span><span class="langmenu__code" aria-hidden="true">${own.code}</span> <span class="langmenu__name">${esc(own.name)}</span>${icon('chev', 'langmenu__chev')}</summary>
+      <summary class="langmenu__tab"><span class="visually-hidden">${esc(t.langMenu.label)} </span><span class="langmenu__code">${own.code}</span> <span class="langmenu__name">${esc(own.name)}</span>${icon('chev', 'langmenu__chev')}</summary>
       <div class="langmenu__sheet">
-        <p class="langmenu__label pencil" id="langmenu-label">${esc(t.langMenu.label)}</p>
+        <p class="langmenu__label pencil" id="langmenu-label" aria-hidden="true">${esc(t.langMenu.label)}</p>
         <ul class="langmenu__list" aria-labelledby="langmenu-label">
           ${LANGUAGES.map(row).join('\n          ')}
         </ul>

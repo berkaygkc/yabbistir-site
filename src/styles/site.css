@@ -58,6 +58,33 @@
   color-scheme: light;
 }
 
+/* Each CJK language sets its own script in its own faces, after the Latin heads: Japanese in Hiragino, Korean in Apple SD
+   Gothic Neo and AppleMyungjo, Simplified Chinese in PingFang SC and Songti SC, Traditional in PingFang TC and Songti TC.
+   [lang] also catches every element that names its own language: the hint's lines and the menu's rows. */
+[lang]:lang(ja) {
+  --cjk-sans: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Noto Sans CJK JP", "Yu Gothic", Meiryo;
+  --cjk-serif: "Hiragino Mincho ProN", "Noto Serif JP", "Noto Serif CJK JP", "Yu Mincho";
+}
+[lang]:lang(ko) {
+  --cjk-sans: "Apple SD Gothic Neo", "Noto Sans KR", "Noto Sans CJK KR", "Malgun Gothic";
+  --cjk-serif: AppleMyungjo, "Noto Serif KR", "Noto Serif CJK KR", Batang;
+}
+[lang]:lang(zh-Hans) {
+  --cjk-sans: "PingFang SC", "Noto Sans SC", "Noto Sans CJK SC", "Microsoft YaHei";
+  --cjk-serif: "Songti SC", "Noto Serif SC", "Noto Serif CJK SC", SimSun;
+}
+[lang]:lang(zh-Hant) {
+  --cjk-sans: "PingFang TC", "Noto Sans TC", "Noto Sans CJK TC", "Microsoft JhengHei";
+  --cjk-serif: "Songti TC", "Noto Serif TC", "Noto Serif CJK TC", PMingLiU;
+}
+[lang]:is(:lang(ja), :lang(ko), :lang(zh-Hans), :lang(zh-Hant)) {
+  --font-display: "Libre Franklin", "Helvetica Neue", Arial, var(--cjk-sans), sans-serif;
+  --font-text: "Source Serif 4", "Iowan Old Style", Georgia, var(--cjk-serif), serif;
+  --font-slug: "Courier Prime", "Courier New", var(--cjk-sans), monospace;
+  --font-app: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, var(--cjk-sans), sans-serif;
+  --font-app-mono: ui-monospace, "SF Mono", Menlo, var(--cjk-sans), monospace;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --board: #15191d;
@@ -152,8 +179,11 @@ button { font: inherit; color: inherit; }
   transform: translateY(-160%);
 }
 .skip:focus { transform: none; }
+.skip:not(:focus) { box-shadow: none; }
 
 main > section, main > article { width: min(100% - 2 * var(--margin), var(--max)); margin-inline: auto; }
+/* The hero's panel settles in from the right with its crop marks; on a phone neither may scroll the board sideways. */
+.home__main { overflow-x: clip; }
 
 /* ── Masthead and ruler ───────────────────────────────────────────────── */
 
@@ -218,10 +248,6 @@ a.langmenu__item:focus-visible { outline-offset: -2px; }
 .langmenu__mark .ic { width: 15px; height: 15px; }
 .langmenu__item .langmenu__code { font: 400 12.5px/1 var(--font-slug); letter-spacing: 0.01em; color: var(--ink-3); text-align: right; }
 a.langmenu__item:hover .langmenu__code { color: var(--ink-2); }
-/* Each name is set in its own script's face, as a specimen would be. */
-.langmenu__item .langmenu__name:lang(ja) { font-family: "Libre Franklin", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", "Yu Gothic", Meiryo, sans-serif; }
-.langmenu__item .langmenu__name:lang(ko) { font-family: "Libre Franklin", "Apple SD Gothic Neo", "Noto Sans CJK KR", "Malgun Gothic", sans-serif; }
-.langmenu__item .langmenu__name:lang(zh-Hant) { font-family: "Libre Franklin", "PingFang TC", "Noto Sans CJK TC", "Microsoft JhengHei", sans-serif; }
 
 .ruler { height: 22px; padding-left: var(--margin); overflow: hidden; border-bottom: 1px solid var(--grid-minor); }
 .ruler__marks {
@@ -239,7 +265,8 @@ a.langmenu__item:hover .langmenu__code { color: var(--ink-2); }
   padding: 8px var(--margin); background: var(--paper); border-bottom: 1px dashed var(--nonphoto);
   font: 500 14.5px var(--font-display); color: var(--ink-2);
 }
-.lang-suggest__line { display: flex; align-items: center; justify-content: center; gap: 12px; }
+/* Each line names its own language, so it sets its own faces. */
+.lang-suggest__line { display: flex; align-items: center; justify-content: center; gap: 12px; font-family: var(--font-display); }
 .lang-suggest a { display: inline-flex; align-items: center; gap: 7px; font-weight: 600; color: var(--ink); }
 .lang-suggest a .ic { width: 16px; height: 16px; color: var(--pencil); transition: transform 0.2s var(--ease); }
 .lang-suggest a:hover .ic { transform: translateX(2px); }
@@ -797,6 +824,8 @@ a.langmenu__item:hover .langmenu__code { color: var(--ink-2); }
   .masthead .tab__label { display: none; }
   .masthead .tab { padding: 10px 12px; }
   .filters { top: 58px; }
+  /* A poster title whose longest word is wider than the column (--title-ems, from the build) shrinks to fit it. */
+  .store__title, .doc__title { font-size: min(clamp(54px, 7.5vw, 96px), (100vw - 2 * var(--margin)) / var(--title-ems, 1)); }
   body { font-size: 17px; }
   .galley { padding: 22px 20px 14px; }
   .galley--head { padding: 18px 20px 12px; }
