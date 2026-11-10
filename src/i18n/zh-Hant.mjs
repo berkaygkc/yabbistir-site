@@ -1,0 +1,232 @@
+// 繁體中文（台灣）文案。權限句子、類別名稱和面板文字與 App 一致（Localizable.xcstrings）。
+
+export default {
+  lang: 'zh-Hant',
+  locale: 'zh-TW',
+  meta: {
+    title: 'yabbistir：在你輸入的地方打開的剪貼板記錄工具',
+    description: '一款免費、開源的 macOS 26 剪貼板記錄工具，直接在文字插入點下方打開，並能透過開放商店裡的延伸功能不斷成長。',
+    extensionsTitle: 'yabbistir 延伸功能',
+    extensionsDescription: (n) => `${n} 個來自 yabbistir 開放商店的延伸功能。每個延伸功能在安裝前都會說明它想做什麼。`,
+    privacyTitle: '隱私權 · yabbistir',
+  },
+  skip: '跳到主要內容',
+  nav: { home: 'yabbistir', extensions: '延伸功能', privacy: '隱私權', github: 'GitHub', download: '下載', menu: '選單' },
+  langMenu: { label: '語言' },
+  langSuggest: { text: '此頁面也有英文版。', go: 'English', dismiss: '關閉' },
+
+  hero: {
+    draft: '週四示範。要在本機啟動資料庫，請執行 ',
+    h1: '在你輸入的地方貼上。',
+    sub: 'yabbistir 是一款 macOS 剪貼板記錄工具，直接在文字插入點下方打開。輸入即可搜尋，按 ↵ 貼上。延伸功能會教它認出你拷貝的是什麼，以及該怎麼處理。',
+    measure: '8 pt',
+    measureNote: '面板在插入點下方 8 pt 處打開',
+    facts: ['免費開源（MIT）', '已簽署並通過 Apple 公證', '搭載 Apple 晶片的 macOS 26'],
+    tryNote: '試試看：輸入搜尋 · ↑ ↓ · ↵ 貼上到草稿中',
+    pasted: (t) => `已將「${t}」貼上到草稿中。`,
+  },
+  download: {
+    cta: '下載 macOS 版',
+    meta: (r, size) => `版本 ${r.version} · ${size} · DMG`,
+    brew: 'Homebrew',
+    allWays: '其他安裝方式',
+  },
+  panel: {
+    search: '搜尋剪貼板⋯',
+    categories: '類別',
+    history: '記錄',
+    today: '今天',
+    yesterday: '昨天',
+    paste: '貼上',
+    transform: '轉換',
+    actions: '動作',
+    noResults: (q) => `找不到「${q}」的結果`,
+    label: 'yabbistir 面板示範',
+    rows: [
+      { kind: 'code', text: "SELECT id, email FROM users WHERE created_at > now() - interval '1 day'", age: '2分鐘前', day: 'today' },
+      { kind: 'link', tile: 'V', tileColor: '#3b2e6e', text: 'SwiftUI 中的 Liquid Glass：完整指南', age: '6分鐘前', day: 'today' },
+      { kind: 'text', text: '週四下午 2 點，和曉雯、建宏一起示範退款流程', age: '9分鐘前', day: 'today' },
+      { kind: 'color', color: '#C8A27C', text: '#C8A27C', age: '14分鐘前', day: 'today' },
+      { kind: 'code', text: 'docker compose up -d db', age: '25分鐘前', day: 'today', selected: true },
+      { kind: 'link', tile: 'G', tileColor: '#24262b', text: 'https://git.example.dev/yabbistir/issues/42', age: '47分鐘前', day: 'today' },
+      { kind: 'text', text: '嗨！你的退款已核准，預計 3–5 個工作天內入帳。', age: '昨天', day: 'yesterday' },
+    ],
+  },
+
+  film: {
+    h2: '四十秒，從頭到尾。',
+    body: '插入點下方的面板、貼上佇列、⇧ 上的轉換，以及以直欄顯示的類別，依你遇到它們的順序一一展示。',
+    slug: 'App 的 40 秒示範 · 無聲',
+    label: 'yabbistir 的 40 秒示範，無聲',
+    play: '播放',
+    meta: '0:40 · 無聲',
+  },
+
+  features: {
+    h2: '為鍵盤而生，從不礙事。',
+    items: {
+      caret: {
+        title: '插入點下方的面板',
+        body: '它在文字插入點下方 8 pt 處打開；在不回報插入點的 App 中，則在滑鼠指標下方打開。輸入即可搜尋，↑ ↓ 移動，↵ 貼上，⌘1–⌘9 貼上前九項。⇧↵ 會貼上該項目的第二選項，例如把格式化文字貼成純文字。',
+        slug: '⇧⌘V · ↑ ↓ · ↵ · ⌘1–⌘9',
+      },
+      stack: {
+        title: '貼上佇列',
+        body: '用 ⇧⌘C 連續拷貝多項內容，再依序貼上：每按一次 ⌘V，就會輪到下一項。可以拖移重新排序。新的拷貝排到隊尾時，⌥1 把它移到最前，⌥2 把它移到第二位，貼上佇列裡的其餘項目維持原樣。',
+        slug: '⇧⌘C · ⌘V · ⌥1 · ⌥2',
+        steps: ['git checkout -b fix/refund-email', 'npm test -- refund', 'git push -u origin HEAD'],
+        next: '下一次 ⌘V',
+      },
+      transforms: {
+        title: '轉換',
+        body: '在某個項目上在項目上按一下 ⇧，就能看到可以對它做什麼：Base64 編碼、把顏色轉為 RGB、HSL、OKLCH 或 SwiftUI Color、轉換影像格式，或讀出影像中的文字。⌘K 會列出所有動作。↵ 一律照原樣貼上該項目。',
+        slug: '⇧ · ⌘K',
+        alt: '影片連結上的轉換面板，最前方是 Finder：下載為影片、下載音訊、以檔案形式貼上到 Finder，以及 Base64 編碼',
+      },
+      columns: {
+        title: '以直欄顯示的類別',
+        body: '⌘P 把項目加入類別，類別可以作為獨立的直欄在「記錄」旁邊打開。類別中的項目會一直保留，直到你移除它們。',
+        slug: '⌘P · → ←',
+        alt: 'yabbistir 面板：左側是記錄，「文字片段」類別作為第二直欄打開',
+      },
+      jobs: {
+        title: '選單列裡的工作',
+        body: '下載影片這類耗時較長的動作，會作為工作顯示在選單列圖示下方的小卡片上，圖示則以圓環顯示進度。',
+        slug: '最多同時 3 個',
+        alt: '選單列圖示下方的工作卡片：正在下載的影片、正在合併的音訊、可以貼上的結果，以及已儲存到 Finder 的檔案',
+      },
+    },
+  },
+
+  grows: {
+    h2: '它會不斷成長。',
+    body: '延伸功能是小型 JavaScript 套件，能辨識你拷貝的內容，在儲存前清理它，轉換它，對它採取動作，或填入屬於自己的直欄。yabbistir 繪製它們介面的每一個部分，因此它們的外觀和使用方式都與 App 其餘部分一致。',
+    film: '60 秒看五個延伸功能',
+    filmLabel: '60 秒看五個 yabbistir 延伸功能，附旁白和字幕',
+    filmMeta: '1:00 · 英文旁白 · 字幕：繁體中文、英文、土耳其文',
+    asks: '每個延伸功能在安裝前都會說明它想做什麼。',
+    asksSlug: '設定 → 延伸功能 → 商店',
+    asksBody: '連上網站、執行程式、讀取你的記錄或看到你拷貝的內容：在你允許之前，什麼都不會發生。商店的目錄經過簽署，yabbistir 在安裝前會檢查每個套件。',
+    all: (n) => `全部 ${n} 個延伸功能`,
+    write: '撰寫你自己的',
+    writeBody: '延伸功能是打包成單一檔案的 TypeScript。從延伸功能商店儲存庫的範本開始，一邊編輯一邊在 yabbistir 中即時執行，然後提交 Pull Request。',
+    featured: ['dev.yabbistir.secret-guard', 'dev.yabbistir.safe-paste', 'dev.yabbistir.authenticator', 'dev.yabbistir.ai-writing', 'dev.yabbistir.github', 'dev.yabbistir.video-download'],
+  },
+
+  privacy: {
+    h2: '除非你要求，否則什麼都不會離開你的 Mac。',
+    items: [
+      { title: '沒有遙測', slug: '檢查更新⋯ · 商店 → 重新整理', body: '沒有分析，沒有背景連線。yabbistir 只在你要求時才連上網路：「檢查更新⋯」會向 GitHub 詢問最新版本，「商店」標籤頁會在你打開時讀取商店的簽署清單。' },
+      { title: '密碼不會留下', slug: 'org.nspasteboard.ConcealedType · TransientType', body: '被 App 標記為隱藏或暫時的拷貝（密碼管理工具就是這樣做的）絕不會被儲存，從「鑰匙圈存取」或「密碼」App 拷貝的內容同樣不會。' },
+      { title: '記錄保存在本機', slug: '~/Library/Application Support/yabbistir', body: '它留在你的 Mac 上。來自 iPhone 的拷貝會透過通用剪貼板送達，同樣保存在這裡。記錄從你上次使用某個項目起保留一年。' },
+    ],
+    more: '進一步了解隱私權',
+  },
+
+  install: {
+    h2: '取得 yabbistir。',
+    dmgSteps: '打開 DMG，把 yabbistir 拖到「應用程式」。它使用 Developer ID 簽署，並已通過 Apple 公證。',
+    brewTitle: '使用 Homebrew',
+    brewNote: 'Homebrew 7 及更新版本會要求你先信任來自其他 tap 的 cask。',
+    requires: '需要搭載 Apple 晶片的 macOS 26 或更新版本。',
+    first: '首次執行時會出現一個簡短的視窗，帶你完成起步設定：選擇語言，匯入其他剪貼板管理工具的資料庫，設定快速鍵，以及授予 yabbistir 替你貼上所需的輔助使用權限。',
+    notes: '版本說明',
+    copy: '拷貝',
+    copied: '已拷貝',
+    terminal: '終端機',
+  },
+
+  faq: {
+    h2: '常見問題',
+    items: [
+      { q: '為什麼只支援 macOS 26？', a: '它建立在 macOS 26 之上：面板使用 Liquid Glass，延伸功能可以使用 Apple 的裝置端模型，而這需要 macOS 26 和 Apple 晶片。這是一個人的專案，把一個平台做好，勝過兩個平台都只做一半。' },
+      { q: '為什麼不在 App Store 上？', a: 'Mac App Store 要求使用 App 沙盒，而 yabbistir 不在沙盒中執行：你允許的延伸功能可以執行你已安裝的命令列程式。它改用 Developer ID 簽署並通過 Apple 公證，而且是免費的，所以 GitHub 發行版本和 Homebrew 就足夠了。' },
+      { q: '延伸功能能做什麼？這樣不危險嗎？', a: '安裝延伸功能之前，yabbistir 會顯示它想做什麼：連上網站（以及哪些網站）、執行命令列程式（以及哪些程式）、讀取你的記錄，或看到你拷貝的內容。在你允許之前，什麼都不會發生；更新如果要求更多權限，會再次詢問。延伸功能在獨立的輔助行程中執行，介面由 yabbistir 繪製。' },
+      { q: '真的免費嗎？', a: '是的。不需要帳號，沒有訂閱，沒有付費方案。程式碼在 GitHub 上以 MIT 授權條款發布。' },
+    ],
+  },
+
+  footer: {
+    name: 'yabbistir 是土耳其文 yapıştır（「貼上」）的俏皮說法。',
+    made: 'MIT 授權條款 · 由 Berkay Gökçe 與 Claude Code 製作。',
+    links: { app: '原始碼', store: '延伸功能商店', releases: '發行版本', issues: '回報問題', privacy: '隱私權', translation: '回報翻譯問題' },
+    counter: '訪問次數的統計不使用 Cookie。',
+  },
+
+  store: {
+    h1: '延伸功能',
+    sub: (n) => `${n} 個來自開放商店的延伸功能。每個延伸功能在安裝前都會說明它想做什麼，在你允許之前什麼都不會發生。`,
+    search: '搜尋延伸功能',
+    searchPlaceholder: '依名稱或用途搜尋',
+    allCategories: '全部',
+    category: '類別',
+    permission: '權限',
+    anyPermission: '任何',
+    showing: (n, total) => (n === total ? `${total} 個延伸功能` : `${total} 個延伸功能中的 ${n} 個`),
+    empty: '沒有相符的延伸功能。試試更少的字詞，或換一個類別。',
+    reset: '顯示全部',
+    categories: { text: '文字', links: '連結', images: '影像', files: '檔案', developer: '開發者', media: '媒體', ai: 'AI', productivity: '生產力' },
+    perm: {
+      none: '不需權限',
+      network: '連上網站',
+      exec: '執行程式',
+      sensitive: '讀取機密資訊',
+      capture: '看到你的拷貝',
+      history: '讀取記錄',
+    },
+  },
+
+  ext: {
+    film: {
+      label: (n) => `${n}的實際運作，附旁白`,
+      meta: (len) => `${len} · 英文旁白 · 字幕：英文和土耳其文`,
+      youtube: '在 YouTube 上觀看',
+    },
+    back: '全部延伸功能',
+    install: '安裝',
+    wants: '它可以做什麼',
+    wantsTitle: (n) => `「${n}」想要：`,
+    nothing: '不需要特殊權限。',
+    sentences: {
+      networkAny: '可以連上任何網站',
+      network: (hosts) => `可以連上：${hosts}`,
+      exec: (tools) => `可以在你的Mac上執行這些程式：${tools}。它們可以讀寫你的檔案並連上網際網路。`,
+      sensitive: '可以讀取並貼上密碼等機密資訊。這些資訊絕不會寫入記錄或磁碟。',
+      capture: '可以看到你拷貝的所有內容',
+      history: '可以讀取你的全部記錄',
+    },
+    facts: { version: '版本', requires: '需要 yabbistir', updated: '更新於', author: '作者', categories: '類別', size: '套件', id: '識別碼' },
+    readme: 'README',
+    readmeNote: '這個延伸功能的文件為英文。',
+    source: '在 GitHub 上檢視原始碼',
+    prev: '上一個',
+    next: '下一個',
+    sheet: {
+      title: (n) => `安裝「${n}」`,
+      open: '在 yabbistir 中打開',
+      openNote: '需要 yabbistir 0.5 或更新版本。yabbistir 會顯示這個延伸功能想做什麼，並且只在你允許後才安裝。',
+      manual: (n) => `或者在 yabbistir 中：設定 → 延伸功能 → 商店，然後選擇「${n}」。`,
+      noApp: '還沒有 yabbistir？',
+      close: '關閉',
+    },
+  },
+
+  privacyPage: {
+    h1: '隱私權',
+    siteTitle: '本網站',
+    site: [
+      'yabbistir.com 使用 GoatCounter 統計訪問量，不使用 Cookie，也不儲存任何能識別你的資訊。它只統計頁面瀏覽量以及「下載」和「安裝」的點擊次數，僅此而已。這裡沒有同意橫幅，因為沒有什麼需要你同意。',
+      '影片和字體都由本網站提供。不會從 YouTube 或廣告網路載入任何內容。',
+    ],
+    appTitle: 'App',
+    app: [
+      '沒有遙測，沒有分析，沒有背景連線。yabbistir 只在你要求時才連上網路：「檢查更新⋯」會向 GitHub 詢問最新版本，如果有較新的版本，就會提議打開它的發行版本頁面；「商店」標籤頁會在你打開它或按下「重新整理」時讀取商店的簽署清單，並且只下載你安裝的內容。內建延伸功能從不連上網路。',
+      '被 App 標記為隱藏或暫時的拷貝（密碼管理工具就是這樣做的）絕不會被儲存，從「鑰匙圈存取」或「密碼」App 拷貝的內容同樣不會。延伸功能貼上的密碼會作為僅限這台 Mac 的隱藏項目放到剪貼板上，片刻之後你的剪貼板就會恢復；它絕不會被顯示、儲存或寫入記錄檔。',
+      '你的記錄保存在你的 Mac 上，位於 ~/Library/Application Support/yabbistir。',
+      '商店裡的延伸功能在安裝前會說明它們想做什麼：連上網站（以及哪些網站）、執行程式（以及哪些程式）、讀取你的記錄，或看到你拷貝的內容。在你允許之前，它們什麼都做不了。',
+    ],
+  },
+
+  notFound: { title: '這張樣稿走丟了。', body: '你點進來的頁面不在版面上。', home: '回到 yabbistir' },
+  dates: (iso) => new Date(iso).toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
+};
