@@ -1,0 +1,232 @@
+// 日本語の文面。権限の文、カテゴリ名、パネルの文字列はアプリ（Localizable.xcstrings）のものと同じです。
+
+export default {
+  lang: 'ja',
+  locale: 'ja-JP',
+  meta: {
+    title: 'yabbistir: 入力する場所で開くクリップボード履歴',
+    description: 'macOS 26向けの無料のオープンソースのクリップボード履歴。テキストの挿入ポイントのすぐ下に開き、オープンなストアの機能拡張で機能が広がります。',
+    extensionsTitle: 'yabbistirの機能拡張',
+    extensionsDescription: (n) => `yabbistirのオープンなストアにある${n}個の機能拡張。どれもインストール前に、何をしようとしているかが表示されます。`,
+    privacyTitle: 'プライバシー · yabbistir',
+  },
+  skip: '本文へスキップ',
+  nav: { home: 'yabbistir', extensions: '機能拡張', privacy: 'プライバシー', github: 'GitHub', download: 'ダウンロード', menu: 'メニュー' },
+  langMenu: { label: '言語' },
+  langSuggest: { text: 'このページには英語版もあります。', go: 'English', dismiss: '閉じる' },
+
+  hero: {
+    draft: '木曜デモの準備。ローカルでデータベースを起動するコマンド: ',
+    h1: '入力する場所に、ペースト。',
+    sub: 'yabbistirは、テキストの挿入ポイントのすぐ下に開くmacOS用のクリップボード履歴です。入力して検索し、↵でペースト。機能拡張が、コピーした内容の種類と、それをどう扱うかを教えます。',
+    measure: '8 pt',
+    measureNote: 'パネルは挿入ポイントの8ポイント下に開きます',
+    facts: ['無料でオープンソース（MIT）', 'Appleによる署名と公証済み', 'macOS 26・Appleシリコン搭載Mac'],
+    tryNote: '試してみてください: 入力して検索 · ↑ ↓ · ↵で下書きにペースト',
+    pasted: (t) => `“${t}”を下書きにペーストしました。`,
+  },
+  download: {
+    cta: 'macOS版をダウンロード',
+    meta: (r, size) => `バージョン${r.version} · ${size} · DMG`,
+    brew: 'Homebrew',
+    allWays: 'そのほかのインストール方法',
+  },
+  panel: {
+    search: 'クリップボードを検索…',
+    categories: 'カテゴリ',
+    history: '履歴',
+    today: '今日',
+    yesterday: '昨日',
+    paste: 'ペースト',
+    transform: '変換',
+    actions: 'アクション',
+    noResults: (q) => `“${q}”の検索結果はありません`,
+    label: 'yabbistirパネルのデモ',
+    rows: [
+      { kind: 'code', text: "SELECT id, email FROM users WHERE created_at > now() - interval '1 day'", age: '2分', day: 'today' },
+      { kind: 'link', tile: 'V', tileColor: '#3b2e6e', text: 'SwiftUIのLiquid Glass完全ガイド', age: '6分', day: 'today' },
+      { kind: 'text', text: '木曜14時、返金フローのデモ（田中さん、佐藤さんと）', age: '9分', day: 'today' },
+      { kind: 'color', color: '#C8A27C', text: '#C8A27C', age: '14分', day: 'today' },
+      { kind: 'code', text: 'docker compose up -d db', age: '25分', day: 'today', selected: true },
+      { kind: 'link', tile: 'G', tileColor: '#24262b', text: 'https://git.example.dev/yabbistir/issues/42', age: '47分', day: 'today' },
+      { kind: 'text', text: 'ご返金を承認しました。3〜5日でお手元に届きます。', age: '昨日', day: 'yesterday' },
+    ],
+  },
+
+  film: {
+    h2: '最初から最後まで、40秒。',
+    body: '挿入ポイントの下のパネル、スタック、⇧での変換、カラムになるカテゴリを、使い始めて出会う順に。',
+    slug: 'アプリの40秒紹介 · 音声なし',
+    label: 'yabbistirの40秒紹介（音声なし）',
+    play: '再生',
+    meta: '0:40 · 音声なし',
+  },
+
+  features: {
+    h2: 'キーボードのために作られ、邪魔になりません。',
+    items: {
+      caret: {
+        title: '挿入ポイントの下にパネル',
+        body: 'テキストの挿入ポイントの8ポイント下に開きます。挿入ポイントを報告しないアプリでは、ポインタの下に開きます。入力して検索し、↑ ↓で移動、↵でペースト、⌘1–⌘9で最初の9件を選べます。⇧↵なら、リッチテキストをプレーンテキストにするなど、項目の2番目の選択肢でペーストします。',
+        slug: '⇧⌘V · ↑ ↓ · ↵ · ⌘1–⌘9',
+      },
+      stack: {
+        title: 'スタック',
+        body: '⇧⌘Cで続けて複数コピーし、順番にペーストします。⌘Vのたびに次の項目が出てきます。ドラッグで並べ替えもできます。新しいコピーが最後に加わったときは、⌥1で先頭へ、⌥2で2番目へ移動でき、残りの順序はそのままです。',
+        slug: '⇧⌘C · ⌘V · ⌥1 · ⌥2',
+        steps: ['git checkout -b fix/refund-email', 'npm test -- refund', 'git push -u origin HEAD'],
+        next: '次の⌘V',
+      },
+      transforms: {
+        title: '変換',
+        body: '項目で⇧を押すと、その項目でできることが表示されます。Base64へのエンコード、カラーのRGB・HSL・OKLCH・SwiftUI Colorへの変換、画像の変換、画像内のテキストの読み取りなど。⌘Kですべてのアクションを一覧できます。↵は常に項目をそのままペーストします。',
+        slug: '⇧ · ⌘K',
+        alt: 'ビデオリンクの変換パネル、前面にFinder: Download as video、Download audio、Paste to Finder as a File、Encode Base64',
+      },
+      columns: {
+        title: 'カラムになるカテゴリ',
+        body: '⌘Pで項目をカテゴリに追加でき、カテゴリは履歴の隣に専用のカラムとして開けます。カテゴリ内の項目は、削除するまで残ります。',
+        slug: '⌘P · → ←',
+        alt: '左に履歴、2つ目のカラムとしてSnippetsカテゴリを開いたyabbistirのパネル',
+      },
+      jobs: {
+        title: 'メニューバーのジョブ',
+        body: '動画のダウンロードのような時間のかかるアクションは、メニューバーのアイコンの下の小さなカードにジョブとして表示され、アイコンには進捗がリングで表示されます。',
+        slug: '最大3件を同時に',
+        alt: 'メニューバーのアイコンの下のジョブカード: ダウンロード中の動画、結合中の音声、ペースト可能な結果、Finderに保存されたファイル',
+      },
+    },
+  },
+
+  grows: {
+    h2: '広がります。',
+    body: '機能拡張は小さなJavaScriptパッケージで、コピーした内容の認識、保存前のクリーンアップ、変換、実行、専用カラムの表示ができます。機能拡張のインターフェイスはすべてyabbistirが描画するので、アプリのほかの部分と同じ見た目と動作になります。',
+    film: '5つの機能拡張を60秒で',
+    filmLabel: 'yabbistirの5つの機能拡張を60秒で紹介、英語のナレーションと字幕付き',
+    filmMeta: '1:00 · 英語ナレーション · 字幕は日本語、英語、トルコ語',
+    asks: 'どの機能拡張も、インストール前に何をしようとしているかが表示されます。',
+    asksSlug: '設定 → 機能拡張 → ストア',
+    asksBody: 'Webサイトへのアクセス、プログラムの実行、履歴の読み取り、コピーした内容の参照。許可するまで何も行われません。ストアのカタログは署名されており、yabbistirはインストール前にすべてのパッケージを確認します。',
+    all: (n) => `${n}個の機能拡張すべて`,
+    write: '自分で作る',
+    writeBody: '機能拡張は、1つのファイルにまとめたTypeScriptです。ストアのリポジトリにあるテンプレートから始め、編集しながらyabbistirでライブ実行し、プルリクエストを開きます。',
+    featured: ['dev.yabbistir.secret-guard', 'dev.yabbistir.safe-paste', 'dev.yabbistir.authenticator', 'dev.yabbistir.ai-writing', 'dev.yabbistir.github', 'dev.yabbistir.video-download'],
+  },
+
+  privacy: {
+    h2: '求めない限り、データはMacの外に出ません。',
+    items: [
+      { title: 'テレメトリなし', slug: 'アップデートを確認… · ストア → 更新', body: '分析なし、バックグラウンドのネットワーク通信なし。yabbistirがオンラインになるのは、求められたときだけです。“アップデートを確認…”はGitHubに最新バージョンを問い合わせ、“ストア”タブは開いたときにストアの署名付きリストを読み込みます。' },
+      { title: 'パスワードは残さない', slug: 'org.nspasteboard.ConcealedType · TransientType', body: 'パスワードマネージャのように、アプリが“秘匿”または“一時的”とマークしたコピーは保存されません。キーチェーンアクセスや“パスワード”Appからのコピーも保存されません。' },
+      { title: '履歴はローカルに', slug: '~/Library/Application Support/yabbistir', body: '履歴はMacの中にとどまります。iPhoneからのコピーはユニバーサルクリップボード経由で届き、同じように保存されます。履歴は、項目を最後に使った日から1年間保持されます。' },
+    ],
+    more: 'プライバシーの詳細',
+  },
+
+  install: {
+    h2: 'yabbistirを入手。',
+    dmgSteps: 'DMGを開いて、yabbistirをアプリケーションフォルダにドラッグしてください。Developer IDで署名され、Appleによって公証されています。',
+    brewTitle: 'Homebrewで',
+    brewNote: 'Homebrew 7以降では、先に別のtapのcaskを信頼するよう求められます。',
+    requires: 'macOS 26以降と、Appleシリコン搭載のMacが必要です。',
+    first: '最初の起動時に表示される短いウインドウが、言語、ほかのクリップボードマネージャのライブラリの読み込み、キーボードショートカット、yabbistirがペーストに必要とするアクセシビリティの権限など、はじめの設定を案内します。',
+    notes: 'リリースノート',
+    copy: 'コピー',
+    copied: 'コピー済み',
+    terminal: 'ターミナル',
+  },
+
+  faq: {
+    h2: 'よくある質問',
+    items: [
+      { q: 'なぜmacOS 26だけなのですか?', a: 'macOS 26の上に作られているためです。パネルはLiquid Glassを使い、機能拡張はAppleのオンデバイスモデルを使えますが、それにはmacOS 26とAppleシリコンが必要です。これは個人のプロジェクトで、2つのプラットフォームを中途半端にするより、1つを丁寧に仕上げるほうがよいと考えています。' },
+      { q: 'なぜApp Storeにないのですか?', a: 'Mac App Storeにはアプリのサンドボックスが必須ですが、yabbistirはサンドボックス内では動作しません。許可した機能拡張が、インストール済みのコマンドラインプログラムを実行できるためです。代わりにDeveloper IDで署名され、Appleによって公証されています。無料なので、GitHubのリリースとHomebrewで十分です。' },
+      { q: '機能拡張には何ができますか? 危険ではありませんか?', a: '機能拡張をインストールする前に、yabbistirは何をしようとしているかを表示します。Webサイトへのアクセス（どのサイトか）、コマンドラインプログラムの実行（どのプログラムか）、履歴の読み取り、コピーした内容の参照です。許可するまで何も行われず、更新でさらに多くを求められた場合は、もう一度確認します。機能拡張は別のヘルパープロセスで動作し、インターフェイスはyabbistirが描画します。' },
+      { q: '本当に無料ですか?', a: 'はい。アカウントもサブスクリプションも有料プランもありません。コードはGitHubでMITライセンスのもとで公開されています。' },
+    ],
+  },
+
+  footer: {
+    name: 'yabbistirは、トルコ語で“ペースト”を意味するyapıştırを、遊び心でもじった名前です。',
+    made: 'MITライセンス · Berkay Gökçeが、Claude Codeとともに制作。',
+    links: { app: 'ソースコード', store: '機能拡張ストア', releases: 'リリース', issues: '問題を報告', privacy: 'プライバシー', translation: '翻訳の問題を報告' },
+    counter: '訪問数はCookieなしで集計されます。',
+  },
+
+  store: {
+    h1: '機能拡張',
+    sub: (n) => `オープンなストアの${n}個の機能拡張。どれもインストール前に何をしようとしているかが表示され、許可するまで何も行われません。`,
+    search: '機能拡張を検索',
+    searchPlaceholder: '名前や機能で検索',
+    allCategories: 'すべて',
+    category: 'カテゴリ',
+    permission: '権限',
+    anyPermission: 'すべて',
+    showing: (n, total) => (n === total ? `${total}個の機能拡張` : `${total}個中${n}個の機能拡張`),
+    empty: '一致する機能拡張がありません。語数を減らすか、別のカテゴリをお試しください。',
+    reset: 'すべて表示',
+    categories: { text: 'テキスト', links: 'リンク', images: '画像', files: 'ファイル', developer: '開発ツール', media: 'メディア', ai: 'AI', productivity: '仕事効率化' },
+    perm: {
+      none: '権限なし',
+      network: 'Webサイトにアクセス',
+      exec: 'プログラムを実行',
+      sensitive: 'シークレットを読み取り',
+      capture: 'コピーを参照',
+      history: '履歴を読み取り',
+    },
+  },
+
+  ext: {
+    film: {
+      label: (n) => `${n}の動作デモ、英語ナレーション付き`,
+      meta: (len) => `${len} · 英語ナレーション · 字幕は英語とトルコ語`,
+      youtube: 'YouTubeで見る',
+    },
+    back: 'すべての機能拡張',
+    install: 'インストール',
+    wants: '実行できること',
+    wantsTitle: (n) => `“${n}”が次の操作を求めています:`,
+    nothing: '特別な権限は必要ありません。',
+    sentences: {
+      networkAny: 'すべてのWebサイトにアクセスできます',
+      network: (hosts) => `アクセス先: ${hosts}`,
+      exec: (tools) => `Mac上で次のプログラムを実行できます: ${tools}。ファイルの読み書きやインターネットへのアクセスも可能です。`,
+      sensitive: 'パスワードなどのシークレットを読み取ってペーストできます。履歴やディスクには書き込まれません。',
+      capture: 'コピーした内容をすべて参照できます',
+      history: '履歴全体を読み取れます',
+    },
+    facts: { version: 'バージョン', requires: '必要なyabbistir', updated: '更新日', author: '作者', categories: 'カテゴリ', size: 'パッケージ', id: '識別子' },
+    readme: 'README',
+    readmeNote: 'この機能拡張のドキュメントは英語です。',
+    source: 'GitHubでソースを見る',
+    prev: '前へ',
+    next: '次へ',
+    sheet: {
+      title: (n) => `${n}をインストール`,
+      open: 'yabbistirで開く',
+      openNote: 'yabbistir 0.5以降が必要です。yabbistirが機能拡張の実行内容を表示し、許可した場合にのみインストールします。',
+      manual: (n) => `または、yabbistirで: 設定 → 機能拡張 → ストアを開き、${n}を選びます。`,
+      noApp: 'まだyabbistirをお持ちでないですか?',
+      close: '閉じる',
+    },
+  },
+
+  privacyPage: {
+    h1: 'プライバシー',
+    siteTitle: 'このサイト',
+    site: [
+      'yabbistir.comは、Cookieを使わず、個人を特定する情報も保存せずに、GoatCounterで訪問数を集計しています。集計するのは、表示されたページ数と、ダウンロードおよびインストールのクリック数だけです。同意するものがないため、同意バナーはありません。',
+      '動画とフォントはこのサイトから配信されます。YouTubeや広告ネットワークからは何も読み込まれません。',
+    ],
+    appTitle: 'アプリ',
+    app: [
+      'テレメトリなし、分析なし、バックグラウンドのネットワーク通信なし。yabbistirがオンラインになるのは、求められたときだけです。“アップデートを確認…”はGitHubに最新バージョンを問い合わせ、新しいものがあればリリースページを開くよう提案します。“ストア”タブは、開いたときや“更新”を押したときにストアの署名付きリストを読み込み、インストールするものだけをダウンロードします。内蔵の機能拡張がオンラインになることはありません。',
+      'パスワードマネージャのように、アプリが“秘匿”または“一時的”とマークしたコピーは保存されません。キーチェーンアクセスや“パスワード”Appからのコピーも保存されません。機能拡張がペーストするパスワードは、このMacだけに有効な秘匿項目としてクリップボードに置かれ、少し後にクリップボードは元に戻ります。表示も保存もログ記録もされません。',
+      '履歴はMacの中の~/Library/Application Support/yabbistirにとどまります。',
+      'ストアの機能拡張は、インストール前に何をしようとしているかを表示します。Webサイトへのアクセス（どのサイトか）、プログラムの実行（どのプログラムか）、履歴の読み取り、コピーした内容の参照です。許可するまで、そのどれも行えません。',
+    ],
+  },
+
+  notFound: { title: 'このゲラは行方不明です。', body: 'たどってきたページは台紙の上にありません。', home: 'yabbistirに戻る' },
+  dates: (iso) => new Date(iso).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
+};
