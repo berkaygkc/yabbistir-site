@@ -79,8 +79,8 @@ export default {
       },
       transforms: {
         title: 'Transformations',
-        body: 'Sur un élément, appuyez sur ⇧ pour voir ce qu’on peut en faire : encoder en Base64, transformer une couleur en RGB, HSL, OKLCH ou en Color SwiftUI, convertir une image ou en lire le texte. ⌘K liste toutes les actions. ↵ colle toujours l’élément tel quel.',
-        slug: '⇧ · ⌘K',
+        body: 'Sur un élément, appuyez sur ⇧ (ou ⌘T) pour voir ce qu’on peut en faire : encoder en Base64, transformer une couleur en RGB, HSL, OKLCH ou en Color SwiftUI, convertir une image ou en lire le texte. ⌘K liste toutes les actions. ↵ colle toujours l’élément tel quel.',
+        slug: '⇧ · ⌘T · ⌘K',
         alt: 'Le panneau des transformations sur un lien vidéo, avec le Finder au premier plan : Télécharger en vidéo, Télécharger l’audio, Coller dans le Finder comme fichier et Encoder en Base64',
       },
       columns: {
@@ -103,7 +103,7 @@ export default {
     body: 'Les extensions sont de petits paquets JavaScript qui reconnaissent ce que vous copiez, le nettoient avant son enregistrement, le transforment, agissent dessus ou remplissent leur propre colonne. yabbistir dessine chaque élément de leur interface : elles ressemblent donc au reste de l’app et fonctionnent comme elle.',
     film: 'Cinq extensions en 60 secondes',
     filmLabel: 'Cinq extensions yabbistir en 60 secondes, avec narration en anglais et sous-titres',
-    filmMeta: '1:00 · narration en anglais · sous-titres en français, en anglais et en turc',
+    filmMeta: '1:00 · narration en anglais · sous-titres en neuf langues',
     asks: 'Chacune dit ce qu’elle veut faire avant son installation.',
     asksSlug: 'Réglages → Extensions → Boutique',
     asksBody: 'Accéder à des sites web, exécuter un programme, lire votre historique ou voir ce que vous copiez : rien ne se passe tant que vous ne l’autorisez pas. Le catalogue de la boutique est signé, et yabbistir vérifie chaque paquet avant de l’installer.',

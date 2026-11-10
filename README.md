@@ -25,7 +25,7 @@ build.mjs          renders every page into dist/
 src/data.mjs       catalog, manifests, READMEs, release; snapshot fallback
 src/ui.mjs         page shell and shared pieces
 src/pages/         home, extensions, extension, privacy and 404
-src/i18n/          English and Turkish copy (permission and panel strings are the app's own)
+src/i18n/          copy in nine languages (permission and panel strings are the app's own)
 src/styles/        site.css
 src/client/        site.js: the demo panel, store filters, copy buttons
 public/            fonts, images, films, captions

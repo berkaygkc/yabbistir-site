@@ -79,8 +79,8 @@ export default {
       },
       transforms: {
         title: 'Dönüşümler',
-        body: 'Bir öğede ⇧’ye dokun, onunla neler yapılabileceğini gör: Base64 kodla, bir rengi RGB, HSL, OKLCH ya da SwiftUI Color’a çevir, bir görseli dönüştür ya da içindeki metni oku. ⌘K her eylemi listeler. ↵ öğeyi her zaman olduğu gibi yapıştırır.',
-        slug: '⇧ · ⌘K',
+        body: 'Bir öğede ⇧’ye dokun (ya da ⌘T’ye bas), onunla neler yapılabileceğini gör: Base64 kodla, bir rengi RGB, HSL, OKLCH ya da SwiftUI Color’a çevir, bir görseli dönüştür ya da içindeki metni oku. ⌘K her eylemi listeler. ↵ öğeyi her zaman olduğu gibi yapıştırır.',
+        slug: '⇧ · ⌘T · ⌘K',
         alt: 'Finder öndeyken bir video bağlantısında dönüşüm paneli: video olarak indir, sesi indir, Finder’a dosya olarak yapıştır ve Base64 kodla',
       },
       columns: {
@@ -103,7 +103,7 @@ export default {
     body: 'Uzantılar küçük JavaScript paketleri: kopyaladığını tanır, saklanmadan önce temizler, dönüştürür, onunla bir iş yapar ya da kendi sütununu doldurur. Arayüzlerinin her parçasını yabbistir çizer, bu yüzden uygulamanın geri kalanı gibi görünür ve çalışırlar.',
     film: 'Altmış saniyede beş uzantı',
     filmLabel: 'Altmış saniyede beş yabbistir uzantısı, sesli anlatım ve altyazıyla',
-    filmMeta: '1:00 · sesli anlatım · Türkçe ve İngilizce altyazı',
+    filmMeta: '1:00 · sesli anlatım · dokuz dilde altyazı',
     asks: 'Her biri kurulmadan önce ne yapmak istediğini söyler.',
     asksSlug: 'Ayarlar → Uzantılar → Mağaza',
     asksBody: 'İnternete çıkmak, bir program çalıştırmak, geçmişini okumak ya da kopyaladığını görmek: sen izin vermeden hiçbiri olmaz. Mağazanın kataloğu imzalı; yabbistir her paketi kurmadan önce doğrular.',

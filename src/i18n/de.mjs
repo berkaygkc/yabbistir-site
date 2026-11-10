@@ -79,8 +79,8 @@ export default {
       },
       transforms: {
         title: 'Umwandlungen',
-        body: 'Drücke bei einem Objekt kurz ⇧, um zu sehen, was sich damit machen lässt: Base64 codieren, eine Farbe in RGB, HSL, OKLCH oder eine SwiftUI-Color umwandeln, ein Bild konvertieren oder den Text darin lesen. ⌘K listet alle Aktionen. ↵ setzt das Objekt immer so ein, wie es ist.',
-        slug: '⇧ · ⌘K',
+        body: 'Drücke bei einem Objekt kurz ⇧ (oder ⌘T), um zu sehen, was sich damit machen lässt: Base64 codieren, eine Farbe in RGB, HSL, OKLCH oder eine SwiftUI-Color umwandeln, ein Bild konvertieren oder den Text darin lesen. ⌘K listet alle Aktionen. ↵ setzt das Objekt immer so ein, wie es ist.',
+        slug: '⇧ · ⌘T · ⌘K',
         alt: 'Das Umwandlungs-Panel bei einem Videolink, der Finder im Vordergrund: als Video herunterladen, Audio herunterladen, als Datei in den Finder einsetzen und Base64 codieren',
       },
       columns: {
@@ -103,7 +103,7 @@ export default {
     body: 'Erweiterungen sind kleine JavaScript-Pakete, die erkennen, was du kopierst, es vor dem Speichern bereinigen, umwandeln, etwas damit tun oder eine eigene Spalte füllen. yabbistir zeichnet jedes Element ihrer Oberfläche, deshalb sehen sie aus wie der Rest der App und verhalten sich auch so.',
     film: 'Fünf Erweiterungen in 60 Sekunden',
     filmLabel: 'Fünf yabbistir-Erweiterungen in 60 Sekunden, englisch vertont, mit Untertiteln',
-    filmMeta: '1:00 · englisch gesprochen · Untertitel auf Deutsch, Englisch und Türkisch',
+    filmMeta: '1:00 · englisch gesprochen · Untertitel in neun Sprachen',
     asks: 'Jede sagt dir vor der Installation, was sie tun möchte.',
     asksSlug: 'Einstellungen → Erweiterungen → Store',
     asksBody: 'Websites erreichen, ein Programm ausführen, deinen Verlauf lesen oder sehen, was du kopierst: Nichts davon passiert, bevor du es erlaubst. Der Store-Katalog ist signiert, und yabbistir prüft jedes Paket vor der Installation.',

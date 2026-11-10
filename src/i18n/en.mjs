@@ -79,8 +79,8 @@ export default {
       },
       transforms: {
         title: 'Transforms',
-        body: 'Tap ⇧ on an item to see what can be done with it: encode Base64, turn a color into RGB, HSL, OKLCH or a SwiftUI Color, convert an image or read the text in it. ⌘K lists every action. ↵ always pastes the item as it is.',
-        slug: '⇧ · ⌘K',
+        body: 'Tap ⇧ (or press ⌘T) on an item to see what can be done with it: encode Base64, turn a color into RGB, HSL, OKLCH or a SwiftUI Color, convert an image or read the text in it. ⌘K lists every action. ↵ always pastes the item as it is.',
+        slug: '⇧ · ⌘T · ⌘K',
         alt: 'The transform panel on a video link with Finder in front: Download as video, Download audio, Paste to Finder as a File and Encode Base64',
       },
       columns: {
@@ -103,7 +103,7 @@ export default {
     body: 'Extensions are small JavaScript packages that recognize what you copy, clean it before it’s saved, transform it, act on it or fill a column of their own. yabbistir draws every piece of their interface, so they look and work like the rest of the app.',
     film: 'Five extensions in 60 seconds',
     filmLabel: 'Five yabbistir extensions in 60 seconds, narrated, with captions',
-    filmMeta: '1:00 · narrated · captions in English and Turkish',
+    filmMeta: '1:00 · narrated · captions in nine languages',
     asks: 'Each one says what it wants to do before you install it.',
     asksSlug: 'Settings → Extensions → Store',
     asksBody: 'Reaching websites, running a program, reading your history or seeing what you copy: nothing happens until you allow it. The store’s catalog is signed, and yabbistir checks every package before installing it.',

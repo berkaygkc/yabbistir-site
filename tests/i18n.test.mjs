@@ -61,6 +61,9 @@ test('bestLanguage maps the browser list the way the app does', () => {
   assert.equal(bestLanguage(['zh-Hant-TW'], all), 'zh-Hant');
   assert.equal(bestLanguage(['zh-CN'], all), 'zh-Hans');
   assert.equal(bestLanguage(['zh'], all), 'zh-Hans');
+  assert.equal(bestLanguage(['yue'], all), 'zh-Hant');
+  assert.equal(bestLanguage(['yue-Hant-HK'], all), 'zh-Hant');
+  assert.equal(bestLanguage(['yue-Hans-CN'], all), 'zh-Hans');
   assert.equal(bestLanguage(['pt-BR', 'ja'], all), 'ja');
   assert.equal(bestLanguage(['pt-BR'], all), null);
   assert.equal(bestLanguage(['de-AT'], all), 'de');
@@ -75,6 +78,11 @@ test('the hint offers the browser language until the visitor picks one from the 
   assert.equal(hintLanguage(['ja-JP', 'en'], 'en', all, null), 'ja');
   assert.equal(hintLanguage(['en-US'], 'en', all, null), null);
   assert.equal(hintLanguage(['zh-TW'], 'zh-Hant', all, undefined), null);
+  // Cantonese is offered Chinese, as in the app: Traditional unless it names Simplified.
+  assert.equal(hintLanguage(['yue'], 'en', all, null), 'zh-Hant');
+  assert.equal(hintLanguage(['yue-Hant-HK'], 'en', all, null), 'zh-Hant');
+  assert.equal(hintLanguage(['yue-Hans-CN'], 'en', all, null), 'zh-Hans');
+  assert.equal(hintLanguage(['yue-Hant-HK'], 'zh-Hant', all, null), null);
   // The choice is this page's language: no hint, whatever the browser says.
   assert.equal(hintLanguage(['en-US'], 'zh-Hant', all, 'zh-Hant'), null);
   assert.equal(hintLanguage(['ja-JP'], 'de', all, 'de'), null);
