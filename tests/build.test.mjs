@@ -208,6 +208,9 @@ test('poster titles carry the width of their longest word, so a long one can shr
   assert.equal(titleEms('機能拡張'), 0.96);
   assert.equal(titleEms('개인정보 보호'), 0.96);
   assert.equal(titleEms('Get yabbistir'), titleEms('yabbistir'));
+  // A line may break after a hyphen before a letter, but not before a slash.
+  assert.equal(titleEms('Link-Werkzeuge'), titleEms('Werkzeuge'));
+  assert.ok(titleEms('Groß-/Kleinschreibung') > titleEms('Kleinschreibung'));
   for (const { code } of LANGUAGES) {
     for (const [file, cls] of [['extensions/index.html', 'store__title'], ['privacy/index.html', 'doc__title']]) {
       const html = await readFile(join(dirOf(code), file), 'utf8');
@@ -215,5 +218,10 @@ test('poster titles carry the width of their longest word, so a long one can shr
       assert.ok(ems, `${code} ${cls}`);
       assert.equal(Number(ems), titleEms(text.replace(/&#39;/g, "'").replace(/&amp;/g, '&')), `${code} ${cls}`);
     }
+    // Extension names, too: Geheimnisschutz is wider than a phone's room beside the tile.
+    const html = await readFile(join(dirOf(code), 'extensions/secret-guard/index.html'), 'utf8');
+    const [, ems, text] = html.match(/<h1 id="x-title" style="--title-ems: ([\d.]+)">([^<]*)<\/h1>/) ?? [];
+    assert.ok(ems, `${code} x-title`);
+    assert.equal(Number(ems), titleEms(text.replace(/&#39;/g, "'").replace(/&amp;/g, '&')), `${code} x-title`);
   }
 });

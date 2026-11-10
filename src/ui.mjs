@@ -47,16 +47,19 @@ export const reg = (cls = '') => `<svg class="reg ${cls}" aria-hidden="true"><us
 /** How wide a poster title's longest unbreakable run is, in em, written as --title-ems so that a long word (Erweiterungen,
     Confidentialité) shrinks until it fits its column, on a phone or beside the store's lede, while a title that fits keeps
     its size. The widths are Libre Franklin 860 with the poster's −0.04em tracking, measured in Chrome and rounded up a
-    little. A CJK or Hangul character may break after itself, so it is a run of its own. */
+    little. A CJK or Hangul character may break after itself, so it is a run of its own; so may a hyphen before a letter
+    (Link-|Werkzeuge), though not one before a slash (Groß-/Kleinschreibung). */
 export function titleEms(text) {
   let run = 0;
   let widest = 0;
-  for (const ch of text) {
+  const chars = [...text];
+  chars.forEach((ch, i) => {
     if (/\s/.test(ch)) run = 0;
     else if (/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u.test(ch)) { run = 0; widest = Math.max(widest, 0.96); }
     else run += /[ijlıíìîï'’.,:;!]/.test(ch) ? 0.25 : /[frtIİJ-]/.test(ch) ? 0.42 : /[mwæœMW]/.test(ch) ? 0.92 : /[\p{Lu}ß]/u.test(ch) ? 0.7 : 0.55;
     widest = Math.max(widest, run);
-  }
+    if (ch === '-' && /\p{L}/u.test(chars[i + 1] ?? '')) run = 0;
+  });
   return Math.round(widest * 100) / 100;
 }
 

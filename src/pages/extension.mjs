@@ -1,6 +1,6 @@
 import { Marked } from 'marked';
 import { STORE_REPO } from '../data.mjs';
-import { html, esc, icon, page, localPath, monogram, consentSentences, downloadTab, playButton, captionTracks } from '../ui.mjs';
+import { html, esc, icon, page, localPath, monogram, consentSentences, downloadTab, playButton, captionTracks, titleEms } from '../ui.mjs';
 import { FILMS } from '../films.mjs';
 
 /** README → HTML. Raw HTML is shown as text, links and images resolve against the store repository, the title goes. */
@@ -61,10 +61,12 @@ export function extension({ t, data, site, e, prev, next }) {
     [t.ext.facts.size, `${Math.max(1, Math.round(e.size / 1000)).toLocaleString(t.locale)} KB`],
     [t.ext.facts.id, e.id],
   ];
+  // Browsers don't end a line after a slash (Groß-/Kleinschreibung), so a long name may break there before it shrinks.
+  const nameParts = name.split(/(?<=\/)(?=\p{L})/u);
   const body = html`<article class="xpage" aria-labelledby="x-title">
   <nav class="xpage__crumbs" aria-label="Breadcrumb"><a href="${site.url(localPath(t.lang, '/extensions/'))}">${icon('back')}${esc(t.ext.back)}</a></nav>
   <header class="xpage__head galley" data-paste>
-    <div class="xpage__title">${monogram(e.name.en)}<h1 id="x-title">${esc(name)}</h1></div>
+    <div class="xpage__title">${monogram(e.name.en)}<h1 id="x-title" style="--title-ems: ${Math.max(...nameParts.map(titleEms))}">${nameParts.map(esc).join('<wbr>')}</h1></div>
     <p class="xpage__desc">${esc(desc)}</p>
     <div class="xpage__actions">
       <button type="button" class="tab tab--lg" popovertarget="install-sheet" data-goatcounter-click="install-open-${esc(e.slug)}">${icon('down')}<span class="tab__label">${esc(t.ext.install)}</span></button>

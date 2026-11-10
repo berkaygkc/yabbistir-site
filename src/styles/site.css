@@ -679,9 +679,11 @@ a.langmenu__item:hover .langmenu__code { color: var(--ink-2); }
 .xpage__crumbs a { display: inline-flex; align-items: center; gap: 8px; font: 620 15px var(--font-display); text-decoration: none; color: var(--ink-2); }
 .xpage__crumbs a:hover { color: var(--ink); }
 .xpage__head { grid-column: 1; gap: 18px; padding: 30px 32px 16px; }
-.xpage__title { display: flex; align-items: center; gap: 18px; }
+/* A name whose longest word (--title-ems, from the build) is too wide for the room beside the tile shrinks to fit it, as
+   the store's title does: Geheimnisschutz on a phone, Entwicklungsserver beside the permissions. */
+.xpage__title { display: flex; align-items: center; gap: 18px; container-type: inline-size; }
 .xpage__title .mono-tile { width: 60px; height: 60px; font-size: 21px; border-width: 2px; }
-.xpage__title h1 { font-size: clamp(38px, 5vw, 64px); font-weight: 820; line-height: 0.98; letter-spacing: -0.032em; }
+.xpage__title h1 { font-size: min(clamp(38px, 5vw, 64px), (100cqi - 78px) / var(--title-ems, 1)); font-weight: 820; line-height: 0.98; letter-spacing: -0.032em; }
 .xpage__desc { font-size: 20px; line-height: 1.5; max-width: 34em; }
 .xpage__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: 4px; }
 .xpage__film { grid-column: 1; display: flex; flex-direction: column; gap: 12px; }
