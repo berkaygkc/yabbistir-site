@@ -1,0 +1,232 @@
+// 한국어 텍스트. 권한 문장, 카테고리 이름, 패널 텍스트는 앱(Localizable.xcstrings)의 것과 같습니다.
+
+export default {
+  lang: 'ko',
+  locale: 'ko-KR',
+  meta: {
+    title: 'yabbistir: 입력하는 곳에서 열리는 클립보드 기록',
+    description: 'macOS 26용 무료 오픈 소스 클립보드 기록 앱입니다. 삽입점 바로 아래에서 열리며, 열린 스토어의 확장 프로그램으로 기능이 늘어납니다.',
+    extensionsTitle: 'yabbistir 확장 프로그램',
+    extensionsDescription: (n) => `yabbistir의 열린 스토어에 있는 확장 프로그램 ${n}개입니다. 각 확장 프로그램은 설치하기 전에 하려는 일을 보여줍니다.`,
+    privacyTitle: '개인정보 보호 · yabbistir',
+  },
+  skip: '본문으로 건너뛰기',
+  nav: { home: 'yabbistir', extensions: '확장 프로그램', privacy: '개인정보 보호', github: 'GitHub', download: '다운로드', menu: '메뉴' },
+  langMenu: { label: '언어' },
+  langSuggest: { text: '이 페이지는 영어로도 볼 수 있습니다.', go: 'English', dismiss: '닫기' },
+
+  hero: {
+    draft: '목요일 데모. 데이터베이스를 로컬에 띄우려면 이걸 실행하세요: ',
+    h1: '입력하는 곳에 바로 붙여넣기.',
+    sub: 'yabbistir는 삽입점 바로 아래에서 열리는 macOS용 클립보드 기록 앱입니다. 입력해서 검색하고 ↵로 붙여넣으십시오. 확장 프로그램은 복사한 내용이 무엇인지, 그것으로 무엇을 할 수 있는지 yabbistir에 알려줍니다.',
+    measure: '8 pt',
+    measureNote: '패널은 삽입점 아래 8포인트에서 열립니다',
+    facts: ['무료 오픈 소스(MIT)', 'Apple 서명 및 공증 완료', 'Apple 실리콘의 macOS 26'],
+    tryNote: '직접 해보기: 입력해서 검색 · ↑ ↓ · ↵로 초안에 붙여넣기',
+    pasted: (t) => `초안에 붙여넣음: ‘${t}’`,
+  },
+  download: {
+    cta: 'macOS용 다운로드',
+    meta: (r, size) => `버전 ${r.version} · ${size} · DMG`,
+    brew: 'Homebrew',
+    allWays: '다른 설치 방법',
+  },
+  panel: {
+    search: '클립보드 검색…',
+    categories: '카테고리',
+    history: '기록',
+    today: '오늘',
+    yesterday: '어제',
+    paste: '붙여넣기',
+    transform: '변환',
+    actions: '동작',
+    noResults: (q) => `‘${q}’에 대한 결과 없음`,
+    label: 'yabbistir 패널 데모',
+    rows: [
+      { kind: 'code', text: "SELECT id, email FROM users WHERE created_at > now() - interval '1 day'", age: '2분', day: 'today' },
+      { kind: 'link', tile: 'V', tileColor: '#3b2e6e', text: 'SwiftUI의 Liquid Glass — 완벽 가이드', age: '6분', day: 'today' },
+      { kind: 'text', text: '목요일 오후 2시: 지민, 도윤과 환불 절차 데모', age: '9분', day: 'today' },
+      { kind: 'color', color: '#C8A27C', text: '#C8A27C', age: '14분', day: 'today' },
+      { kind: 'code', text: 'docker compose up -d db', age: '25분', day: 'today', selected: true },
+      { kind: 'link', tile: 'G', tileColor: '#24262b', text: 'https://git.example.dev/yabbistir/issues/42', age: '47분', day: 'today' },
+      { kind: 'text', text: '안녕하세요. 환불이 승인되었으며 3~5일 안에 입금됩니다.', age: '어제', day: 'yesterday' },
+    ],
+  },
+
+  film: {
+    h2: '40초, 처음부터 끝까지.',
+    body: '삽입점 아래의 패널, 스택, ⇧로 여는 변환, 열이 되는 카테고리까지, 만나게 되는 순서대로 보여줍니다.',
+    slug: '40초로 보는 앱 · 소리 없음',
+    label: '소리 없는 40초 yabbistir 영상',
+    play: '재생',
+    meta: '0:40 · 소리 없음',
+  },
+
+  features: {
+    h2: '키보드를 위해 만들었고, 방해하지 않습니다.',
+    items: {
+      caret: {
+        title: '삽입점 아래의 패널',
+        body: '삽입점 아래 8포인트에서 열리며, 삽입점을 알려주지 않는 앱에서는 포인터 아래에서 열립니다. 입력해서 검색하고, ↑ ↓로 이동하고, ↵로 붙여넣고, ⌘1–⌘9로 처음 아홉 개를 붙여넣습니다. ⇧↵는 서식 있는 텍스트를 일반 텍스트로 붙여넣는 것처럼 항목의 두 번째 선택을 사용합니다.',
+        slug: '⇧⌘V · ↑ ↓ · ↵ · ⌘1–⌘9',
+      },
+      stack: {
+        title: '스택',
+        body: '⇧⌘C로 여러 항목을 연달아 복사한 다음 순서대로 붙여넣으십시오. ⌘V를 누를 때마다 다음 항목이 나타납니다. 끌어서 순서를 바꿀 수 있습니다. 새로 복사한 항목이 맨 끝에 들어오면 ⌥1은 맨 위로, ⌥2는 두 번째로 옮기며 나머지 순서는 그대로 유지됩니다.',
+        slug: '⇧⌘C · ⌘V · ⌥1 · ⌥2',
+        steps: ['git checkout -b fix/refund-email', 'npm test -- refund', 'git push -u origin HEAD'],
+        next: '다음 ⌘V',
+      },
+      transforms: {
+        title: '변환',
+        body: '항목에서 ⇧를 누르면 그 항목으로 할 수 있는 일을 볼 수 있습니다. Base64 인코딩, 색상을 RGB, HSL, OKLCH 또는 SwiftUI Color로 바꾸기, 이미지 변환, 이미지 속 텍스트 읽기 등입니다. ⌘K는 모든 동작을 보여줍니다. ↵는 항상 항목을 그대로 붙여넣습니다.',
+        slug: '⇧ · ⌘K',
+        alt: 'Finder가 앞에 있는 상태에서 동영상 링크에 연 변환 패널: 동영상으로 다운로드, 오디오 다운로드, Finder에 파일로 붙여넣기, Base64 인코딩',
+      },
+      columns: {
+        title: '열이 되는 카테고리',
+        body: '⌘P로 항목을 카테고리에 추가하면, 카테고리를 기록 옆의 별도 열로 열 수 있습니다. 카테고리에 있는 항목은 직접 제거하기 전까지 유지됩니다.',
+        slug: '⌘P · → ←',
+        alt: '왼쪽에 기록이 있고 스니펫 카테고리가 두 번째 열로 열려 있는 yabbistir 패널',
+      },
+      jobs: {
+        title: '메뉴 막대의 작업',
+        body: '동영상 다운로드처럼 오래 걸리는 동작은 메뉴 막대 아이콘 아래의 작은 카드에서 작업으로 실행되며, 아이콘은 진행 상황을 고리로 보여줍니다.',
+        slug: '동시에 최대 3개',
+        alt: '메뉴 막대 아이콘 아래의 작업 카드: 다운로드 중인 동영상, 병합 중인 오디오, 붙여넣을 준비가 된 결과, Finder에 저장된 파일',
+      },
+    },
+  },
+
+  grows: {
+    h2: '계속 자랍니다.',
+    body: '확장 프로그램은 작은 JavaScript 패키지로, 복사한 내용을 인식하고, 저장하기 전에 정리하고, 변환하고, 그 내용으로 동작하거나, 자신만의 열을 채웁니다. 인터페이스의 모든 요소는 yabbistir가 그리므로 앱의 나머지 부분과 같은 모습과 방식으로 작동합니다.',
+    film: '60초 동안 보는 확장 프로그램 다섯 개',
+    filmLabel: '영어 해설과 자막이 있는 60초 yabbistir 확장 프로그램 다섯 개 영상',
+    filmMeta: '1:00 · 영어 음성 · 한국어, 영어, 터키어 자막',
+    asks: '각 확장 프로그램은 설치하기 전에 하려는 일을 알려줍니다.',
+    asksSlug: '설정 → 확장 프로그램 → 스토어',
+    asksBody: '웹 사이트에 접근하기, 프로그램 실행하기, 기록 읽기, 복사한 내용 보기: 허용하기 전에는 아무 일도 일어나지 않습니다. 스토어의 카탈로그는 서명되어 있으며, yabbistir는 설치하기 전에 모든 패키지를 확인합니다.',
+    all: (n) => `확장 프로그램 ${n}개 모두 보기`,
+    write: '직접 만들기',
+    writeBody: '확장 프로그램은 하나의 파일로 묶은 TypeScript입니다. 스토어 저장소의 템플릿으로 시작하여 편집하는 동안 yabbistir에서 실시간으로 실행해 본 다음 풀 리퀘스트를 여십시오.',
+    featured: ['dev.yabbistir.secret-guard', 'dev.yabbistir.safe-paste', 'dev.yabbistir.authenticator', 'dev.yabbistir.ai-writing', 'dev.yabbistir.github', 'dev.yabbistir.video-download'],
+  },
+
+  privacy: {
+    h2: '요청하지 않으면 아무것도 Mac 밖으로 나가지 않습니다.',
+    items: [
+      { title: '원격 측정 없음', slug: '업데이트 확인… · 스토어 → 새로 고침', body: '분석도 없고, 백그라운드 네트워크도 없습니다. yabbistir는 사용자가 요청할 때만 온라인에 접속합니다. 업데이트 확인…은 GitHub에 최신 버전을 묻고, 스토어 탭은 열 때 스토어의 서명된 목록을 읽습니다.' },
+      { title: '암호는 제외', slug: 'org.nspasteboard.ConcealedType · TransientType', body: '암호 관리자처럼 앱이 숨김 또는 임시로 표시한 복사본은 저장되지 않으며, 키체인 접근이나 암호 앱에서 복사한 내용도 저장되지 않습니다.' },
+      { title: '기록은 로컬에 보관', slug: '~/Library/Application Support/yabbistir', body: 'Mac에만 보관됩니다. iPhone에서 복사한 내용은 공통 클립보드를 통해 도착하며 마찬가지로 이곳에 보관됩니다. 기록은 항목을 마지막으로 사용한 때부터 1년 동안 보관됩니다.' },
+    ],
+    more: '개인정보 보호에 대해 더 보기',
+  },
+
+  install: {
+    h2: 'yabbistir 받기.',
+    dmgSteps: 'DMG를 열고 yabbistir를 응용 프로그램 폴더로 끌어 놓으십시오. Developer ID로 서명되어 있으며 Apple의 공증을 받았습니다.',
+    brewTitle: 'Homebrew로',
+    brewNote: 'Homebrew 7 이상에서는 다른 탭의 cask를 먼저 신뢰하도록 요청합니다.',
+    requires: 'Apple 실리콘의 macOS 26 이상이 필요합니다.',
+    first: '처음 실행하면 짧은 창이 시작을 안내합니다. 언어 선택, 다른 클립보드 관리자의 보관함 가져오기, 단축키, 그리고 yabbistir가 대신 붙여넣는 데 필요한 손쉬운 사용 권한을 다룹니다.',
+    notes: '릴리스 노트',
+    copy: '복사하기',
+    copied: '복사됨',
+    terminal: '터미널',
+  },
+
+  faq: {
+    h2: '질문',
+    items: [
+      { q: '왜 macOS 26 전용입니까?', a: 'macOS 26을 기반으로 만들었기 때문입니다. 패널은 Liquid Glass를 사용하고, 확장 프로그램은 macOS 26과 Apple 실리콘이 필요한 Apple의 온디바이스 모델을 사용할 수 있습니다. 한 사람이 만드는 프로젝트이며, 제대로 만든 플랫폼 하나가 어정쩡한 플랫폼 둘보다 낫습니다.' },
+      { q: '왜 App Store에 없습니까?', a: 'Mac App Store는 앱 샌드박스를 요구하는데 yabbistir는 샌드박스에서 실행되지 않습니다. 허용한 확장 프로그램이 설치된 명령줄 프로그램을 실행할 수 있기 때문입니다. 대신 Developer ID로 서명하고 Apple의 공증을 받았으며, 무료이므로 GitHub 릴리스와 Homebrew로 충분합니다.' },
+      { q: '확장 프로그램은 무엇을 할 수 있습니까? 위험하지 않습니까?', a: '확장 프로그램을 설치하기 전에 yabbistir가 하려는 일을 보여줍니다. 웹 사이트에 접근하기(어느 사이트인지 포함), 명령줄 프로그램 실행하기(어느 프로그램인지 포함), 기록 읽기, 복사한 내용 보기입니다. 허용하기 전에는 아무 일도 일어나지 않으며, 더 많은 권한을 요구하는 업데이트는 다시 묻습니다. 확장 프로그램은 별도의 도우미 프로세스에서 실행되고, 인터페이스는 yabbistir가 그립니다.' },
+      { q: '정말 무료입니까?', a: '그렇습니다. 계정도, 구독도, 유료 등급도 없습니다. 코드는 GitHub에서 MIT 라이선스로 공개되어 있습니다.' },
+    ],
+  },
+
+  footer: {
+    name: 'yabbistir는 터키어로 “붙여넣기”를 뜻하는 yapıştır를 장난스럽게 발음한 이름입니다.',
+    made: 'MIT 라이선스 · Berkay Gökçe가 Claude Code와 함께 만들었습니다.',
+    links: { app: '소스 코드', store: '확장 프로그램 스토어', releases: '릴리스', issues: '문제 신고', privacy: '개인정보 보호', translation: '번역 문제 신고' },
+    counter: '방문 수는 쿠키 없이 집계합니다.',
+  },
+
+  store: {
+    h1: '확장 프로그램',
+    sub: (n) => `열린 스토어의 확장 프로그램 ${n}개입니다. 각 확장 프로그램은 설치하기 전에 하려는 일을 보여주며, 허용하기 전에는 아무 일도 일어나지 않습니다.`,
+    search: '확장 프로그램 검색',
+    searchPlaceholder: '이름이나 기능으로 검색',
+    allCategories: '전체',
+    category: '카테고리',
+    permission: '권한',
+    anyPermission: '모두',
+    showing: (n, total) => (n === total ? `확장 프로그램 ${total}개` : `확장 프로그램 ${total}개 중 ${n}개`),
+    empty: '일치하는 확장 프로그램이 없습니다. 단어를 줄이거나 다른 카테고리를 선택해 보십시오.',
+    reset: '모두 보기',
+    categories: { text: '텍스트', links: '링크', images: '이미지', files: '파일', developer: '개발자', media: '미디어', ai: 'AI', productivity: '생산성' },
+    perm: {
+      none: '권한 없음',
+      network: '웹 사이트 접근',
+      exec: '프로그램 실행',
+      sensitive: '비밀 값 읽기',
+      capture: '복사 내용 보기',
+      history: '기록 읽기',
+    },
+  },
+
+  ext: {
+    film: {
+      label: (n) => `${n} 시연 영상, 영어 해설`,
+      meta: (len) => `${len} · 영어 음성 · 영어와 터키어 자막`,
+      youtube: 'YouTube에서 보기',
+    },
+    back: '모든 확장 프로그램',
+    install: '설치',
+    wants: '할 수 있는 일',
+    wantsTitle: (n) => `‘${n}’이(가) 다음을 요청합니다:`,
+    nothing: '특별한 권한이 필요하지 않습니다.',
+    sentences: {
+      networkAny: '모든 웹 사이트에 접근할 수 있습니다',
+      network: (hosts) => `접근 가능: ${hosts}`,
+      exec: (tools) => `Mac에서 다음 프로그램을 실행할 수 있습니다: ${tools}. 이 프로그램은 파일을 읽고 쓰며 인터넷에 접근할 수 있습니다.`,
+      sensitive: '암호 같은 비밀 값을 읽고 붙여넣을 수 있습니다. 기록이나 디스크에는 저장되지 않습니다.',
+      capture: '복사하는 모든 내용을 볼 수 있습니다',
+      history: '전체 기록을 읽을 수 있습니다',
+    },
+    facts: { version: '버전', requires: '필요한 yabbistir', updated: '업데이트', author: '제작자', categories: '카테고리', size: '패키지', id: '식별자' },
+    readme: 'README',
+    readmeNote: '이 확장 프로그램의 설명서는 영어로 되어 있습니다.',
+    source: 'GitHub의 소스',
+    prev: '이전',
+    next: '다음',
+    sheet: {
+      title: (n) => `${n} 설치`,
+      open: 'yabbistir에서 열기',
+      openNote: 'yabbistir 0.5 이상이 필요합니다. yabbistir가 확장 프로그램이 하려는 일을 보여주며, 허용한 경우에만 설치합니다.',
+      manual: (n) => `또는 yabbistir에서 설정 → 확장 프로그램 → 스토어를 연 다음 ${n}을(를) 선택하십시오.`,
+      noApp: '아직 yabbistir가 없습니까?',
+      close: '닫기',
+    },
+  },
+
+  privacyPage: {
+    h1: '개인정보 보호',
+    siteTitle: '이 사이트',
+    site: [
+      'yabbistir.com은 GoatCounter로 방문 수를 집계하며, 쿠키를 사용하지 않고 사용자를 식별하는 정보도 저장하지 않습니다. 조회한 페이지와 다운로드 및 설치 클릭만 집계하며, 그 밖의 것은 집계하지 않습니다. 동의할 내용이 없으므로 동의 배너도 없습니다.',
+      '동영상과 글꼴은 이 사이트에서 제공됩니다. YouTube나 광고 네트워크에서는 아무것도 불러오지 않습니다.',
+    ],
+    appTitle: '앱',
+    app: [
+      '원격 측정도, 분석도, 백그라운드 네트워크도 없습니다. yabbistir는 사용자가 요청할 때만 온라인에 접속합니다. 업데이트 확인…은 GitHub에 최신 버전을 묻고, 더 새로운 버전이 있으면 릴리스 페이지를 열도록 제안합니다. 스토어 탭은 열거나 새로 고침을 누를 때 스토어의 서명된 목록을 읽고, 설치하는 것만 다운로드합니다. 내장 확장 프로그램은 온라인에 접속하지 않습니다.',
+      '암호 관리자처럼 앱이 숨김 또는 임시로 표시한 복사본은 저장되지 않으며, 키체인 접근이나 암호 앱에서 복사한 내용도 저장되지 않습니다. 확장 프로그램이 붙여넣는 암호는 이 Mac에서만 쓰이는 숨김 항목으로 클립보드에 놓이고, 잠시 후 원래의 클립보드가 돌아옵니다. 암호는 표시되거나 저장되거나 로그에 남지 않습니다.',
+      '기록은 Mac의 ~/Library/Application Support/yabbistir에만 보관됩니다.',
+      '스토어 확장 프로그램은 설치하기 전에 하려는 일을 보여줍니다. 웹 사이트에 접근하기(어느 사이트인지 포함), 프로그램 실행하기(어느 프로그램인지 포함), 기록 읽기, 복사한 내용 보기입니다. 허용하기 전에는 아무것도 할 수 없습니다.',
+    ],
+  },
+
+  notFound: { title: '이 교정지가 사라졌습니다.', body: '따라온 페이지가 보드에 없습니다.', home: 'yabbistir로 돌아가기' },
+  dates: (iso) => new Date(iso).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
+};
