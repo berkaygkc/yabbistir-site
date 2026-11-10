@@ -26,7 +26,7 @@ Two hooks, always together: yabbistir opens right under the text caret, and it g
 
 - Name: **yabbistir**, always lowercase; a playful way of saying *yapıştır*, Turkish for "paste".
 - The app icon (a glass Y on a dark tile) is the only logo.
-- English by default, Turkish at `/tr/`. Turkish extension names come from the catalog.
+- Nine languages: English by default at the root, and Deutsch, Español, Français, Türkçe, 日本語, 한국어, 简体中文 and 繁體中文 at `/de/`, `/es/`, `/fr/`, `/tr/`, `/ja/`, `/ko/`, `/zh-Hans/` and `/zh-Hant/`. Extension names come from the catalog in each language.
 - No star counts, no download counts, no invented testimonials, no invented numbers.
 - No SF Symbols on the web (Apple's license); app screenshots may show them as part of the app.
 - Visual direction chosen by the user on 2026-11-05: the paste-up board (Montaj Masası).
