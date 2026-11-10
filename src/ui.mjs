@@ -17,7 +17,7 @@ export function bytes(n, locale) {
 }
 
 /** Paths on the site: `site.url('/extensions/')` → the base-aware href; `site.abs(...)` → the absolute URL. */
-export function makeSite({ origin, base, assetVersion, tracks = [] }) {
+export function makeSite({ origin, base, assetVersion, tracks = {} }) {
   const url = (path) => base.replace(/\/$/, '') + path;
   return { origin, base, assetVersion, tracks, url, abs: (path) => origin + url(path) };
 }
@@ -177,5 +177,9 @@ ${body}
 </html>
 `;
 }
+
+/** A film's caption tracks: one per language the build found a `<file>.<code>.vtt` for, the page's own language on. */
+export const captionTracks = (t, site, file) =>
+  (site.tracks[file] ?? []).map((l) => `<track kind="${l.code === 'en' ? 'captions' : 'subtitles'}" src="${site.url(`/media/${file}.${l.code}.vtt`)}" srclang="${l.code}" label="${esc(l.name)}"${t.lang === l.code ? ' default' : ''}>`).join('\n      ');
 
 export const playButton = (label, aria) => `<button type="button" class="player__play" aria-label="${esc(aria)}" hidden><span class="player__disc">${icon('play')}</span><span class="player__label">${esc(label)}</span></button>`;

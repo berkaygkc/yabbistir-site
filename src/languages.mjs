@@ -1,5 +1,6 @@
 // The site's languages, in menu order. A new language is one entry here, `src/i18n/<code>.mjs` and
-// `public/media/extensions-60s.<code>.vtt`; nothing else names a language.
+// `public/media/extensions-60s.<code>.vtt` (plus `<file>.<code>.vtt` for any film in src/films.mjs it captions);
+// nothing else names a language.
 //
 //   code    the BCP 47 tag: <html lang>, hreflang, the i18n module's name
 //   path    where the language lives ('' for English at the root)

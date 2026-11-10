@@ -126,16 +126,35 @@ test('no star or download counts anywhere', () => {
   for (const [f, html] of pages) assert.doesNotMatch(html, /shields\.io|stargazers|github\/downloads/, f);
 });
 
-test('an extension with a film shows it on its page, with captions, and others show none', async () => {
-  for (const lang of ['', 'tr/']) {
-    const html = await readFile(join(DIST, lang, 'extensions/authenticator/index.html'), 'utf8');
-    assert.match(html, /<video[^>]*poster="[^"]*\/media\/authenticator-44s\.jpg"/);
-    assert.ok(html.includes('/media/authenticator-44s.mp4'));
-    assert.match(html, /<track kind="captions" src="[^"]*authenticator-44s\.en\.vtt"/);
-    assert.match(html, /<track kind="subtitles" src="[^"]*authenticator-44s\.tr\.vtt"/);
-    assert.ok(html.includes('https://youtu.be/sBg1I6EmRB0'));
+test('an extension with a film shows it on its page in every language, with captions, and others show none', async () => {
+  assert.ok(await exists('public/media/authenticator-44s.en.vtt'));
+  assert.ok(await exists('public/media/authenticator-44s.tr.vtt'));
+  for (const { code } of LANGUAGES) {
+    const html = await readFile(join(dirOf(code), 'extensions/authenticator/index.html'), 'utf8');
+    assert.match(html, /<video[^>]*poster="[^"]*\/media\/authenticator-44s\.jpg"/, code);
+    assert.ok(html.includes('/media/authenticator-44s.mp4'), code);
+    assert.ok(html.includes('https://youtu.be/sBg1I6EmRB0'), code);
+    // A track for each language with a caption file (English captions, the rest subtitles), on for the page's own.
+    for (const l of LANGUAGES) {
+      const has = await exists(`public/media/authenticator-44s.${l.code}.vtt`);
+      const track = html.match(new RegExp(`<track kind="(\\w+)" src="[^"]*authenticator-44s\\.${l.code}\\.vtt" srclang="${l.code}"[^>]*>`));
+      assert.equal(Boolean(track), has, `${code}: ${l.code} track`);
+      if (!track) continue;
+      assert.equal(track[1], l.code === 'en' ? 'captions' : 'subtitles', `${code}: ${l.code} kind`);
+      assert.equal(track[0].includes(' default'), l.code === code, `${code}: ${l.code} default`);
+    }
   }
   const other = await readFile(join(DIST, 'extensions/secret-guard/index.html'), 'utf8');
   assert.doesNotMatch(other, /<video/);
+});
+
+test('the home film carries a track for each language with a caption file', async () => {
+  for (const { code } of LANGUAGES) {
+    const html = await readFile(join(dirOf(code), 'index.html'), 'utf8');
+    for (const l of LANGUAGES) {
+      const has = await exists(`public/media/extensions-60s.${l.code}.vtt`);
+      assert.equal(html.includes(`/media/extensions-60s.${l.code}.vtt" srclang="${l.code}"`), has, `${code}: ${l.code}`);
+    }
+  }
 });
 

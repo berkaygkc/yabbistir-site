@@ -1,5 +1,5 @@
 import { APP_REPO, STORE_REPO } from '../data.mjs';
-import { html, esc, icon, reg, page, downloadTab, brewBlock, monogram, permissionMarks, consentSentences, localPath, bytes, playButton } from '../ui.mjs';
+import { html, esc, icon, reg, page, downloadTab, brewBlock, monogram, permissionMarks, consentSentences, localPath, bytes, playButton, captionTracks } from '../ui.mjs';
 
 function demoPanel(t) {
   const p = t.panel;
@@ -148,7 +148,7 @@ function grows(t, data, site) {
   <figure class="grows__film player crop" data-paste data-player>
     <video class="film__video" controls preload="none" poster="${site.url('/media/extensions-60s.jpg')}" playsinline width="1280" height="720" aria-label="${esc(t.grows.filmLabel)}" data-goatcounter-play="extensions-film">
       <source src="${site.url('/media/extensions-60s.mp4')}" type="video/mp4">
-      ${site.tracks.map((l) => `<track kind="${l.code === 'en' ? 'captions' : 'subtitles'}" src="${site.url(`/media/extensions-60s.${l.code}.vtt`)}" srclang="${l.code}" label="${esc(l.name)}"${t.lang === l.code ? ' default' : ''}>`).join('\n      ')}
+      ${captionTracks(t, site, 'extensions-60s')}
     </video>
     ${playButton(t.film.play, t.grows.filmLabel)}
     <figcaption class="player__caption"><span class="pencil">${esc(t.grows.film)}</span><span class="slug">${esc(t.grows.filmMeta)}</span></figcaption>

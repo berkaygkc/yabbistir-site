@@ -15,6 +15,7 @@ import { dirname, join } from 'node:path';
 import { loadData } from './src/data.mjs';
 import { LANGUAGES } from './src/languages.mjs';
 import { makeSite } from './src/ui.mjs';
+import { FILMS } from './src/films.mjs';
 import { home } from './src/pages/home.mjs';
 import { extensions } from './src/pages/extensions.mjs';
 import { extension } from './src/pages/extension.mjs';
@@ -44,7 +45,10 @@ await writeFile(join(DIST, 'assets/site.css'), css);
 await writeFile(join(DIST, 'assets/site.js'), js);
 
 const catalogs = await Promise.all(LANGUAGES.map(async (l) => (await import(`./src/i18n/${l.code}.mjs`)).default));
-const tracks = (await Promise.all(LANGUAGES.map(async (l) => ((await exists(`public/media/extensions-60s.${l.code}.vtt`)) ? l : null)))).filter(Boolean);
+// Each film's captions: the languages, in registry order, that have public/media/<file>.<code>.vtt.
+const films = ['extensions-60s', ...Object.values(FILMS).map((f) => f.file)];
+const captioned = async (file) => (await Promise.all(LANGUAGES.map(async (l) => ((await exists(`public/media/${file}.${l.code}.vtt`)) ? l : null)))).filter(Boolean);
+const tracks = Object.fromEntries(await Promise.all(films.map(async (file) => [file, await captioned(file)])));
 const site = makeSite({ origin, base, assetVersion, tracks });
 const pages = [];
 for (const t of catalogs) {
