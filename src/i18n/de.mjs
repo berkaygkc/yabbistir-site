@@ -177,6 +177,11 @@ export default {
   },
 
   ext: {
+    film: {
+      label: (n) => `${n} in Aktion, mit englischem Sprecher`,
+      meta: (len) => `${len} · englisch gesprochen · Untertitel auf Englisch und Türkisch`,
+      youtube: 'Auf YouTube ansehen',
+    },
     back: 'Alle Erweiterungen',
     install: 'Installieren',
     wants: 'Was sie tun darf',
