@@ -202,7 +202,7 @@ test('the home film carries a track for each language with a caption file', asyn
 });
 
 
-test('poster titles carry the width of their longest word, so a long one can shrink to fit a phone', async () => {
+test('poster titles carry the width of their longest word, so a long one can shrink to fit its column', async () => {
   // A long Latin word is wider than a short one; a CJK or Hangul character may break after itself; spaces end a run.
   assert.ok(titleEms('Erweiterungen') > titleEms('Extensions'));
   assert.equal(titleEms('機能拡張'), 0.96);

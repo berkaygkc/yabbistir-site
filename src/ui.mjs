@@ -44,10 +44,10 @@ const SPRITE = html`<svg width="0" height="0" style="position:absolute" aria-hid
 export const icon = (id, cls = '') => `<svg class="ic ${cls}" aria-hidden="true"><use href="#i-${id}"/></svg>`;
 export const reg = (cls = '') => `<svg class="reg ${cls}" aria-hidden="true"><use href="#i-reg"/></svg>`;
 
-/** How wide a poster title's longest unbreakable run is, in em, written as --title-ems so that on a phone a long word
-    (Erweiterungen, Confidentialité) shrinks until it fits the column while a title that fits keeps its size. The widths
-    are Libre Franklin 860 with the poster's −0.04em tracking, measured in Chrome and rounded up a little. A CJK or Hangul
-    character may break after itself, so it is a run of its own. */
+/** How wide a poster title's longest unbreakable run is, in em, written as --title-ems so that a long word (Erweiterungen,
+    Confidentialité) shrinks until it fits its column, on a phone or beside the store's lede, while a title that fits keeps
+    its size. The widths are Libre Franklin 860 with the poster's −0.04em tracking, measured in Chrome and rounded up a
+    little. A CJK or Hangul character may break after itself, so it is a run of its own. */
 export function titleEms(text) {
   let run = 0;
   let widest = 0;

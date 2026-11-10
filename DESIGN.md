@@ -245,7 +245,7 @@ A near-monochrome paste-up palette (board, paper, ink) with two working colors f
 
 ### Hierarchy
 - **Display** (820, clamp(46px, 6.4vw, 96px), 0.95, -0.036em): the hero H1 galley; the extension page H1 runs the same voice at clamp(38px, 5vw, 64px).
-- **Poster** (860, clamp(54px, 7.5vw, 96px), 0.9, -0.04em): page and section titles set loose on the board (Extensions, It grows, Get yabbistir, Privacy). Under 760px a page title whose longest word is wider than the column (Erweiterungen, Confidentialité) shrinks until it fits; the build writes that word's width in em as `--title-ems`.
+- **Poster** (860, clamp(54px, 7.5vw, 96px), 0.9, -0.04em): page and section titles set loose on the board (Extensions, It grows, Get yabbistir, Privacy). A page title whose longest word is too wide for its room (Erweiterungen, Confidentialité) shrinks until it fits: on one column the room is the column; beside the store's lede it is the five-column title column plus the gutter less 8px, so a title may lean into the gutter but never reaches the lede. The build writes that word's width in em as `--title-ems`; the room is measured in container units of the store head and the document.
 - **Headline** (780, clamp(34px, 4.3vw, 62px), 1.0, -0.03em): section titles, held to 15 to 18ch.
 - **Title** (720, 22px, 1.16): galley headings; galley names at 740 20px; FAQ questions at 680 19px.
 - **Body** (400, 18px, 1.56; 17px under 760px): reading text, galley copy in ink-secondary, prose at 70ch and 1.62.

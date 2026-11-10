@@ -641,8 +641,14 @@ a.langmenu__item:hover .langmenu__code { color: var(--ink-2); }
 /* ── Store ────────────────────────────────────────────────────────────── */
 
 .store { padding-block: clamp(40px, 6vw, 80px) 120px; }
-.store__head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px 48px; align-items: end; margin-bottom: 48px; }
-.store__title { font-size: clamp(54px, 7.5vw, 96px); font-weight: 860; line-height: 0.9; letter-spacing: -0.04em; }
+/* The title sits in five of twelve columns beside the lede. One whose longest word (--title-ems, from the build) is too
+   wide for that room shrinks to fit it: it may lean into the gutter, as "Extensions" does, but stops at least 8px short of
+   the lede. On one column the room is the column. */
+.store__head { --gutter: 48px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px var(--gutter); align-items: end; margin-bottom: 48px; container-type: inline-size; }
+.store__title {
+  --room: calc((100cqi - var(--gutter)) * 5 / 12 + var(--gutter) - 8px);
+  font-size: min(clamp(54px, 7.5vw, 96px), var(--room) / var(--title-ems, 1)); font-weight: 860; line-height: 0.9; letter-spacing: -0.04em;
+}
 .store__sub { font-size: 19px; color: var(--ink-2); max-width: 36em; }
 .filters { position: sticky; top: 64px; z-index: 10; display: grid; gap: 12px; margin: 0 calc(var(--margin) * -1) 36px; padding: 14px var(--margin); background: color-mix(in srgb, var(--board) 97%, transparent); border-block: 1px solid var(--grid-major); }
 .filters__search { position: relative; max-width: 560px; }
@@ -737,8 +743,9 @@ a.langmenu__item:hover .langmenu__code { color: var(--ink-2); }
 
 /* ── Documents and the lost page ─────────────────────────────────────── */
 
-.doc { padding-block: clamp(40px, 6vw, 80px) 120px; display: grid; gap: 32px; max-width: 880px !important; }
-.doc__title { font-size: clamp(54px, 7.5vw, 96px); font-weight: 860; line-height: 0.9; letter-spacing: -0.04em; }
+.doc { padding-block: clamp(40px, 6vw, 80px) 120px; display: grid; gap: 32px; max-width: 880px !important; container-type: inline-size; }
+/* A title whose longest word is wider than the column shrinks to fit it (see .store__title). */
+.doc__title { font-size: min(clamp(54px, 7.5vw, 96px), 100cqi / var(--title-ems, 1)); font-weight: 860; line-height: 0.9; letter-spacing: -0.04em; }
 .doc__section { gap: 14px; padding: 30px 32px 26px; }
 .doc__section h2 { font-size: 26px; font-weight: 760; letter-spacing: -0.015em; }
 .doc__section p { font-size: 18px; max-width: 64ch; }
@@ -809,6 +816,7 @@ a.langmenu__item:hover .langmenu__code { color: var(--ink-2); }
   .install__grid, .install__first { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .faq { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .store__head { grid-template-columns: minmax(0, 1fr); }
+  .store__title { --room: 100cqi; }
   .xpage { grid-template-columns: minmax(0, 1fr); }
   .xpage__wants { grid-column: 1; grid-row: auto; position: static; }
   .xpage__readme { grid-column: 1 / -1; }
@@ -824,8 +832,6 @@ a.langmenu__item:hover .langmenu__code { color: var(--ink-2); }
   .masthead .tab__label { display: none; }
   .masthead .tab { padding: 10px 12px; }
   .filters { top: 58px; }
-  /* A poster title whose longest word is wider than the column (--title-ems, from the build) shrinks to fit it. */
-  .store__title, .doc__title { font-size: min(clamp(54px, 7.5vw, 96px), (100vw - 2 * var(--margin)) / var(--title-ems, 1)); }
   body { font-size: 17px; }
   .galley { padding: 22px 20px 14px; }
   .galley--head { padding: 18px 20px 12px; }
