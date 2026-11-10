@@ -13,6 +13,7 @@ export const LANGUAGES = [
   { code: 'tr', path: '/tr', name: 'Türkçe', locale: 'tr-TR', og: 'tr_TR' },
   { code: 'de', path: '/de', name: 'Deutsch', locale: 'de-DE', og: 'de_DE' },
   { code: 'es', path: '/es', name: 'Español', locale: 'es-ES', og: 'es_ES' },
+  { code: 'zh-Hans', path: '/zh-hans', name: '简体中文', locale: 'zh-CN', og: 'zh_CN' },
 ];
 
 export const DEFAULT_LANGUAGE = LANGUAGES[0];

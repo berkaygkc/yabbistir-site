@@ -1,0 +1,232 @@
+// 简体中文文案。权限句子、分类名称和面板文字与 App 一致（Localizable.xcstrings）。
+
+export default {
+  lang: 'zh-Hans',
+  locale: 'zh-CN',
+  meta: {
+    title: 'yabbistir：在你输入的地方打开的剪贴板历史工具',
+    description: '一款免费、开源的 macOS 26 剪贴板历史工具，直接在文本插入点下方打开，并能通过开放商店里的扩展不断成长。',
+    extensionsTitle: 'yabbistir 扩展',
+    extensionsDescription: (n) => `${n} 个来自 yabbistir 开放商店的扩展。每个扩展在安装前都会说明它想做什么。`,
+    privacyTitle: '隐私 · yabbistir',
+  },
+  skip: '跳到正文',
+  nav: { home: 'yabbistir', extensions: '扩展', privacy: '隐私', github: 'GitHub', download: '下载', menu: '菜单' },
+  langMenu: { label: '语言' },
+  langSuggest: { text: '此页面也有英文版。', go: 'English', dismiss: '关闭' },
+
+  hero: {
+    draft: '周四演示。要在本地启动数据库，请运行 ',
+    h1: '在输入的地方粘贴。',
+    sub: 'yabbistir 是一款 macOS 剪贴板历史工具，直接在文本插入点下方打开。输入即可搜索，按 ↵ 粘贴。扩展会教它认出你拷贝的是什么，以及该怎么处理。',
+    measure: '8 pt',
+    measureNote: '面板在插入点下方 8 pt处打开',
+    facts: ['免费开源（MIT）', '已签名并通过 Apple 公证', 'Apple 芯片上的 macOS 26'],
+    tryNote: '试试看：输入搜索 · ↑ ↓ · ↵ 粘贴到草稿中',
+    pasted: (t) => `已将“${t}”粘贴到草稿中。`,
+  },
+  download: {
+    cta: '下载 macOS 版',
+    meta: (r, size) => `版本 ${r.version} · ${size} · DMG`,
+    brew: 'Homebrew',
+    allWays: '其他安装方式',
+  },
+  panel: {
+    search: '搜索剪贴板…',
+    categories: '分类',
+    history: '历史记录',
+    today: '今天',
+    yesterday: '昨天',
+    paste: '粘贴',
+    transform: '转换',
+    actions: '操作',
+    noResults: (q) => `没有“${q}”的结果`,
+    label: 'yabbistir 面板演示',
+    rows: [
+      { kind: 'code', text: "SELECT id, email FROM users WHERE created_at > now() - interval '1 day'", age: '2分钟前', day: 'today' },
+      { kind: 'link', tile: 'V', tileColor: '#3b2e6e', text: 'SwiftUI 中的 Liquid Glass：完整指南', age: '6分钟前', day: 'today' },
+      { kind: 'text', text: '周四下午 2 点，和林晓、陈浩一起演示退款流程', age: '9分钟前', day: 'today' },
+      { kind: 'color', color: '#C8A27C', text: '#C8A27C', age: '14分钟前', day: 'today' },
+      { kind: 'code', text: 'docker compose up -d db', age: '25分钟前', day: 'today', selected: true },
+      { kind: 'link', tile: 'G', tileColor: '#24262b', text: 'https://git.example.dev/yabbistir/issues/42', age: '47分钟前', day: 'today' },
+      { kind: 'text', text: '您好，您的退款已获批准，预计 3–5 个工作日到账。', age: '昨天', day: 'yesterday' },
+    ],
+  },
+
+  film: {
+    h2: '四十秒，从头到尾。',
+    body: '插入点下方的面板、粘贴队列、⇧ 上的转换，以及以列显示的分类，按你遇到它们的顺序依次展示。',
+    slug: 'App 的 40 秒演示 · 无声',
+    label: 'yabbistir 的 40 秒演示，无声',
+    play: '播放',
+    meta: '0:40 · 无声',
+  },
+
+  features: {
+    h2: '为键盘而生，从不碍事。',
+    items: {
+      caret: {
+        title: '插入点下方的面板',
+        body: '它在文本插入点下方 8 pt处打开；在不报告插入点的 App 中，则在鼠标指针下方打开。输入即可搜索，↑ ↓ 移动，↵ 粘贴，⌘1–⌘9 粘贴前九项。⇧↵ 会粘贴该项目的第二选项，例如把富文本粘贴为纯文本。',
+        slug: '⇧⌘V · ↑ ↓ · ↵ · ⌘1–⌘9',
+      },
+      stack: {
+        title: '粘贴队列',
+        body: '用 ⇧⌘C 连续拷贝多项内容，再按顺序粘贴：每按一次 ⌘V，就会轮到下一项。可以拖移重新排序。新的拷贝排到队尾时，⌥1 把它移到最前，⌥2 把它移到第二位，队列里的其余内容保持原样。',
+        slug: '⇧⌘C · ⌘V · ⌥1 · ⌥2',
+        steps: ['git checkout -b fix/refund-email', 'npm test -- refund', 'git push -u origin HEAD'],
+        next: '下一次 ⌘V',
+      },
+      transforms: {
+        title: '转换',
+        body: '在某个项目上轻点 ⇧，就能看到可以对它做什么：Base64 编码、把颜色转为 RGB、HSL、OKLCH 或 SwiftUI Color、转换图像格式，或读出图像中的文字。⌘K 会列出所有操作。↵ 始终按原样粘贴该项目。',
+        slug: '⇧ · ⌘K',
+        alt: '视频链接上的转换面板，前台是访达：下载为视频、下载音频、以文件形式粘贴到访达，以及 Base64 编码',
+      },
+      columns: {
+        title: '以列显示的分类',
+        body: '⌘P 把项目添加到分类，分类可以作为独立的一列在“历史记录”旁边打开。分类中的项目会一直保留，直到你移除它们。',
+        slug: '⌘P · → ←',
+        alt: 'yabbistir 面板：左侧是历史记录，“文本片段”分类作为第二列打开',
+      },
+      jobs: {
+        title: '菜单栏里的任务',
+        body: '下载视频这类耗时较长的操作，会作为任务显示在菜单栏图标下方的小卡片上，图标则以圆环显示进度。',
+        slug: '最多同时 3 个',
+        alt: '菜单栏图标下方的任务卡片：正在下载的视频、正在合并的音频、可以粘贴的结果，以及已存储到访达的文件',
+      },
+    },
+  },
+
+  grows: {
+    h2: '它会不断成长。',
+    body: '扩展是小型 JavaScript 包，能识别你拷贝的内容，在保存前清理它，转换它，对它采取行动，或填充属于自己的一列。yabbistir 绘制它们界面的每一个部分，因此它们的外观和使用方式都与 App 其余部分一致。',
+    film: '60 秒看五个扩展',
+    filmLabel: '60 秒看五个 yabbistir 扩展，配有解说和字幕',
+    filmMeta: '1:00 · 英文解说 · 字幕：简体中文、英文、土耳其文',
+    asks: '每个扩展在安装前都会说明它想做什么。',
+    asksSlug: '设置 → 扩展 → 商店',
+    asksBody: '访问网站、运行程序、读取你的历史记录或看到你拷贝的内容：在你允许之前，什么都不会发生。商店的目录经过签名，yabbistir 在安装前会检查每个软件包。',
+    all: (n) => `全部 ${n} 个扩展`,
+    write: '编写你自己的',
+    writeBody: '扩展是打包成单个文件的 TypeScript。从扩展商店仓库的模板开始，一边编辑一边在 yabbistir 中实时运行，然后提交拉取请求。',
+    featured: ['dev.yabbistir.secret-guard', 'dev.yabbistir.safe-paste', 'dev.yabbistir.authenticator', 'dev.yabbistir.ai-writing', 'dev.yabbistir.github', 'dev.yabbistir.video-download'],
+  },
+
+  privacy: {
+    h2: '除非你要求，否则什么都不会离开你的 Mac。',
+    items: [
+      { title: '没有遥测', slug: '检查更新… · 商店 → 刷新', body: '没有分析，没有后台联网。yabbistir 只在你要求时才联网：“检查更新…”会向 GitHub 询问最新版本，“商店”标签页会在你打开时读取商店的签名列表。' },
+      { title: '密码不会留下', slug: 'org.nspasteboard.ConcealedType · TransientType', body: '被 App 标记为隐藏或临时的拷贝（密码管理器就是这样做的）绝不会被存储，从“钥匙串访问”或“密码”App 拷贝的内容同样不会。' },
+      { title: '历史记录保存在本地', slug: '~/Library/Application Support/yabbistir', body: '它留在你的 Mac 上。来自 iPhone 的拷贝会通过通用剪贴板到达，同样保存在这里。历史记录从你上次使用某个项目起保留一年。' },
+    ],
+    more: '进一步了解隐私',
+  },
+
+  install: {
+    h2: '获取 yabbistir。',
+    dmgSteps: '打开 DMG，把 yabbistir 拖到“应用程序”。它使用 Developer ID 签名，并已通过 Apple 公证。',
+    brewTitle: '使用 Homebrew',
+    brewNote: 'Homebrew 7 及更高版本会要求你先信任来自其他 tap 的 cask。',
+    requires: '需要 Apple 芯片上的 macOS 26 或更高版本。',
+    first: '首次运行时会出现一个简短的窗口，带你完成起步设置：选择语言，导入其他剪贴板管理器的资料库，设置快捷键，以及授予 yabbistir 替你粘贴所需的辅助功能权限。',
+    notes: '发行说明',
+    copy: '拷贝',
+    copied: '已拷贝',
+    terminal: '终端',
+  },
+
+  faq: {
+    h2: '常见问题',
+    items: [
+      { q: '为什么只支持 macOS 26？', a: '它建立在 macOS 26 之上：面板使用 Liquid Glass，扩展可以使用 Apple 的设备端模型，而这需要 macOS 26 和 Apple 芯片。这是一个人的项目，把一个平台做好，胜过两个平台都只做一半。' },
+      { q: '为什么不在 App Store 上？', a: 'Mac App Store 要求使用 App 沙盒，而 yabbistir 不在沙盒中运行：你允许的扩展可以运行你已安装的命令行程序。它改用 Developer ID 签名并通过 Apple 公证，而且是免费的，所以 GitHub 发行版和 Homebrew 就足够了。' },
+      { q: '扩展能做什么？这样不危险吗？', a: '安装扩展之前，yabbistir 会显示它想做什么：访问网站（以及哪些网站）、运行命令行程序（以及哪些程序）、读取你的历史记录，或看到你拷贝的内容。在你允许之前，什么都不会发生；更新如果要求更多权限，会再次询问。扩展在单独的辅助进程中运行，界面由 yabbistir 绘制。' },
+      { q: '真的免费吗？', a: '是的。无需账户，没有订阅，没有付费版本。代码在 GitHub 上以 MIT 许可证发布。' },
+    ],
+  },
+
+  footer: {
+    name: 'yabbistir 是土耳其语 yapıştır（“粘贴”）的俏皮说法。',
+    made: 'MIT 许可证 · 由 Berkay Gökçe 与 Claude Code 制作。',
+    links: { app: '源代码', store: '扩展商店', releases: '发行版本', issues: '报告问题', privacy: '隐私', translation: '报告翻译问题' },
+    counter: '访问次数的统计不使用 Cookie。',
+  },
+
+  store: {
+    h1: '扩展',
+    sub: (n) => `${n} 个来自开放商店的扩展。每个扩展在安装前都会说明它想做什么，在你允许之前什么都不会发生。`,
+    search: '搜索扩展',
+    searchPlaceholder: '按名称或用途搜索',
+    allCategories: '全部',
+    category: '分类',
+    permission: '权限',
+    anyPermission: '任意',
+    showing: (n, total) => (n === total ? `${total} 个扩展` : `${total} 个扩展中的 ${n} 个`),
+    empty: '没有匹配的扩展。试试更少的词，或换一个分类。',
+    reset: '显示全部',
+    categories: { text: '文本', links: '链接', images: '图像', files: '文件', developer: '开发者', media: '媒体', ai: 'AI', productivity: '效率' },
+    perm: {
+      none: '无需权限',
+      network: '访问网站',
+      exec: '运行程序',
+      sensitive: '读取机密信息',
+      capture: '看到你的拷贝',
+      history: '读取历史记录',
+    },
+  },
+
+  ext: {
+    film: {
+      label: (n) => `${n}的实际运行，配有解说`,
+      meta: (len) => `${len} · 英文解说 · 字幕：英文和土耳其文`,
+      youtube: '在 YouTube 上观看',
+    },
+    back: '全部扩展',
+    install: '安装',
+    wants: '它可以做什么',
+    wantsTitle: (n) => `“${n}”想要：`,
+    nothing: '无需特殊权限。',
+    sentences: {
+      networkAny: '可以访问任意网站',
+      network: (hosts) => `可以访问：${hosts}`,
+      exec: (tools) => `可以在你的Mac上运行这些程序：${tools}。它们可以读写你的文件并访问互联网。`,
+      sensitive: '可以读取并粘贴密码等机密信息。这些信息绝不会写入历史记录或磁盘。',
+      capture: '可以看到你拷贝的所有内容',
+      history: '可以读取你的全部历史记录',
+    },
+    facts: { version: '版本', requires: '需要 yabbistir', updated: '更新于', author: '作者', categories: '分类', size: '软件包', id: '标识符' },
+    readme: 'README',
+    readmeNote: '这个扩展的文档为英文。',
+    source: '在 GitHub 上查看源代码',
+    prev: '上一个',
+    next: '下一个',
+    sheet: {
+      title: (n) => `安装“${n}”`,
+      open: '在 yabbistir 中打开',
+      openNote: '需要 yabbistir 0.5 或更高版本。yabbistir 会显示这个扩展想做什么，并且只在你允许后才安装。',
+      manual: (n) => `或者在 yabbistir 中：设置 → 扩展 → 商店，然后选择“${n}”。`,
+      noApp: '还没有 yabbistir？',
+      close: '关闭',
+    },
+  },
+
+  privacyPage: {
+    h1: '隐私',
+    siteTitle: '本网站',
+    site: [
+      'yabbistir.com 使用 GoatCounter 统计访问量，不使用 Cookie，也不存储任何能识别你的信息。它只统计页面浏览量以及“下载”和“安装”的点击次数，仅此而已。这里没有同意横幅，因为没有什么需要你同意。',
+      '视频和字体都由本网站提供。不会从 YouTube 或广告网络加载任何内容。',
+    ],
+    appTitle: 'App',
+    app: [
+      '没有遥测，没有分析，没有后台联网。yabbistir 只在你要求时才联网：“检查更新…”会向 GitHub 询问最新版本，如果有更新的版本，就会提议打开它的发布页面；“商店”标签页会在你打开它或按下“刷新”时读取商店的签名列表，并且只下载你安装的内容。内置扩展从不联网。',
+      '被 App 标记为隐藏或临时的拷贝（密码管理器就是这样做的）绝不会被存储，从“钥匙串访问”或“密码”App 拷贝的内容同样不会。扩展粘贴的密码会作为仅限这台 Mac 的隐藏项目放到剪贴板上，片刻之后你的剪贴板就会恢复；它绝不会被显示、存储或写入日志。',
+      '你的历史记录保存在你的 Mac 上，位于 ~/Library/Application Support/yabbistir。',
+      '商店里的扩展在安装前会说明它们想做什么：访问网站（以及哪些网站）、运行程序（以及哪些程序）、读取你的历史记录，或看到你拷贝的内容。在你允许之前，它们什么都做不了。',
+    ],
+  },
+
+  notFound: { title: '这张校样走丢了。', body: '你点开的页面不在版面上。', home: '回到 yabbistir' },
+  dates: (iso) => new Date(iso).toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
+};
