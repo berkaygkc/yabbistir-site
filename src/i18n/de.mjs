@@ -18,7 +18,7 @@ export default {
   hero: {
     draft: 'Demo am Donnerstag. Die Datenbank startest du lokal mit ',
     h1: 'Einsetzen, wo du tippst.',
-    sub: 'yabbistir ist ein Zwischenablage-Verlauf für macOS, der sich direkt unter deiner Einfügemarke öffnet. Tippe, um zu suchen, und drücke ↵ zum Einsetzen. Erweiterungen bringen ihm bei, was du kopiert hast und was sich damit anfangen lässt.',
+    sub: 'yabbistir ist ein Zwischenablage-Verlauf für macOS, der sich direkt unter deiner Einfügemarke öffnet. Tippe, um zu suchen, und drücke ↵ zum Einsetzen. Erweiterungen bringen ihm bei, deine Kopien zu erkennen und etwas mit ihnen anzufangen.',
     measure: '8 pt',
     measureNote: 'das Panel öffnet sich 8 Punkt unter der Einfügemarke',
     facts: ['Kostenlos und Open Source (MIT)', 'Signiert und von Apple notarisiert', 'macOS 26 auf Macs mit Apple Chip'],
@@ -100,9 +100,9 @@ export default {
 
   grows: {
     h2: 'Es wächst mit.',
-    body: 'Erweiterungen sind kleine JavaScript-Pakete, die erkennen, was du kopierst, es vor dem Speichern bereinigen, umwandeln, etwas damit tun oder eine eigene Spalte füllen. yabbistir zeichnet jedes Element ihrer Oberfläche, deshalb sehen sie aus und funktionieren wie der Rest der App.',
+    body: 'Erweiterungen sind kleine JavaScript-Pakete, die erkennen, was du kopierst, es vor dem Speichern bereinigen, umwandeln, etwas damit tun oder eine eigene Spalte füllen. yabbistir zeichnet jedes Element ihrer Oberfläche, deshalb sehen sie aus wie der Rest der App und verhalten sich auch so.',
     film: 'Fünf Erweiterungen in 60 Sekunden',
-    filmLabel: 'Fünf yabbistir-Erweiterungen in 60 Sekunden, mit englischem Sprecher und Untertiteln',
+    filmLabel: 'Fünf yabbistir-Erweiterungen in 60 Sekunden, englisch vertont, mit Untertiteln',
     filmMeta: '1:00 · englisch gesprochen · Untertitel auf Deutsch, Englisch und Türkisch',
     asks: 'Jede sagt dir vor der Installation, was sie tun möchte.',
     asksSlug: 'Einstellungen → Erweiterungen → Store',
@@ -178,7 +178,7 @@ export default {
 
   ext: {
     film: {
-      label: (n) => `${n} in Aktion, mit englischem Sprecher`,
+      label: (n) => `${n} in Aktion, englisch vertont`,
       meta: (len) => `${len} · englisch gesprochen · Untertitel auf Englisch und Türkisch`,
       youtube: 'Auf YouTube ansehen',
     },
