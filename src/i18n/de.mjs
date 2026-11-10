@@ -13,7 +13,7 @@ export default {
   skip: 'Zum Inhalt springen',
   nav: { home: 'yabbistir', extensions: 'Erweiterungen', privacy: 'Datenschutz', github: 'GitHub', download: 'Laden', menu: 'Menü' },
   langMenu: { label: 'Sprache' },
-  langSuggest: { text: 'Diese Seite gibt es auch auf Englisch.', go: 'English', dismiss: 'Schließen' },
+  langSuggest: { text: 'Diese Seite gibt es auch auf Deutsch.', dismiss: 'Schließen' },
 
   hero: {
     draft: 'Demo am Donnerstag. Die Datenbank startest du lokal mit ',

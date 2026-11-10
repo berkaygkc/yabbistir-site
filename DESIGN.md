@@ -263,7 +263,7 @@ A near-monochrome paste-up palette (board, paper, ink) with two working colors f
 
 The board is a twelve-column grid inside `max` with `margin` gutters, and the visible grid background is registered to the same left margin so galleys sit on its lines. Sections are asymmetric spreads: hero 7/5 (copy and a 340 to 440px panel column), film and FAQ 4/8, store head 5/7, extension page 7/5 with a sticky "wants to" column. The features and extensions spreads place galleys and prints at deliberate offset column spans and rows so the page reads as a layout in progress, not a card grid. The store itself is the exception: an auto-fill grid of 290px-minimum galleys, because it is a catalog.
 
-Rhythm is the pica: 16px grid, 96px major lines; section ends at 120 to 140px; galley gaps of 12px internally, 24 to 32px between galleys. Breakpoints: at 1180px spreads relax to even halves; at 980px every spread and two-column layout collapses to one column and the overlaps flatten; at 760px the masthead tightens to 58px, galley padding compacts, crop marks shrink and registration targets drop; at 420px the wordmark keeps only the icon.
+Rhythm is the pica: 16px grid, 96px major lines; section ends at 120 to 140px; galley gaps of 12px internally, 24 to 32px between galleys. Breakpoints: at 1180px spreads relax to even halves; at 980px every spread and two-column layout collapses to one column and the overlaps flatten; at 980px the language tab keeps only its code; at 760px the masthead tightens to 58px and drops GitHub, galley padding compacts, crop marks shrink and registration targets drop; at 560px the masthead drops Privacy (the colophon keeps both links); at 420px the wordmark keeps only the icon.
 
 ## Elevation & Depth
 
@@ -273,6 +273,7 @@ Depth is physical: paper on board. Galleys cast a soft, short offset shadow that
 - **Paper** (`box-shadow: 0 1px 0 rgba(21,21,19,.035), 0 1px 2px rgba(21,21,19,.06), 0 12px 24px -14px rgba(21,21,19,.28)`; dark `0 0 0 1px rgba(0,0,0,.35), 0 16px 32px -16px rgba(0,0,0,.9)`): every galley, print, sheet and FAQ item at rest.
 - **Lift** (`box-shadow: 0 3px 6px rgba(21,21,19,.07), 0 26px 44px -18px rgba(21,21,19,.34)`; dark `0 0 0 1px rgba(0,0,0,.35), 0 30px 54px -22px rgba(0,0,0,.95)`): hover on galley links and button links, the open sheet, and galleys mid-settle.
 - **Film** (`box-shadow: 0 10px 18px -12px rgba(21,21,19,.5)`): under the rubylith tab only.
+- **Lift Drop** (`filter: drop-shadow(0 1px 1px rgba(21,21,19,.13)) drop-shadow(0 16px 18px rgba(21,21,19,.2))`; dark `drop-shadow(0 0 .5px rgba(0,0,0,.7)) drop-shadow(0 18px 20px rgba(0,0,0,.6))`): the open language menu, whose tab and galley are one paper shape.
 - **Hairline Inset** (`box-shadow: inset 0 0 0 1px var(--rule)`): the edge of fields, chips, keys and inset paper; borders are drawn as inset shadows, not `border`.
 
 ### Named Rules
@@ -311,7 +312,12 @@ Dashed 1px non-photo-blue border, 2px corner, blue pencil Libre Franklin 600 12.
 - **Focus:** the global 2px blue-pencil outline at 3px offset.
 
 ### Navigation
-Sticky 64px masthead (58px under 760px) on board at 96% with a `grid-major` bottom rule, followed by the pica ruler with Courier Prime pencil numbers every six picas. Links are Libre Franklin 600 15px ink-secondary; hover goes ink; the current page gets ink text and a 2px ink underline drawn as an inset shadow. The language switch is set as a Courier Prime 700 13px slug. The quiet Download tab closes the bar.
+Sticky 64px masthead (58px under 760px) on board at 96% with a `grid-major` bottom rule, followed by the pica ruler with Courier Prime pencil numbers every six picas. Links are Libre Franklin 600 15px ink-secondary; hover goes ink; the current page gets ink text and a 2px ink underline drawn as an inset shadow. The language menu sits last in the nav, beside the quiet Download tab that closes the bar (see Language Menu).
+
+### Language Menu
+A `<details>` in the nav, so it opens and links without scripts. Closed, its tab is a slug: the language code in Courier Prime 700 11.5px inside a 1px hairline box (currentColor at 38%), then the language's own name in the nav's Libre Franklin 600 15px and a 12px chevron; under 980px the name is visually hidden and the code carries the tab. Open, the tab turns to galley paper and a galley pulls down from under it, right-aligned to it with a square join, the two drawn as one paper shape under one Lift shadow (a `drop-shadow` filter, since the shape isn't a box). The galley opens with a blue pencil note (`langMenu.label`) over a dashed rule, then every language in registry order: a pencil check for the current one (ink, 720, not a link), the name in its own script and face (Hiragino for Japanese, Apple SD Gothic Neo for Korean, PingFang TC for Traditional Chinese), and the BCP 47 code right-aligned as a slug. Rows hover to paper tint with a hairline; focus is the pencil ring inset 2px. The galley pulls down over 0.34s (`clip-path` from the tab, the list sliding 10px), not under reduced motion. Esc closes it and returns focus to the tab; an outside click or focus leaving closes it; ↑ ↓ Home End move through the languages. On light table it stays lit paper.
+
+The language hint above the masthead offers the visitor's first browser language the site serves, in that language's own words, as one linked sentence with a pencil arrow.
 
 ### Terminal Block
 Paper tint with hairline inset; a slug-labelled bar with a Copy button (paper, hairline, Libre Franklin 600 13px; copied state turns blue pencil); Courier Prime 14.5px lines with a "$ " prompt in ink-tertiary and hanging indent.

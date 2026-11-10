@@ -13,7 +13,7 @@ export default {
   skip: '본문으로 건너뛰기',
   nav: { home: 'yabbistir', extensions: '확장 프로그램', privacy: '개인정보 보호', github: 'GitHub', download: '다운로드', menu: '메뉴' },
   langMenu: { label: '언어' },
-  langSuggest: { text: '이 페이지는 영어로도 볼 수 있습니다.', go: 'English', dismiss: '닫기' },
+  langSuggest: { text: '이 페이지는 한국어로도 볼 수 있습니다.', dismiss: '닫기' },
 
   hero: {
     draft: '목요일 데모. 데이터베이스를 로컬에 띄우려면 이걸 실행하세요: ',

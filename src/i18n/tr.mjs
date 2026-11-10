@@ -13,7 +13,7 @@ export default {
   skip: 'İçeriğe geç',
   nav: { home: 'yabbistir', extensions: 'Uzantılar', privacy: 'Gizlilik', github: 'GitHub', download: 'İndir', menu: 'Menü' },
   langMenu: { label: 'Dil' },
-  langSuggest: { text: 'Bu sayfa İngilizce de var.', go: 'English', dismiss: 'Kapat' },
+  langSuggest: { text: 'Bu sayfa Türkçe de var.', dismiss: 'Kapat' },
 
   hero: {
     draft: 'Perşembe demosu. Veritabanını yerelde açmak için şunu çalıştır: ',

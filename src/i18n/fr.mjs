@@ -13,7 +13,7 @@ export default {
   skip: 'Aller au contenu',
   nav: { home: 'yabbistir', extensions: 'Extensions', privacy: 'Confidentialité', github: 'GitHub', download: 'Télécharger', menu: 'Menu' },
   langMenu: { label: 'Langue' },
-  langSuggest: { text: 'Cette page existe aussi en anglais.', go: 'English', dismiss: 'Fermer' },
+  langSuggest: { text: 'Cette page existe aussi en français.', dismiss: 'Fermer' },
 
   hero: {
     draft: 'Démo de jeudi. Pour lancer la base de données en local, exécutez ',

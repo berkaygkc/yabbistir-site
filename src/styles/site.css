@@ -31,6 +31,7 @@
   --crop: #151513;
   --shadow: 0 1px 0 rgba(21, 21, 19, 0.035), 0 1px 2px rgba(21, 21, 19, 0.06), 0 12px 24px -14px rgba(21, 21, 19, 0.28);
   --shadow-lift: 0 3px 6px rgba(21, 21, 19, 0.07), 0 26px 44px -18px rgba(21, 21, 19, 0.34);
+  --shadow-lift-drop: drop-shadow(0 1px 1px rgba(21, 21, 19, 0.13)) drop-shadow(0 16px 18px rgba(21, 21, 19, 0.2));
   --font-display: "Libre Franklin", "Helvetica Neue", Arial, "PingFang SC", "PingFang TC", "Hiragino Sans", "Apple SD Gothic Neo", "Noto Sans CJK SC", "Microsoft YaHei", "Malgun Gothic", sans-serif;
   --font-text: "Source Serif 4", "Iowan Old Style", Georgia, "Songti SC", "Hiragino Mincho ProN", serif;
   --font-slug: "Courier Prime", "Courier New", "PingFang SC", "PingFang TC", "Hiragino Sans", "Apple SD Gothic Neo", "Noto Sans CJK SC", "Microsoft YaHei", "Malgun Gothic", monospace;
@@ -77,6 +78,7 @@
     --lit: radial-gradient(75% 60% at 50% 22%, rgba(160, 212, 245, 0.30), rgba(160, 212, 245, 0.11) 45%, rgba(160, 212, 245, 0.03) 75%, transparent 100%);
     --shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 16px 32px -16px rgba(0, 0, 0, 0.9);
     --shadow-lift: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 30px 54px -22px rgba(0, 0, 0, 0.95);
+    --shadow-lift-drop: drop-shadow(0 0 0.5px rgba(0, 0, 0, 0.7)) drop-shadow(0 18px 20px rgba(0, 0, 0, 0.6));
 
     --app-surface: #1e1e21;
     --app-text: rgba(255, 255, 255, 0.93);
@@ -93,7 +95,7 @@
     color-scheme: dark;
   }
   /* Paper on the light table: its ink is dark, whatever the room. */
-  :is(.galley, .xgalley__link, .install, .faq__item, .consent li, .consent--none, .sheet, .button-link, .filters__search input, .lang-suggest, .skip, .player__play) {
+  :is(.galley, .xgalley__link, .install, .faq__item, .consent li, .consent--none, .sheet, .button-link, .filters__search input, .lang-suggest, .skip, .player__play, .langmenu[open] > .langmenu__tab, .langmenu__sheet) {
     --ink: #191916;
     --ink-2: #3a3934;
     --ink-3: #5d5c55;
@@ -165,13 +167,61 @@ main > section, main > article { width: min(100% - 2 * var(--margin), var(--max)
 .wordmark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 800 21px/1 var(--font-display); letter-spacing: -0.02em; }
 .wordmark img { border-radius: 7px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18); }
 .masthead__nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
-.masthead__nav a {
+.masthead__nav > a {
   padding: 8px 12px; text-decoration: none; color: var(--ink-2);
   font: 600 15px/1 var(--font-display); letter-spacing: -0.005em;
 }
-.masthead__nav a:hover { color: var(--ink); }
-.masthead__nav a[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--ink); }
-.masthead__lang { font-family: var(--font-slug) !important; font-weight: 700 !important; font-size: 13px !important; letter-spacing: 0.04em; }
+.masthead__nav > a:hover { color: var(--ink); }
+.masthead__nav > a[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--ink); }
+
+/* The language menu: a slug tab in the masthead. Opened, the tab turns out to be paper: a galley pulls down from under
+   it, one paper shape with one shadow, listing every language in its own name and script, with its code as a slug. */
+.langmenu { position: relative; margin-left: 4px; }
+.langmenu[open] { z-index: 1; filter: var(--shadow-lift-drop); }
+.langmenu__tab {
+  display: flex; align-items: center; gap: 8px;
+  height: 34px; padding: 0 10px 0 9px; border-radius: 1px 1px 0 0;
+  list-style: none; cursor: pointer; user-select: none; -webkit-user-select: none;
+  font: 600 15px/1 var(--font-display); letter-spacing: -0.005em; color: var(--ink-2);
+  transition: color 0.18s var(--ease);
+}
+.langmenu__tab::-webkit-details-marker { display: none; }
+.langmenu__tab::marker { content: ""; }
+.langmenu__tab:hover, .langmenu[open] > .langmenu__tab { color: var(--ink); }
+.langmenu[open] > .langmenu__tab { background: var(--paper); }
+.langmenu__tab:focus-visible { outline-offset: 1px; }
+.langmenu__tab .langmenu__code {
+  display: inline-grid; place-items: center; height: 19px; padding: 1px 5px 0;
+  font: 700 11.5px/1 var(--font-slug); letter-spacing: 0.01em;
+  border-radius: 1px; box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 38%, transparent);
+}
+.langmenu__chev { width: 12px; height: 12px; margin-left: -1px; transition: transform 0.28s var(--ease); }
+.langmenu[open] .langmenu__chev { transform: rotate(180deg); }
+.langmenu__sheet {
+  position: absolute; top: 100%; right: 0;
+  width: max-content; min-width: max(100%, 224px);
+  padding: 13px 7px 7px; border-radius: 1px 0 1px 1px;
+  background: var(--paper);
+}
+.langmenu__label { padding: 0 10px 11px; margin-bottom: 5px; font-size: 13px; border-bottom: 1px dashed color-mix(in srgb, var(--nonphoto) 75%, transparent); }
+.langmenu__list { display: grid; gap: 1px; margin: 0; padding: 0; list-style: none; }
+.langmenu__item {
+  display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; align-items: center; gap: 12px;
+  padding: 9px 10px 9px 8px; border-radius: 1px;
+  font: 620 16px/1.2 var(--font-display); letter-spacing: -0.006em; color: var(--ink-2); text-decoration: none;
+  transition: background-color 0.16s var(--ease), color 0.16s var(--ease);
+}
+a.langmenu__item:hover { background: var(--paper-2); color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule); }
+a.langmenu__item:focus-visible { outline-offset: -2px; }
+.langmenu__item[aria-current] { color: var(--ink); font-weight: 720; }
+.langmenu__mark { display: grid; place-items: center; color: var(--pencil); }
+.langmenu__mark .ic { width: 15px; height: 15px; }
+.langmenu__item .langmenu__code { font: 400 12.5px/1 var(--font-slug); letter-spacing: 0.01em; color: var(--ink-3); text-align: right; }
+a.langmenu__item:hover .langmenu__code { color: var(--ink-2); }
+/* Each name is set in its own script's face, as a specimen would be. */
+.langmenu__item .langmenu__name:lang(ja) { font-family: "Libre Franklin", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", "Yu Gothic", Meiryo, sans-serif; }
+.langmenu__item .langmenu__name:lang(ko) { font-family: "Libre Franklin", "Apple SD Gothic Neo", "Noto Sans CJK KR", "Malgun Gothic", sans-serif; }
+.langmenu__item .langmenu__name:lang(zh-Hant) { font-family: "Libre Franklin", "PingFang TC", "Noto Sans CJK TC", "Microsoft JhengHei", sans-serif; }
 
 .ruler { height: 22px; padding-left: var(--margin); overflow: hidden; border-bottom: 1px solid var(--grid-minor); }
 .ruler__marks {
@@ -186,12 +236,13 @@ main > section, main > article { width: min(100% - 2 * var(--margin), var(--max)
 }
 
 .lang-suggest {
-  display: flex; align-items: center; justify-content: center; gap: 12px;
   padding: 8px var(--margin); background: var(--paper); border-bottom: 1px dashed var(--nonphoto);
   font: 500 14.5px var(--font-display); color: var(--ink-2);
 }
-.lang-suggest[hidden] { display: none; }
-.lang-suggest a { font-weight: 700; color: var(--ink); }
+.lang-suggest__line { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.lang-suggest a { display: inline-flex; align-items: center; gap: 7px; font-weight: 600; color: var(--ink); }
+.lang-suggest a .ic { width: 16px; height: 16px; color: var(--pencil); transition: transform 0.2s var(--ease); }
+.lang-suggest a:hover .ic { transform: translateX(2px); }
 
 .icon-button {
   display: inline-grid; place-items: center; width: 32px; height: 32px; padding: 0;
@@ -686,6 +737,12 @@ main > section, main > article { width: min(100% - 2 * var(--margin), var(--max)
   .js .hero__demo[data-paste].is-set { transform: none; }
   .js .install.galley[data-paste] { transform: none; }
 }
+@media (prefers-reduced-motion: no-preference) {
+  .langmenu[open] > .langmenu__sheet { animation: langmenu-pull 0.34s var(--ease); }
+  .langmenu[open] .langmenu__list { animation: langmenu-slide 0.34s var(--ease); }
+}
+@keyframes langmenu-pull { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes langmenu-slide { from { transform: translateY(-10px); } }
 @media (prefers-reduced-motion: reduce) {
   .caret { animation: none; }
   *, *::before, *::after { scroll-behavior: auto !important; }
@@ -693,6 +750,11 @@ main > section, main > article { width: min(100% - 2 * var(--margin), var(--max)
 
 /* ── Responsive ───────────────────────────────────────────────────────── */
 
+@media (max-width: 980px) {
+  .masthead__nav > a { padding-inline: 10px; }
+  .langmenu { margin-left: 0; }
+  .langmenu__tab > .langmenu__name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
 @media (max-width: 1180px) {
   .spread { gap: 44px 24px; }
   .spread__caret { grid-column: 1 / span 6; }
@@ -727,8 +789,11 @@ main > section, main > article { width: min(100% - 2 * var(--margin), var(--max)
 @media (max-width: 760px) {
   .masthead { gap: 12px; height: 58px; }
   .masthead__nav { gap: 0; }
-  .masthead__nav a { padding: 8px 8px; font-size: 14.5px; }
-  .masthead__nav a[href^="https://github.com"] { display: none; }
+  .masthead__nav > a { padding: 8px 8px; font-size: 14.5px; }
+  .masthead__github { display: none; }
+  .langmenu { margin-left: 2px; }
+  .langmenu__tab { padding: 0 8px; gap: 6px; }
+  .langmenu__item { padding-block: 11px; }
   .masthead .tab__label { display: none; }
   .masthead .tab { padding: 10px 12px; }
   .filters { top: 58px; }
@@ -747,6 +812,9 @@ main > section, main > article { width: min(100% - 2 * var(--margin), var(--max)
   .xpage__readme { padding: 22px 20px 20px; }
   .player__play { left: 10px; top: 10px; padding: 6px 14px 6px 6px; font-size: 14.5px; }
   .player__disc { width: 32px; height: 32px; }
+}
+@media (max-width: 560px) {
+  .masthead__privacy { display: none; }
 }
 @media (max-width: 420px) {
   .wordmark span { display: none; }

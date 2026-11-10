@@ -5,6 +5,9 @@ import { LANGUAGES, languageOf, localPath, pathIn } from './languages.mjs';
 
 export { localPath, pathIn };
 
+// Every language's copy: the language hint speaks each language in its own words, whatever the page's language.
+const CATALOGS = Object.fromEntries(await Promise.all(LANGUAGES.map(async (l) => [l.code, (await import(`./i18n/${l.code}.mjs`)).default])));
+
 export const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
@@ -93,15 +96,43 @@ export function consentSentences(t, e) {
   return out;
 }
 
+/** The language menu: a paste-up tab in the masthead that opens a galley of every language, each linking this same page.
+    A plain <details>, so it opens, links and closes without scripts; site.js adds Esc, outside clicks and arrow keys. */
+function langMenu(t, site, path) {
+  const own = languageOf(t.lang);
+  const row = (l) => {
+    const inner = `<span class="langmenu__mark" aria-hidden="true">${l.code === own.code ? icon('check') : ''}</span><span class="langmenu__name">${esc(l.name)}</span><span class="langmenu__code">${l.code}</span>`;
+    return l.code === own.code
+      ? `<li><span class="langmenu__item" aria-current="true" lang="${l.code}">${inner}</span></li>`
+      : `<li><a class="langmenu__item" href="${site.url(pathIn(l.code, path))}" hreflang="${l.code}" lang="${l.code}">${inner}</a></li>`;
+  };
+  return html`<details class="langmenu">
+      <summary class="langmenu__tab"><span class="visually-hidden">${esc(t.langMenu.label)} </span><span class="langmenu__code" aria-hidden="true">${own.code}</span> <span class="langmenu__name">${esc(own.name)}</span>${icon('chev', 'langmenu__chev')}</summary>
+      <div class="langmenu__sheet">
+        <p class="langmenu__label pencil" id="langmenu-label">${esc(t.langMenu.label)}</p>
+        <ul class="langmenu__list" aria-labelledby="langmenu-label">
+          ${LANGUAGES.map(row).join('\n          ')}
+        </ul>
+      </div>
+    </details>`;
+}
+
+/** The quiet hint over the masthead: one line per other language, each in that language's own words. site.js shows the
+    line for the visitor's first browser language the site serves, when it isn't this page's, until it is dismissed. */
+function langSuggest(t, site, path) {
+  return html`<div class="lang-suggest" data-lang-suggest data-lang-codes="${LANGUAGES.map((l) => l.code).join(' ')}" hidden>
+  ${LANGUAGES.filter((l) => l.code !== t.lang).map((l) => {
+    const words = CATALOGS[l.code].langSuggest;
+    return `<div class="lang-suggest__line" data-lang-for="${l.code}" lang="${l.code}" hidden><p><a href="${site.url(pathIn(l.code, path))}" hreflang="${l.code}">${esc(words.text)}${icon('arrow')}</a></p><button type="button" class="icon-button" data-lang-dismiss aria-label="${esc(words.dismiss)}">${icon('close')}</button></div>`;
+  }).join('\n  ')}
+</div>`;
+}
+
 export function page({ t, site, path, title, description, body, data, bodyClass = '', image = '/img/og.png', jsonld = null }) {
-  const here = site.url(path);
-  // While there are two languages the masthead toggles to the other one.
-  const other = LANGUAGES.find((l) => l.code !== t.lang);
-  const alt = pathIn(other.code, path);
   const v = site.assetVersion;
   const nav = [
-    ['/extensions/', t.nav.extensions],
-    ['/privacy/', t.nav.privacy],
+    ['/extensions/', t.nav.extensions, 'extensions'],
+    ['/privacy/', t.nav.privacy, 'privacy'],
   ];
   const current = (p) => (path === localPath(t.lang, p) || path.startsWith(localPath(t.lang, p)) ? ' aria-current="page"' : '');
   const rulerMarks = Array.from({ length: 24 }, (_, i) => `<span>${(i + 1) * 6}</span>`).join('');
@@ -140,19 +171,16 @@ ${site.base === '/' ? '' : `<script>window.goatcounter={path:function(p){var b=$
 <body class="${esc(bodyClass)}" data-lang="${t.lang}">
 ${SPRITE}
 <a class="skip" href="#main">${esc(t.skip)}</a>
-<div class="lang-suggest" data-lang-suggest="${other.code}" data-lang-codes="${LANGUAGES.map((l) => l.code).join(' ')}" hidden>
-  <p>${esc(t.langSuggest.text)} <a href="${site.url(alt)}" hreflang="${other.code}" lang="${other.code}">${esc(t.langSuggest.go)}</a></p>
-  <button type="button" class="icon-button" data-lang-dismiss aria-label="${esc(t.langSuggest.dismiss)}">${icon('close')}</button>
-</div>
+${langSuggest(t, site, path)}
 <header class="masthead">
   <a class="wordmark" href="${site.url(localPath(t.lang, '/'))}" aria-label="yabbistir">
     <img src="${site.url('/img/icon-256.webp')}" width="28" height="28" alt="">
     <span>yabbistir</span>
   </a>
   <nav class="masthead__nav" aria-label="Primary">
-    ${nav.map(([p, label]) => `<a href="${site.url(localPath(t.lang, p))}"${current(p)}>${esc(label)}</a>`)}
-    <a href="${APP_REPO}" rel="noopener">${esc(t.nav.github)}</a>
-    <a class="masthead__lang" href="${site.url(alt)}" hreflang="${other.code}" lang="${other.code}" aria-label="${esc(other.name)}">${esc(other.code.toUpperCase())}</a>
+    ${nav.map(([p, label, key]) => `<a class="masthead__${key}" href="${site.url(localPath(t.lang, p))}"${current(p)}>${esc(label)}</a>`)}
+    <a class="masthead__github" href="${APP_REPO}" rel="noopener">${esc(t.nav.github)}</a>
+    ${langMenu(t, site, path)}
   </nav>
   ${downloadTab(t, data.release, { size: 'sm', id: 'download-dmg-nav' }).replace('tab tab--sm', 'tab tab--sm tab--quiet')}
 </header>

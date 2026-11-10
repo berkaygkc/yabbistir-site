@@ -1,4 +1,4 @@
-// yabbistir.com: the demo panel, galleys settling onto the board, store filters, copy buttons, the language hint.
+// yabbistir.com: the demo panel, galleys settling onto the board, store filters, copy buttons, the language menu and hint.
 // Everything here is an enhancement: with scripts off, every page still reads, links and downloads.
 
 (() => {
@@ -184,15 +184,44 @@
     if (q.value || state.cat || state.perm) apply();
   }
 
-  /* A visitor whose browser prefers the other language gets a quiet hint, once. */
+  /* The language menu is a <details>: it opens and links without this. Here it also closes on Esc (focus back on its
+     tab), on a click outside and when focus leaves it, and ↑ ↓ Home End move through the languages. */
+  $$('.langmenu').forEach((menu) => {
+    const tab = $('summary', menu);
+    const links = $$('a', menu);
+    const close = (refocus) => {
+      if (!menu.open) return;
+      menu.open = false;
+      if (refocus) tab.focus();
+    };
+    document.addEventListener('click', (e) => { if (!menu.contains(e.target)) close(false); });
+    menu.addEventListener('focusout', (e) => { if (e.relatedTarget && !menu.contains(e.relatedTarget)) close(false); });
+    menu.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.open) { e.preventDefault(); close(true); return; }
+      if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key) || !links.length) return;
+      if (!menu.open) {
+        if (e.key !== 'ArrowDown') return;
+        menu.open = true;
+      }
+      e.preventDefault();
+      const i = links.indexOf(document.activeElement);
+      const last = links.length - 1;
+      const next = { Home: 0, End: last, ArrowDown: i < 0 ? 0 : Math.min(last, i + 1), ArrowUp: i < 0 ? last : Math.max(0, i - 1) }[e.key];
+      links[next].focus();
+    });
+  });
+
+  /* A visitor whose first browser language the site serves, if it isn't this page's, gets a quiet hint in that
+     language, once. */
   const hint = $('[data-lang-suggest]');
   if (hint) {
-    const want = hint.dataset.langSuggest;
-    const best = bestLanguage(navigator.languages ?? [navigator.language], hint.dataset.langCodes.split(' ')) ?? 'en';
+    const best = bestLanguage(navigator.languages?.length ? navigator.languages : [navigator.language], hint.dataset.langCodes.split(' ')) ?? 'en';
+    const line = best === document.documentElement.lang ? null : $(`[data-lang-for="${best}"]`, hint);
     let dismissed = false;
     try { dismissed = localStorage.getItem('yab-lang-hint') === '1'; } catch {}
-    if (!dismissed && best === want) hint.hidden = false;
-    $('[data-lang-dismiss]', hint)?.addEventListener('click', () => {
+    if (line && !dismissed) line.hidden = hint.hidden = false;
+    hint.addEventListener('click', (e) => {
+      if (!e.target.closest('[data-lang-dismiss]')) return;
       hint.hidden = true;
       try { localStorage.setItem('yab-lang-hint', '1'); } catch {}
     });

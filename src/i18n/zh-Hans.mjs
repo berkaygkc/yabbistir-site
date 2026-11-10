@@ -13,7 +13,7 @@ export default {
   skip: '跳到正文',
   nav: { home: 'yabbistir', extensions: '扩展', privacy: '隐私', github: 'GitHub', download: '下载', menu: '菜单' },
   langMenu: { label: '语言' },
-  langSuggest: { text: '此页面也有英文版。', go: 'English', dismiss: '关闭' },
+  langSuggest: { text: '此页面也有简体中文版。', dismiss: '关闭' },
 
   hero: {
     draft: '周四演示。要在本地启动数据库，请运行 ',

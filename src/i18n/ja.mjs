@@ -13,7 +13,7 @@ export default {
   skip: '本文へスキップ',
   nav: { home: 'yabbistir', extensions: '機能拡張', privacy: 'プライバシー', github: 'GitHub', download: 'ダウンロード', menu: 'メニュー' },
   langMenu: { label: '言語' },
-  langSuggest: { text: 'このページには英語版もあります。', go: 'English', dismiss: '閉じる' },
+  langSuggest: { text: 'このページには日本語版もあります。', dismiss: '閉じる' },
 
   hero: {
     draft: '木曜デモの準備。ローカルでデータベースを起動するコマンド: ',

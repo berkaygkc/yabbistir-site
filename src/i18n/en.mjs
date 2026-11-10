@@ -13,7 +13,7 @@ export default {
   skip: 'Skip to content',
   nav: { home: 'yabbistir', extensions: 'Extensions', privacy: 'Privacy', github: 'GitHub', download: 'Download', menu: 'Menu' },
   langMenu: { label: 'Language' },
-  langSuggest: { text: 'This page is also in Turkish.', go: 'Türkçe', dismiss: 'Dismiss' },
+  langSuggest: { text: 'This page is also in English.', dismiss: 'Dismiss' },
 
   hero: {
     draft: 'Thursday demo. To bring the database up locally, run ',

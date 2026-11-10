@@ -40,6 +40,20 @@ test('the registry holds each language once, English first, with its own catalog
   for (const l of LANGUAGES) assert.equal(catalogs[l.code].lang, l.code, l.code);
 });
 
+test('the registry lists the languages in the menu order', () => {
+  assert.deepEqual(LANGUAGES.map((l) => l.code), ['en', 'de', 'es', 'fr', 'tr', 'ja', 'ko', 'zh-Hans', 'zh-Hant']);
+});
+
+test('an explicit Chinese script wins over the region', () => {
+  const all = LANGUAGES.map((l) => l.code);
+  assert.equal(bestLanguage(['zh-Hans-HK'], all), 'zh-Hans');
+  assert.equal(bestLanguage(['zh-Hans-TW'], all), 'zh-Hans');
+  assert.equal(bestLanguage(['zh-Hant-CN'], all), 'zh-Hant');
+  assert.equal(bestLanguage(['zh_Hans_MO'], all), 'zh-Hans');
+  for (const region of ['zh-HK', 'zh-TW', 'zh-MO']) assert.equal(bestLanguage([region], all), 'zh-Hant', region);
+  for (const region of ['zh-CN', 'zh-SG', 'zh']) assert.equal(bestLanguage([region], all), 'zh-Hans', region);
+});
+
 test('bestLanguage maps the browser list the way the app does', () => {
   const all = ['en', 'de', 'es', 'fr', 'tr', 'ja', 'ko', 'zh-Hans', 'zh-Hant'];
   assert.equal(bestLanguage(['zh-TW'], all), 'zh-Hant');

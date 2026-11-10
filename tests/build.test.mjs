@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, readdir, access } from 'node:fs/promises';
 import { join } from 'node:path';
-import { LANGUAGES, localPath } from '../src/languages.mjs';
+import { LANGUAGES, localPath, splitPath } from '../src/languages.mjs';
 
 const DIST = 'dist';
 const base = (await readFile(join(DIST, '.base'), 'utf8')).trim();
@@ -63,6 +63,48 @@ test('pages carry their language, an alternate for every language and a canonica
     assert.match(html, /<link rel="canonical"/, f);
     for (const { code } of LANGUAGES) assert.match(html, new RegExp(`<link rel="alternate" hreflang="${code}" href="`), `${f} ${code}`);
     assert.match(html, /<link rel="alternate" hreflang="x-default" href="/, f);
+  }
+});
+
+// The English path a built page serves (the 404 page carries the home page's links).
+const enPathOf = (file) => (file === join(DIST, '404.html') ? '/' : splitPath('/' + file.slice(DIST.length + 1).replace(/index\.html$/, '')).enPath);
+const attrs = (tag) => Object.fromEntries([...tag.matchAll(/([\w-]+)="([^"]*)"/g)].map(([, k, v]) => [k, v]));
+const hrefIn = (code, file) => `${base.replace(/\/$/, '')}${localPath(code, enPathOf(file))}`;
+
+test('every masthead has a language menu that links the same page in every other language, without scripts', () => {
+  for (const [f, html] of pages) {
+    const own = languageOf(f);
+    const masthead = html.match(/<header class="masthead">[\s\S]*?<\/header>/)?.[0] ?? '';
+    const menu = masthead.match(/(<details class="langmenu"[^>]*>)([\s\S]*?)<\/details>/);
+    assert.ok(menu, `${f}: no <details class="langmenu"> in the masthead`);
+    assert.doesNotMatch(menu[1], /\b(hidden|open)\b/, `${f}: the menu is closed and visible as served`);
+    const summary = menu[2].match(/<summary[^>]*>([\s\S]*?)<\/summary>/)?.[1] ?? '';
+    assert.ok(summary.replace(/<[^>]+>/g, ' ').includes(own.name), `${f}: the summary shows ${own.name}`);
+    const links = [...menu[2].matchAll(/<a\b[^>]*>/g)].map(([tag]) => attrs(tag));
+    const others = LANGUAGES.filter((l) => l.code !== own.code);
+    assert.deepEqual(links.map((a) => a.hreflang), others.map((l) => l.code), `${f}: one link per other language, in registry order`);
+    for (const a of links) {
+      assert.equal(a.lang, a.hreflang, `${f}: ${a.hreflang} lang`);
+      assert.equal(a.href, hrefIn(a.hreflang, f), `${f}: ${a.hreflang} href`);
+    }
+  }
+});
+
+test('the language hint offers each other language in its own words', async () => {
+  const words = Object.fromEntries(await Promise.all(LANGUAGES.map(async (l) => [l.code, (await import(`../src/i18n/${l.code}.mjs`)).default.langSuggest])));
+  const escAttr = (s) => s.replace(/'/g, '&#39;');
+  for (const [f, html] of pages) {
+    const own = languageOf(f);
+    const hint = html.match(/<div class="lang-suggest"[\s\S]*?(?=<header class="masthead">)/)?.[0] ?? '';
+    assert.match(hint, /^<div class="lang-suggest"[^>]*\bhidden\b/, `${f}: the hint starts hidden`);
+    for (const l of LANGUAGES) {
+      const line = hint.match(new RegExp(`<div class="lang-suggest__line" data-lang-for="${l.code}" lang="${l.code}" hidden>[\\s\\S]*?</div>`))?.[0];
+      assert.equal(Boolean(line), l.code !== own.code, `${f}: ${l.code} line`);
+      if (!line) continue;
+      assert.ok(line.includes(escAttr(words[l.code].text)), `${f}: ${l.code} text`);
+      assert.ok(line.includes(`href="${hrefIn(l.code, f)}" hreflang="${l.code}"`), `${f}: ${l.code} link`);
+      assert.ok(line.includes(`aria-label="${escAttr(words[l.code].dismiss)}"`), `${f}: ${l.code} dismiss`);
+    }
   }
 });
 
